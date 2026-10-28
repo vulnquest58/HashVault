@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "name": "rockyou.txt",
+      "source_url": "https://raw.githubusercontent.com/praetorian-inc/Hob0Rules/master/wordlists/rockyou.txt.gz",
+      "version": "Hob0Rules-release",
+      "fetched_at": "2026-08-09T20:45:42Z"
+    },
+    {
+      "name": "seclists",
+      "source_url": "https://github.com/danielmiessler/SecLists",
+      "version": "bd5cfab",
+      "fetched_at": "2026-08-09T20:52:14Z"
+    }
+  ]
+}

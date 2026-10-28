@@ -1,0 +1,67 @@
+paths:
+  hashcat_bin: "tools/hashcat/hashcat.exe"
+  john_bin: "tools/john/run/john.exe"
+  database: "db/hashvault.sqlite3"
+  wordlist_dir: "data/wordlists"
+  rules_dir: "data/rules"
+  sessions_dir: "sessions"
+  quick_wordlist: "data/wordlists/rockyou.txt"
+
+timeouts:
+  fast_hash_seconds: 3600
+  slow_hash_seconds: 86400
+  gpu_detection_seconds: 15
+
+strategy:
+  default_tool: "auto"
+  max_rule_attempts: 3
+  # With a calibration curve present this is a real probability, so 0.75 means
+  # "75% likely correct". Without one it is the raw weight comparison.
+  auto_select_confidence_threshold: 0.75
+  auto_select_margin: 0.2
+  # Resolve formats that share a regex (MD5/MD4/NTLM, md5($p.$s)/md5($s.$p))
+  # by trial-cracking the top candidates with the built-in engine. Bounded by
+  # trial_budget_seconds, so it can never stall a run.
+  enable_trial_disambiguation: true
+  trial_max_candidates: 3
+  trial_budget_seconds: 15.0
+  hashcat_backend: "auto"
+  hashcat_workload_profile: 0
+  builtin_enabled: true
+  builtin_max_candidates: 0
+  retry_alternatives: true
+  max_alternative_attempts: 3
+  default_budget_seconds: 0
+  adaptive_tool_selection: true
+  # Re-verify a cached plaintext before trusting it. Fast formats are checked
+  # every time; slow formats (bcrypt/argon2) are skipped unless
+  # verify_slow_hashes is also enabled, because the check costs a full KDF.
+  verify_cache_entries: true
+  verify_slow_hashes: false
+  # Delete potfiles/outfiles after each attempt. Keep this false: those files
+  # contain recovered plaintext.
+  keep_session_artifacts: false
+
+mutation:
+  max_candidates: 500
+  max_history_seeds: 500
+  max_enrichment_seeds: 500
+  include_years: true
+  years: [2024, 2025, 2026]
+  arabic_language: "auto"
+
+llm:
+  enabled: false
+  base_url: "http://127.0.0.1:11434"
+  model: "llama3.2"
+  timeout_seconds: 20.0
+  max_candidates: 25
+
+enrichment:
+  enabled: false
+  wordlist_paths: []
+
+output:
+  silent_by_default: true
+  log_file: "hashvault.log"
+  log_level: "INFO"

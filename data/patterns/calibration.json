@@ -1,0 +1,47 @@
+{
+  "generated_by": "hashvault calibrate",
+  "method": "histogram-binning (monotone pooled)",
+  "entries_evaluated": 500,
+  "brier_score": 0.2379,
+  "expected_calibration_error": 0.2213,
+  "accuracy": 0.674,
+  "mean_confidence": 0.6011,
+  "points": [
+    [
+      0.499203,
+      0.289553
+    ],
+    [
+      0.980048,
+      0.923077
+    ]
+  ],
+  "observed_weights": {
+    "CRC64Jones": 0.0465,
+    "bcrypt": 0.8919,
+    "NTLM": 0.25,
+    "MSCache": 0.0714,
+    "SHA2-256": 0.5789,
+    "WingFTP SHA256": 0.1333,
+    "SHA1": 0.4167,
+    "sha512crypt": 0.9167,
+    "SHA512": 0.3636,
+    "phpass": 0.9091,
+    "Mirth Connect / Generic PBKDF2-SHA256": 0.9,
+    "descrypt": 0.9,
+    "md5crypt": 0.9,
+    "BSDi Crypt, Extended DES": 0.8889,
+    "MSSQL (2000)": 0.8889,
+    "MySQL323": 0.6667,
+    "PBKDF2-HMAC-SHA1": 0.8889,
+    "SSHA-256(Base64), LDAP {SSHA256}": 0.8889,
+    "SSHA-512(Base64), LDAP {SSHA512}": 0.8889,
+    "nsldaps, SSHA-1": 0.8889,
+    "sha256crypt": 0.8889,
+    "MSSQL (2005)": 0.875,
+    "PBKDF2-HMAC-SHA512": 0.875,
+    "Django (SHA-1)": 0.8571,
+    "MySQL 4.1+": 0.8571,
+    "PDF (Acrobat 5-8)": 0.2857
+  }
+}

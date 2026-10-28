@@ -1,0 +1,602 @@
+[
+  {
+    "name": "md5crypt",
+    "legacy_names": [
+      "Cisco Type 5",
+      "Cisco IOS Type 5",
+      "MD5 Crypt",
+      "MD5crypt (Unix)"
+    ],
+    "regex": "^\\$1\\$[./0-9A-Za-z]{0,8}\\$[./0-9A-Za-z]{22}$",
+    "hashcat_mode": 500,
+    "john_format": "md5crypt",
+    "popularity": 55,
+    "description": "Unix/Cisco MD5-crypt ($1$) -- also known as Cisco IOS Type 5",
+    "is_slow": true,
+    "category": "linux_unix",
+    "min_length": 26,
+    "max_length": 34,
+    "prefix_hint": "$1$",
+    "confidence_weight": 0.98,
+    "source_format_hints": [
+      "shadow"
+    ]
+  },
+  {
+    "name": "phpass",
+    "legacy_names": [
+      "WordPress MD5 (PHPass)",
+      "WordPress MD5"
+    ],
+    "regex": "^\\$P\\$[./0-9A-Za-z]{31}$",
+    "hashcat_mode": 400,
+    "john_format": "phpass",
+    "popularity": 50,
+    "description": "Portable PHP password hash (WordPress, phpBB, Drupal 6)",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 34,
+    "max_length": 34,
+    "prefix_hint": "$P$",
+    "confidence_weight": 0.97,
+    "source_format_hints": []
+  },
+  {
+    "name": "Drupal7",
+    "legacy_names": [
+      "Drupal7 PHPass SHA512",
+      "Drupal 7",
+      "Drupal 7 MD5"
+    ],
+    "regex": "^\\$S\\$[./0-9A-Za-z]{52}$",
+    "hashcat_mode": 7900,
+    "john_format": "drupal7",
+    "popularity": 35,
+    "description": "Drupal 7 SHA-512 based phpass",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 55,
+    "max_length": 55,
+    "prefix_hint": "$S$",
+    "confidence_weight": 0.98,
+    "source_format_hints": []
+  },
+  {
+    "name": "argon2i",
+    "regex": "^\\$argon2i\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[A-Za-z0-9+/]+=*\\$[A-Za-z0-9+/]+=*$",
+    "hashcat_mode": null,
+    "john_format": "argon2",
+    "popularity": 35,
+    "description": "Argon2i memory-hard hash (hashcat 6.2.6 has no Argon2 mode)",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 60,
+    "max_length": 400,
+    "prefix_hint": "$argon2i$",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "argon2id",
+    "regex": "^\\$argon2id\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[A-Za-z0-9+/]+=*\\$[A-Za-z0-9+/]+=*$",
+    "hashcat_mode": null,
+    "john_format": "argon2",
+    "popularity": 45,
+    "description": "Argon2id memory-hard hash (OWASP default; John format argon2)",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 60,
+    "max_length": 400,
+    "prefix_hint": "$argon2id$",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "argon2d",
+    "regex": "^\\$argon2d\\$v=\\d+\\$m=\\d+,t=\\d+,p=\\d+\\$[A-Za-z0-9+/]+=*\\$[A-Za-z0-9+/]+=*$",
+    "hashcat_mode": null,
+    "john_format": "argon2",
+    "popularity": 25,
+    "description": "Argon2d memory-hard hash (John format argon2)",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 60,
+    "max_length": 400,
+    "prefix_hint": "$argon2d$",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "yescrypt",
+    "regex": "^\\$y\\$[./0-9A-Za-z]+\\$[./0-9A-Za-z]+\\$[./0-9A-Za-z]+$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 30,
+    "description": "yescrypt ($y$) -- default on modern Debian/Ubuntu shadow files",
+    "is_slow": true,
+    "category": "linux_unix",
+    "min_length": 40,
+    "max_length": 400,
+    "prefix_hint": "$y$",
+    "confidence_weight": 0.99,
+    "source_format_hints": [
+      "shadow"
+    ]
+  },
+  {
+    "name": "Timeroast",
+    "regex": "^\\$sntp-ms\\$[0-9a-fA-F]+\\$[0-9a-fA-F]+$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 20,
+    "description": "Timeroast / MS-SNTP machine-account hash",
+    "is_slow": false,
+    "category": "network_auth",
+    "min_length": 30,
+    "max_length": 400,
+    "prefix_hint": "$sntp-ms$",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "Werkzeug PBKDF2-SHA256",
+    "regex": "^pbkdf2:sha256:\\d+\\$[^$\\s]+\\$[0-9a-fA-F]{64}$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 35,
+    "description": "Werkzeug/Flask PBKDF2-HMAC-SHA256 password hash",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 40,
+    "max_length": 300,
+    "prefix_hint": "pbkdf2:sha256:",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "Werkzeug PBKDF2-SHA1",
+    "regex": "^pbkdf2:sha1:\\d+\\$[^$\\s]+\\$[0-9a-fA-F]{40}$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 25,
+    "description": "Werkzeug/Flask PBKDF2-HMAC-SHA1 password hash",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 40,
+    "max_length": 300,
+    "prefix_hint": "pbkdf2:sha1:",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "Werkzeug PBKDF2-SHA512",
+    "regex": "^pbkdf2:sha512:\\d+\\$[^$\\s]+\\$[0-9a-fA-F]{128}$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 20,
+    "description": "Werkzeug/Flask PBKDF2-HMAC-SHA512 password hash",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 40,
+    "max_length": 400,
+    "prefix_hint": "pbkdf2:sha512:",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "Gogs/Gitea PBKDF2-SHA256",
+    "regex": "^pbkdf2\\$\\d+\\$\\d+\\$[A-Za-z0-9+/=]+\\$[A-Za-z0-9+/=]+$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 25,
+    "description": "Gogs/Gitea PBKDF2-HMAC-SHA256 hash (Go pbkdf2.Key format)",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 40,
+    "max_length": 400,
+    "prefix_hint": "pbkdf2$",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "NetNTLMv1",
+    "legacy_names": [],
+    "regex": "^[^:]+::[^:]*:[0-9a-fA-F]{48}:[0-9a-fA-F]{48}:[0-9a-fA-F]{16}$",
+    "hashcat_mode": 5500,
+    "john_format": "netntlm",
+    "popularity": 35,
+    "description": "NetNTLMv1 / ESS challenge-response (Responder)",
+    "is_slow": false,
+    "category": "network_auth",
+    "min_length": 40,
+    "max_length": 1000,
+    "prefix_hint": null,
+    "confidence_weight": 0.98,
+    "source_format_hints": [
+      "responder_ntlmv1"
+    ]
+  },
+  {
+    "name": "PostgreSQL",
+    "regex": "^[0-9a-fA-F]{32}:[^\\s:]{1,128}$",
+    "hashcat_mode": 12,
+    "john_format": null,
+    "popularity": 20,
+    "description": "PostgreSQL challenge-response (md5(password+username):username)",
+    "is_slow": false,
+    "category": "database",
+    "min_length": 34,
+    "max_length": 161,
+    "prefix_hint": null,
+    "confidence_weight": 0.3,
+    "source_format_hints": []
+  },
+  {
+    "name": "MSCache",
+    "legacy_names": [
+      "Domain Cached Credentials (DCC), MS Cache",
+      "MSCache1"
+    ],
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$",
+    "hashcat_mode": 1100,
+    "john_format": "mscash",
+    "popularity": 40,
+    "description": "Windows Domain Cached Credentials v1 (MSCache)",
+    "is_slow": false,
+    "category": "windows",
+    "min_length": 34,
+    "max_length": 1100,
+    "prefix_hint": null,
+    "confidence_weight": 0.8,
+    "source_format_hints": [
+      "cachedump"
+    ]
+  },
+  {
+    "name": "MySQL323",
+    "regex": "^[0-9a-fA-F]{16}$",
+    "hashcat_mode": 200,
+    "john_format": "mysql",
+    "popularity": 52,
+    "description": "MySQL 3.23 / 4.0 fast hash",
+    "is_slow": false,
+    "category": "database",
+    "min_length": 16,
+    "max_length": 16,
+    "prefix_hint": null,
+    "confidence_weight": 0.4,
+    "source_format_hints": [],
+    "legacy_names": [
+      "MySQL"
+    ]
+  },
+  {
+    "name": "Half MD5",
+    "regex": "^[0-9a-fA-F]{16}$",
+    "hashcat_mode": 5100,
+    "john_format": null,
+    "popularity": 45,
+    "description": "Half MD5 (first 16 hex characters)",
+    "is_slow": false,
+    "category": "raw_generic",
+    "min_length": 16,
+    "max_length": 16,
+    "prefix_hint": null,
+    "confidence_weight": 0.35,
+    "source_format_hints": []
+  },
+  {
+    "name": "OpenEdge Progress Encode",
+    "regex": "^(?=.*[+/])[A-Za-z0-9+/]{16}={0,2}$",
+    "hashcat_mode": 26200,
+    "john_format": null,
+    "popularity": 30,
+    "description": "OpenEdge Progress Encode (16-char base64 with + or /)",
+    "is_slow": false,
+    "category": "web_app",
+    "min_length": 16,
+    "max_length": 18,
+    "prefix_hint": null,
+    "confidence_weight": 0.15,
+    "source_format_hints": []
+  },
+  {
+    "name": "descrypt",
+    "legacy_names": [
+      "descrypt, DES (Unix), Traditional DES"
+    ],
+    "regex": "^[./0-9A-Za-z]{13,14}$",
+    "hashcat_mode": 1500,
+    "john_format": null,
+    "popularity": 40,
+    "description": "Traditional DES crypt (Unix)",
+    "is_slow": false,
+    "category": "linux_unix",
+    "min_length": 13,
+    "max_length": 14,
+    "prefix_hint": null,
+    "confidence_weight": 0.3,
+    "source_format_hints": [
+      "shadow"
+    ]
+  },
+  {
+    "name": "SHA2-256",
+    "legacy_names": [
+      "SHA256"
+    ],
+    "regex": "^[a-f0-9]{64}$",
+    "hashcat_mode": 1400,
+    "john_format": "raw-sha256",
+    "popularity": 80,
+    "description": "SHA-256 cryptographic hash (64 hex characters)",
+    "is_slow": false,
+    "category": "raw_generic",
+    "min_length": 64,
+    "max_length": 64,
+    "prefix_hint": null,
+    "confidence_weight": 0.4,
+    "source_format_hints": []
+  },
+  {
+    "name": "PostgreSQL CRAM MD5",
+    "legacy_names": [
+      "PostgreSQL CRAM (MD5)"
+    ],
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}$",
+    "hashcat_mode": 11100,
+    "john_format": null,
+    "popularity": 34,
+    "description": "PostgreSQL SCRAM-like CRAM-MD5 challenge hash",
+    "is_slow": false,
+    "category": "database",
+    "min_length": 60,
+    "max_length": 2000,
+    "prefix_hint": "$postgres$",
+    "confidence_weight": 0.9,
+    "source_format_hints": []
+  },
+  {
+    "name": "PostgreSQL MD5",
+    "legacy_names": [
+      "PostgreSQL MD5 (pg_shadow)"
+    ],
+    "regex": "^md5\\$?[0-9a-fA-F]{32}(?::[^\\s:]{1,128})?$",
+    "hashcat_mode": 12,
+    "john_format": null,
+    "popularity": 35,
+    "description": "PostgreSQL md5(password+username) (pg_shadow stored form and hashcat hash:salt form)",
+    "is_slow": false,
+    "category": "database",
+    "min_length": 35,
+    "max_length": 161,
+    "prefix_hint": "md5",
+    "confidence_weight": 0.6,
+    "source_format_hints": []
+  },
+  {
+    "name": "Gogs/Gitea PBKDF2",
+    "legacy_names": [
+      "Gogs/Gitea PBKDF2-SHA256"
+    ],
+    "regex": "^pbkdf2\\$\\d+\\$\\d+\\$[A-Za-z0-9+/=]+\\$[A-Za-z0-9+/=]+$",
+    "hashcat_mode": null,
+    "john_format": null,
+    "popularity": 25,
+    "description": "Gogs/Gitea PBKDF2-HMAC-SHA256 hash (Go pbkdf2.Key format)",
+    "is_slow": true,
+    "category": "web_app",
+    "min_length": 40,
+    "max_length": 400,
+    "prefix_hint": "pbkdf2$",
+    "confidence_weight": 0.99,
+    "source_format_hints": []
+  },
+  {
+    "name": "Apache APR1",
+    "john_format": "md5crypt"
+  },
+  {
+    "name": "MS Office <= 2003 $0/$1, MD5 + RC4",
+    "john_format": "oldoffice"
+  },
+  {
+    "name": "Cisco Type 8 (PBKDF2-SHA256)",
+    "john_format": null
+  },
+  {
+    "name": "VeraCrypt",
+    "john_format": null
+  },
+  {
+    "name": "WingFTP SHA256",
+    "regex": "^[a-f0-9]{64}:[^\\s:]{1,256}$",
+    "hashcat_mode": 1410,
+    "john_format": null,
+    "popularity": 40,
+    "description": "WingFTP salted SHA-256 (hash:salt; salt from settings.xml)",
+    "is_slow": false,
+    "category": "web_app",
+    "min_length": 66,
+    "max_length": 321,
+    "prefix_hint": null,
+    "confidence_weight": 0.5,
+    "source_format_hints": [
+      "wingftp"
+    ]
+  },
+  {
+    "name": "nsldaps, SSHA-1",
+    "legacy_names": [
+      "SSHA-1",
+      "LDAP {SSHA}"
+    ],
+    "regex": "^\\{SSHA\\}[A-Za-z0-9+/=]{20,}$",
+    "hashcat_mode": 111,
+    "john_format": "ssha",
+    "popularity": 45,
+    "description": "Netscape LDAP salted SHA-1 ({SSHA}base64)",
+    "is_slow": false,
+    "category": "ldap",
+    "min_length": 30,
+    "max_length": 400,
+    "prefix_hint": "{SSHA}",
+    "confidence_weight": 0.98,
+    "source_format_hints": []
+  },
+  {
+    "name": "BSDi Crypt, Extended DES",
+    "regex": "^_[./0-9A-Za-z]{2}\\.\\.[./0-9A-Za-z]{2,1024}$"
+  },
+  {
+    "name": "SSHA-256(Base64), LDAP {SSHA256}",
+    "regex": "^\\{(?:SSHA256|ssha256)\\}[A-Za-z0-9+/=]{44,}$"
+  },
+  {
+    "name": "MSSQL (2000)",
+    "regex": "^0x0100[0-9a-fA-F]{88}$",
+    "min_length": 94,
+    "max_length": 94
+  },
+  {
+    "name": "MSSQL (2005)",
+    "regex": "^0x0100[0-9a-fA-F]{48}$",
+    "min_length": 54,
+    "max_length": 54
+  },
+  {
+    "name": "PBKDF2-HMAC-SHA1",
+    "regex": "^sha1:[0-9]+:[A-Za-z0-9+/=]+:[A-Za-z0-9+/=]+$"
+  },
+  {
+    "name": "PBKDF2-HMAC-SHA512",
+    "regex": "^sha512:[0-9]+:[A-Za-z0-9+/=]+:[A-Za-z0-9+/=]+$",
+    "prefix_hint": "sha512:"
+  },
+  {
+    "name": "Python passlib pbkdf2-sha512",
+    "regex": "^\\$pbkdf2-sha512\\$[0-9]+\\$[A-Za-z0-9+/=]+\\$[A-Za-z0-9+/=.]+$",
+    "min_length": 20,
+    "max_length": 512
+  },
+  {
+    "name": "Python passlib pbkdf2-sha256",
+    "regex": "^\\$pbkdf2-sha256\\$[0-9]+\\$[A-Za-z0-9+/=]+\\$[A-Za-z0-9+/=.]+$",
+    "min_length": 20,
+    "max_length": 512
+  },
+  {
+    "name": "Python passlib pbkdf2-sha1",
+    "regex": "^\\$pbkdf2\\$[0-9]+\\$[./A-Za-z0-9+/=]+\\$[./A-Za-z0-9+/=]+$",
+    "prefix_hint": "$pbkdf2$",
+    "min_length": 20,
+    "max_length": 512
+  },
+  {
+    "name": "scrypt",
+    "regex": "^SCRYPT:[0-9]+:[0-9]+:[0-9]+:[A-Za-z0-9+/=]+:[A-Za-z0-9+/=]+$",
+    "min_length": 20,
+    "max_length": 512
+  },
+  {
+    "name": "Atlassian (PBKDF2-HMAC-SHA1)",
+    "regex": "^\\{PKCS5S2\\}[A-Za-z0-9+/=]{40,}$"
+  },
+  {
+    "name": "Juniper/NetBSD sha1crypt",
+    "regex": "^\\$sha1\\$[0-9]+\\$[^$]{1,64}\\$[A-Za-z0-9+/=.]+$"
+  },
+  {
+    "name": "bcrypt(md5($pass)) / bcryptmd5",
+    "prefix_hint": null,
+    "confidence_weight": 0.2
+  },
+  {
+    "name": "bcrypt(sha1($pass)) / bcryptsha1",
+    "prefix_hint": null,
+    "confidence_weight": 0.2
+  },
+  {
+    "name": "bcrypt(sha512($pass)) / bcryptsha512",
+    "prefix_hint": null,
+    "confidence_weight": 0.2
+  },
+  {
+    "name": "KeePass 1 (AES/Twofish) and KeePass 2 (AES)",
+    "legacy_names": [
+      "KeePass Database"
+    ]
+  },
+  {
+    "name": "Kerberos 5 TGS (RC4)",
+    "legacy_names": [
+      "Kerberos 5 TGS"
+    ]
+  },
+  {
+    "name": "Kerberos AS-REP (RC4)",
+    "legacy_names": [
+      "Kerberos AS-REP"
+    ]
+  },
+  {
+    "name": "Mirth Connect / Generic PBKDF2-SHA256",
+    "legacy_names": [
+      "PBKDF2-HMAC-SHA256 (Generic)"
+    ]
+  },
+  {
+    "name": "sha256crypt",
+    "legacy_names": [
+      "SHA256crypt (Unix)"
+    ]
+  },
+  {
+    "name": "sha512crypt",
+    "legacy_names": [
+      "SHA512crypt (Unix)"
+    ]
+  },
+  {
+    "name": "WPA-PMKID",
+    "legacy_names": [
+      "WPA/WPA2"
+    ]
+  },
+  {
+    "name": "WinZip",
+    "legacy_names": [
+      "ZIP (WinZip/7z)"
+    ]
+  },
+  {
+    "name": "JWT (JSON Web Token)",
+    "regex": "^eyJ(?:hbGciOi|0eXAi)[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*$",
+    "hashcat_mode": 16500,
+    "john_format": null,
+    "popularity": 40,
+    "description": "JSON Web Token: the header segment must decode to a JSON object beginning with 'alg' or 'typ'",
+    "is_slow": false,
+    "category": "network_auth",
+    "min_length": 20,
+    "max_length": 8192,
+    "prefix_hint": "eyJ",
+    "confidence_weight": 0.9,
+    "source_format_hints": []
+  },
+  {
+    "name": "Flask Session Cookie ($salt.$salt.$pass)",
+    "regex": "^[A-Za-z0-9+/=_-]{8,}\\.[A-Za-z0-9+/=_-]{4,}\\.[A-Za-z0-9+/=_-]{8,}$",
+    "hashcat_mode": 29100,
+    "john_format": null,
+    "popularity": 30,
+    "description": "itsdangerous/Flask signed session cookie (payload.timestamp.signature); the timestamp segment is short",
+    "is_slow": false,
+    "category": "network_auth",
+    "min_length": 20,
+    "max_length": 16384,
+    "prefix_hint": null,
+    "confidence_weight": 0.35,
+    "source_format_hints": []
+  }
+]

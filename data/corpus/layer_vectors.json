@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "description": "Deterministic wrapped-hash vectors for recipe benchmarking.",
+  "counts": {
+    "total": 18,
+    "with_plaintext": 18,
+    "with_mode": 18,
+    "operations": [
+      "Base32",
+      "Base64",
+      "ExtractEmbeddedHash",
+      "Gzip",
+      "Hex",
+      "URLDecode",
+      "Zlib"
+    ]
+  },
+  "entries": [
+    {
+      "id": "layer-b64-md5",
+      "raw_input": "NWY0ZGNjM2I1YWE3NjVkNjFkODMyN2RlYjg4MmNmOTk=",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "Base64"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "Base64 wrapped MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-b64-sha256",
+      "raw_input": "NWU4ODQ4OThkYTI4MDQ3MTUxZDBlNTZmOGRjNjI5Mjc3MzYwM2QwZDZhYWJiZGQ2MmExMWVmNzIxZDE1NDJkOA==",
+      "expected_hash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "expected_operations": [
+        "Base64"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 1400,
+      "name": "Base64 wrapped SHA-256",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-b64-sha512",
+      "raw_input": "YjEwOWYzYmJiYzI0NGViODI0NDE5MTdlZDA2ZDYxOGI5MDA4ZGQwOWIzYmVmZDFiNWUwNzM5NGM3MDZhOGJiOTgwYjFkNzc4NWU1OTc2ZWMwNDliNDZkZjVmMTMyNmFmNWEyZWE2ZDEwM2ZkMDdjOTUzODVmZmFiMGNhY2JjODY=",
+      "expected_hash": "b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86",
+      "expected_operations": [
+        "Base64"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 1700,
+      "name": "Base64 wrapped SHA-512",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-b32-md5",
+      "raw_input": "GVTDIZDDMMZWENLBME3TMNLEGYYWIOBTGI3WIZLCHA4DEY3GHE4Q====",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "Base32"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "Base32 wrapped MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-nested-b64-md5",
+      "raw_input": "TldZMFpHTmpNMkkxWVdFM05qVmtOakZrT0RNeU4yUmxZamc0TW1ObU9Uaz0=",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "Base64",
+        "Base64"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "Double Base64 wrapped MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-url-b64-md5",
+      "raw_input": "NWY0ZGNjM2I1YWE3NjVkNjFkODMyN2RlYjg4MmNmOTk%3D",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "URLDecode",
+        "Base64"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "URL-encoded Base64 MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-gzip-b64-md5",
+      "raw_input": "H4sIAAAAAAAC/zNNM0lJTjZOMk1MNDczTTEzTLEwNjJPSU2ysDBKTrO0BADL1P8hIAAAAA==",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "Base64",
+        "Gzip"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "Gzip inside Base64 MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-zlib-b64-md5",
+      "raw_input": "eJwzTTNJSU42TjJNTDQ3M00xM0yxMDYyT0lNsrAwSk6ztAQAmuAJMw==",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "Base64",
+        "Zlib"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "Zlib inside Base64 MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-json-md5",
+      "raw_input": "{\"password_hash\": \"5f4dcc3b5aa765d61d8327deb882cf99\"}",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "ExtractEmbeddedHash"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "JSON embedded MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-json-sha256",
+      "raw_input": "{\"data\": {\"hash\": \"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8\"}}",
+      "expected_hash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "expected_operations": [
+        "ExtractEmbeddedHash"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 1400,
+      "name": "Nested JSON embedded SHA-256",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-quoted-md5",
+      "raw_input": "\"5f4dcc3b5aa765d61d8327deb882cf99\"",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "ExtractEmbeddedHash"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "Quoted MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-csv-md5",
+      "raw_input": "user,5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_hash": "5f4dcc3b5aa765d61d8327deb882cf99",
+      "expected_operations": [
+        "ExtractEmbeddedHash"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 0,
+      "name": "CSV embedded MD5",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-hex-bcrypt",
+      "raw_input": "243262243034244b4b696d4a574734625a65774c343337644e46436f4f656b794454544b426a78532e306170417a6139732f567467506a6778625636",
+      "expected_hash": "$2b$04$KKimJWG4bZewL437dNFCoOekyDTTKBjxS.0apAza9s/VtgPjgxbV6",
+      "expected_operations": [
+        "Hex"
+      ],
+      "expected_plaintext": "Layer2026!",
+      "expected_mode": 3200,
+      "name": "Hex wrapped bcrypt",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-hex-sha512crypt",
+      "raw_input": "243624686173687661756c746c6179657224527132537365466c4643333338314d38794658417973495835356b78476c595936707837654138686e75694961586f69676251396d454e324b66727145523735372e4663372f4734306134393546786a487535665530",
+      "expected_hash": "$6$hashvaultlayer$Rq2SseFlFC3381M8yFXAysIX55kxGlYY6px7eA8hnuiIaXoigbQ9mEN2KfrqER757.Fc7/G40a495FxjHu5fU0",
+      "expected_operations": [
+        "Hex"
+      ],
+      "expected_plaintext": "Layer2026!",
+      "expected_mode": 1800,
+      "name": "Hex wrapped sha512crypt",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-gzip-b64-sha256",
+      "raw_input": "H4sIAAAAAAAC/wXBiQHAIAgDwJUI8sRxsNH9R+hdXjK4qXFaNBKym/Wor3x79ypbMtXMOVL5APe1Q8hw8QegNOeUQAAAAA==",
+      "expected_hash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "expected_operations": [
+        "Base64",
+        "Gzip"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 1400,
+      "name": "Gzip inside Base64 SHA-256",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-zlib-b64-sha512",
+      "raw_input": "eJwFwQcBwEAIBDBLULacP4Z/CU3AVCcA+lNd5KfKxbFDPs6JIsoZKgj2hmFLIaUd5C+BSgJPRNpahW+TFtTn7Fg+f2fv2+fDJDcUXSZpdw/Ur9HpP96JI8Q=",
+      "expected_hash": "b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86",
+      "expected_operations": [
+        "Base64",
+        "Zlib"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 1700,
+      "name": "Zlib inside Base64 SHA-512",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-url-b64-sha256",
+      "raw_input": "NWU4ODQ4OThkYTI4MDQ3MTUxZDBlNTZmOGRjNjI5Mjc3MzYwM2QwZDZhYWJiZGQ2MmExMWVmNzIxZDE1NDJkOA%3D%3D",
+      "expected_hash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+      "expected_operations": [
+        "URLDecode",
+        "Base64"
+      ],
+      "expected_plaintext": "password",
+      "expected_mode": 1400,
+      "name": "URL encoded Base64 SHA-256",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    },
+    {
+      "id": "layer-gzip-b64-sha512crypt",
+      "raw_input": "H4sIAAAAAAAC/1MxU8lILM4oSyzNKclJrEwtUgkqNAouTnXLcXM2NrYw9LWodItwrCz2jDA1za5wz4mMNCuoME91tMjIK830TIzIz0xPCrTMdfUz8k4rKnQNMjc113NLNtd3NzFINLE0davI8ig1TQs1AACb6PCZaAAAAA==",
+      "expected_hash": "$6$hashvaultlayer$Rq2SseFlFC3381M8yFXAysIX55kxGlYY6px7eA8hnuiIaXoigbQ9mEN2KfrqER757.Fc7/G40a495FxjHu5fU0",
+      "expected_operations": [
+        "Base64",
+        "Gzip"
+      ],
+      "expected_plaintext": "Layer2026!",
+      "expected_mode": 1800,
+      "name": "Gzip inside Base64 sha512crypt",
+      "source": "hashvault-layer-corpus",
+      "notes": "Deterministic transform vector verified by prepare_input."
+    }
+  ]
+}

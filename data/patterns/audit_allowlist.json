@@ -1,0 +1,30 @@
+{
+  "_comment": "Documented pattern defects that are NOT fixable by editing the regex: hashcat renumbers modes between releases, so the example bundled for a mode can belong to a different algorithm. Each entry is (mode, code) plus why it is tolerated. Anything not listed here is treated as a new regression.",
+  "known_issues": [
+    {
+      "mode": 300,
+      "code": "self_mismatch",
+      "reason": "hashcat's mode-300 example is the bare 40-hex MySQL323 digest while 'MySQL 4.1+' is the '*FCF7...' star-prefixed form. Both shapes are real; the bundled example describes the sibling format."
+    },
+    {
+      "mode": 1731,
+      "code": "self_mismatch",
+      "reason": "The mode-1731 example in patterns.meta.json is truncated (84 chars vs the 94 the regex requires)."
+    },
+    {
+      "mode": 5500,
+      "code": "self_mismatch",
+      "reason": "The bundled NetNTLMv1 example uses an empty username and 32-hex fields; the pattern models the 48-hex challenge/response form emitted by Responder."
+    },
+    {
+      "mode": 19800,
+      "code": "self_mismatch",
+      "reason": "The example for mode 19800 is a $krb5pa$ pre-auth hash, while the pattern covers $krb5asrep$ AES256 replies. Upstream numbering drift."
+    },
+    {
+      "mode": 26200,
+      "code": "self_mismatch",
+      "reason": "The generated regex keeps a lookahead requiring '+' or '/' taken literally from the hashcat example; real OpenEdge encodings do not always contain them."
+    }
+  ]
+}

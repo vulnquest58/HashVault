@@ -1,0 +1,3660 @@
+{
+  "0": {
+    "mode": 0,
+    "name": "MD5",
+    "self_match": true
+  },
+  "10": {
+    "mode": 10,
+    "name": "md5($pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 39,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "11": {
+    "mode": 11,
+    "name": "Joomla < 2.5.18",
+    "self_match": true,
+    "single_token": false,
+    "len": 65,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{32}$"
+  },
+  "12": {
+    "mode": 12,
+    "name": "PostgreSQL",
+    "self_match": true,
+    "single_token": false,
+    "len": 65,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{32}$"
+  },
+  "20": {
+    "mode": 20,
+    "name": "md5($salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 37,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "21": {
+    "mode": 21,
+    "name": "osCommerce, xt:Commerce",
+    "self_match": true,
+    "single_token": false,
+    "len": 35,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2}$"
+  },
+  "22": {
+    "mode": 22,
+    "name": "Juniper NetScreen/SSG (ScreenOS)",
+    "self_match": true,
+    "single_token": false,
+    "len": 39,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "23": {
+    "mode": 23,
+    "name": "Skype",
+    "self_match": true,
+    "single_token": false,
+    "len": 40,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "24": {
+    "mode": 24,
+    "name": "SolarWinds Serv-U",
+    "self_match": true,
+    "single_token": false,
+    "len": 35,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2}$"
+  },
+  "30": {
+    "mode": 30,
+    "name": "md5(utf16le($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 45,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "40": {
+    "mode": 40,
+    "name": "md5($salt.utf16le($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 41,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "50": {
+    "mode": 50,
+    "name": "HMAC-MD5 (key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 35,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2}$"
+  },
+  "60": {
+    "mode": 60,
+    "name": "HMAC-MD5 (key = $salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 38,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "70": {
+    "mode": 70,
+    "name": "md5(utf16le($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "100": {
+    "mode": 100,
+    "name": "SHA1",
+    "self_match": true
+  },
+  "101": {
+    "mode": 101,
+    "name": "nsldap, SHA-1(Base64), Netscape LDAP SHA",
+    "self_match": true,
+    "single_token": false,
+    "len": 33,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "110": {
+    "mode": 110,
+    "name": "sha1($pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 52,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "111": {
+    "mode": 111,
+    "name": "nsldaps, SSHA-1(Base64), Netscape LDAP SSHA",
+    "self_match": true
+  },
+  "112": {
+    "mode": 112,
+    "name": "Oracle S: Type (Oracle 11+)",
+    "self_match": true,
+    "single_token": false,
+    "len": 61,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "120": {
+    "mode": 120,
+    "name": "sha1($salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 50,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "121": {
+    "mode": 121,
+    "name": "SMF (Simple Machines Forum) > v1.1",
+    "self_match": true,
+    "single_token": false,
+    "len": 49,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "122": {
+    "mode": 122,
+    "name": "macOS v10.4, macOS v10.5, macOS v10.6",
+    "self_match": true,
+    "single_token": true,
+    "len": 48,
+    "regex": "^[0-9a-fA-F]{48}$"
+  },
+  "124": {
+    "mode": 124,
+    "name": "Django (SHA-1)",
+    "self_match": true,
+    "single_token": false,
+    "len": 51,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{40}$"
+  },
+  "125": {
+    "mode": 125,
+    "name": "ArubaOS",
+    "self_match": true,
+    "single_token": true,
+    "len": 50,
+    "regex": "^[0-9a-fA-F]{50}$"
+  },
+  "130": {
+    "mode": 130,
+    "name": "sha1(utf16le($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 52,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "131": {
+    "mode": 131,
+    "name": "MSSQL (2000)",
+    "self_match": true,
+    "single_token": true,
+    "len": 94,
+    "regex": "^[A-Za-z0-9+/]{94}={0}$"
+  },
+  "132": {
+    "mode": 132,
+    "name": "MSSQL (2005)",
+    "self_match": true,
+    "single_token": true,
+    "len": 54,
+    "regex": "^[A-Za-z0-9+/]{54}={0}$"
+  },
+  "133": {
+    "mode": 133,
+    "name": "PeopleSoft",
+    "self_match": true,
+    "single_token": true,
+    "len": 28,
+    "regex": "^[A-Za-z0-9+/]{27}={1}$"
+  },
+  "140": {
+    "mode": 140,
+    "name": "sha1($salt.utf16le($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 47,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "141": {
+    "mode": 141,
+    "name": "Episerver 6.x < .NET 4",
+    "self_match": true,
+    "single_token": false,
+    "len": 50,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{2,1024}\\*[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "150": {
+    "mode": 150,
+    "name": "HMAC-SHA1 (key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 46,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "160": {
+    "mode": 160,
+    "name": "HMAC-SHA1 (key = $salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 48,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "170": {
+    "mode": 170,
+    "name": "sha1(utf16le($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 40,
+    "regex": "^[0-9a-fA-F]{40}$"
+  },
+  "200": {
+    "mode": 200,
+    "name": "MySQL323",
+    "self_match": true,
+    "single_token": true,
+    "len": 16,
+    "regex": "^[0-9a-fA-F]{16}$"
+  },
+  "300": {
+    "mode": 300,
+    "name": "MySQL4.1/MySQL5",
+    "self_match": true
+  },
+  "400": {
+    "mode": 400,
+    "name": "phpass",
+    "self_match": true
+  },
+  "500": {
+    "mode": 500,
+    "name": "md5crypt, MD5 (Unix), Cisco-IOS $1$ (MD5)",
+    "self_match": true
+  },
+  "501": {
+    "mode": 501,
+    "name": "Juniper IVE",
+    "self_match": true,
+    "single_token": true,
+    "len": 104,
+    "regex": "^[A-Za-z0-9+/]{102}={2}$"
+  },
+  "600": {
+    "mode": 600,
+    "name": "BLAKE2b-512",
+    "self_match": true,
+    "single_token": false,
+    "len": 136,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{128}$"
+  },
+  "610": {
+    "mode": 610,
+    "name": "BLAKE2b-512($pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 141,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "620": {
+    "mode": 620,
+    "name": "BLAKE2b-512($salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 141,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "900": {
+    "mode": 900,
+    "name": "MD4",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "1000": {
+    "mode": 1000,
+    "name": "NTLM",
+    "self_match": true
+  },
+  "1100": {
+    "mode": 1100,
+    "name": "Domain Cached Credentials (DCC), MS Cache",
+    "self_match": true,
+    "single_token": false,
+    "len": 44,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1300": {
+    "mode": 1300,
+    "name": "SHA2-224",
+    "self_match": true,
+    "single_token": true,
+    "len": 56,
+    "regex": "^[0-9a-fA-F]{56}$"
+  },
+  "1400": {
+    "mode": 1400,
+    "name": "SHA2-256",
+    "self_match": true
+  },
+  "1410": {
+    "mode": 1410,
+    "name": "sha256($pass.$salt)",
+    "self_match": true
+  },
+  "1411": {
+    "mode": 1411,
+    "name": "SSHA-256(Base64), LDAP {SSHA256}",
+    "self_match": true,
+    "single_token": false,
+    "len": 57,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[A-Za-z0-9+/=]{48}$"
+  },
+  "1420": {
+    "mode": 1420,
+    "name": "sha256($salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 73,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1421": {
+    "mode": 1421,
+    "name": "hMailServer",
+    "self_match": true,
+    "single_token": true,
+    "len": 70,
+    "regex": "^[0-9a-fA-F]{70}$"
+  },
+  "1430": {
+    "mode": 1430,
+    "name": "sha256(utf16le($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 70,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1440": {
+    "mode": 1440,
+    "name": "sha256($salt.utf16le($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 70,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1441": {
+    "mode": 1441,
+    "name": "Episerver 6.x >= .NET 4",
+    "self_match": true,
+    "single_token": false,
+    "len": 66,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{2,1024}\\*[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "1450": {
+    "mode": 1450,
+    "name": "HMAC-SHA256 (key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 70,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1460": {
+    "mode": 1460,
+    "name": "HMAC-SHA256 (key = $salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 76,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1470": {
+    "mode": 1470,
+    "name": "sha256(utf16le($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "1500": {
+    "mode": 1500,
+    "name": "descrypt, DES (Unix), Traditional DES",
+    "self_match": true,
+    "single_token": true,
+    "len": 13,
+    "regex": "^[A-Za-z0-9+/]{13}={0}$"
+  },
+  "1600": {
+    "mode": 1600,
+    "name": "Apache $apr1$ MD5, md5apr1, MD5 (APR)",
+    "self_match": true
+  },
+  "1700": {
+    "mode": 1700,
+    "name": "SHA2-512",
+    "self_match": true
+  },
+  "1710": {
+    "mode": 1710,
+    "name": "sha512($pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 141,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1711": {
+    "mode": 1711,
+    "name": "SSHA-512(Base64), LDAP {SSHA512}",
+    "self_match": true,
+    "single_token": false,
+    "len": 109,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "1720": {
+    "mode": 1720,
+    "name": "sha512($salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 132,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1722": {
+    "mode": 1722,
+    "name": "macOS v10.7",
+    "self_match": true,
+    "single_token": true,
+    "len": 136,
+    "regex": "^[0-9a-fA-F]{136}$"
+  },
+  "1730": {
+    "mode": 1730,
+    "name": "sha512(utf16le($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 136,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1731": {
+    "mode": 1731,
+    "name": "MSSQL (2012, 2014)",
+    "self_match": true
+  },
+  "1740": {
+    "mode": 1740,
+    "name": "sha512($salt.utf16le($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 136,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1750": {
+    "mode": 1750,
+    "name": "HMAC-SHA512 (key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 135,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1760": {
+    "mode": 1760,
+    "name": "HMAC-SHA512 (key = $salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 132,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "1770": {
+    "mode": 1770,
+    "name": "sha512(utf16le($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 128,
+    "regex": "^[0-9a-fA-F]{128}$"
+  },
+  "1800": {
+    "mode": 1800,
+    "name": "sha512crypt $6$, SHA512 (Unix)",
+    "self_match": true
+  },
+  "2000": {
+    "mode": 2000,
+    "name": "STDOUT",
+    "self_match": true,
+    "single_token": true,
+    "len": 7,
+    "regex": "^[A-Za-z0-9+/]{7}={0}$"
+  },
+  "2100": {
+    "mode": 2100,
+    "name": "Domain Cached Credentials 2 (DCC2), MS Cache 2",
+    "self_match": true
+  },
+  "2400": {
+    "mode": 2400,
+    "name": "Cisco-PIX MD5",
+    "self_match": true,
+    "single_token": true,
+    "len": 16,
+    "regex": "^[A-Za-z0-9+/]{16}={0}$"
+  },
+  "2410": {
+    "mode": 2410,
+    "name": "Cisco-ASA MD5",
+    "self_match": true,
+    "single_token": false,
+    "len": 21,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "2500": {
+    "mode": 2500,
+    "name": "WPA-EAPOL-PBKDF2",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "2501": {
+    "mode": 2501,
+    "name": "WPA-EAPOL-PMK",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "2600": {
+    "mode": 2600,
+    "name": "md5(md5($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "2611": {
+    "mode": 2611,
+    "name": "vBulletin < v3.8.5",
+    "self_match": true,
+    "single_token": false,
+    "len": 36,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "2612": {
+    "mode": 2612,
+    "name": "PHPS",
+    "self_match": true,
+    "single_token": false,
+    "len": 59,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}$"
+  },
+  "2711": {
+    "mode": 2711,
+    "name": "vBulletin >= v3.8.5",
+    "self_match": true,
+    "single_token": false,
+    "len": 63,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "2811": {
+    "mode": 2811,
+    "name": "MyBB 1.2+, IPB2+ (Invision Power Board)",
+    "self_match": true,
+    "single_token": false,
+    "len": 38,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "3000": {
+    "mode": 3000,
+    "name": "LM",
+    "self_match": true
+  },
+  "3100": {
+    "mode": 3100,
+    "name": "Oracle H: Type (Oracle 7+)",
+    "self_match": true,
+    "single_token": false,
+    "len": 27,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "3200": {
+    "mode": 3200,
+    "name": "bcrypt $2*$, Blowfish (Unix)",
+    "self_match": true
+  },
+  "3500": {
+    "mode": 3500,
+    "name": "md5(md5(md5($pass)))",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "3710": {
+    "mode": 3710,
+    "name": "md5($salt.md5($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 45,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "3711": {
+    "mode": 3711,
+    "name": "MediaWiki B type",
+    "self_match": true,
+    "single_token": false,
+    "len": 46,
+    "regex": "^\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}$"
+  },
+  "3800": {
+    "mode": 3800,
+    "name": "md5($salt.$pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 34,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{1}$"
+  },
+  "3910": {
+    "mode": 3910,
+    "name": "md5(md5($pass).md5($salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 39,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "4010": {
+    "mode": 4010,
+    "name": "md5($salt.md5($salt.$pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 46,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "4110": {
+    "mode": 4110,
+    "name": "md5($salt.md5($pass.$salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 44,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "4300": {
+    "mode": 4300,
+    "name": "md5(strtoupper(md5($pass)))",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "4400": {
+    "mode": 4400,
+    "name": "md5(sha1($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "4410": {
+    "mode": 4410,
+    "name": "md5(sha1($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 50,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "4500": {
+    "mode": 4500,
+    "name": "sha1(sha1($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 40,
+    "regex": "^[0-9a-fA-F]{40}$"
+  },
+  "4510": {
+    "mode": 4510,
+    "name": "sha1(sha1($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 49,
+    "regex": "^[0-9a-fA-F]{40}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "4520": {
+    "mode": 4520,
+    "name": "sha1($salt.sha1($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 89,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{48}$"
+  },
+  "4521": {
+    "mode": 4521,
+    "name": "Redmine",
+    "self_match": true,
+    "single_token": false,
+    "len": 73,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{32}$"
+  },
+  "4522": {
+    "mode": 4522,
+    "name": "PunBB",
+    "self_match": true,
+    "single_token": false,
+    "len": 53,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "4700": {
+    "mode": 4700,
+    "name": "sha1(md5($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 40,
+    "regex": "^[0-9a-fA-F]{40}$"
+  },
+  "4710": {
+    "mode": 4710,
+    "name": "sha1(md5($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 49,
+    "regex": "^[0-9a-fA-F]{40}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "4711": {
+    "mode": 4711,
+    "name": "Huawei sha1(md5($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 49,
+    "regex": "^[0-9a-fA-F]{40}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "4800": {
+    "mode": 4800,
+    "name": "iSCSI CHAP authentication, MD5(CHAP)",
+    "self_match": true,
+    "single_token": false,
+    "len": 68,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{32}:[0-9a-fA-F]{2}$"
+  },
+  "4900": {
+    "mode": 4900,
+    "name": "sha1($salt.$pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 47,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "5000": {
+    "mode": 5000,
+    "name": "sha1(sha1($salt.$pass.$salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 53,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "5100": {
+    "mode": 5100,
+    "name": "Half MD5",
+    "self_match": true,
+    "single_token": true,
+    "len": 16,
+    "regex": "^[0-9a-fA-F]{16}$"
+  },
+  "5200": {
+    "mode": 5200,
+    "name": "Password Safe v3",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "5300": {
+    "mode": 5300,
+    "name": "IKE-PSK MD5",
+    "self_match": true
+  },
+  "5400": {
+    "mode": 5400,
+    "name": "IKE-PSK SHA1",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "5500": {
+    "mode": 5500,
+    "name": "NetNTLMv1 / NetNTLMv1+ESS",
+    "self_match": true
+  },
+  "5600": {
+    "mode": 5600,
+    "name": "NetNTLMv2",
+    "self_match": true
+  },
+  "5700": {
+    "mode": 5700,
+    "name": "Cisco-IOS type 4 (SHA256)",
+    "self_match": true,
+    "single_token": true,
+    "len": 43,
+    "regex": "^[A-Za-z0-9+/]{43}={0}$"
+  },
+  "5800": {
+    "mode": 5800,
+    "name": "Samsung Android Password/PIN",
+    "self_match": true,
+    "single_token": false,
+    "len": 57,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "6000": {
+    "mode": 6000,
+    "name": "RIPEMD-160",
+    "self_match": true,
+    "single_token": true,
+    "len": 40,
+    "regex": "^[0-9a-fA-F]{40}$"
+  },
+  "6100": {
+    "mode": 6100,
+    "name": "Whirlpool",
+    "self_match": true,
+    "single_token": true,
+    "len": 128,
+    "regex": "^[0-9a-fA-F]{128}$"
+  },
+  "6211": {
+    "mode": 6211,
+    "name": "TrueCrypt RIPEMD160 + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6212": {
+    "mode": 6212,
+    "name": "TrueCrypt RIPEMD160 + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6213": {
+    "mode": 6213,
+    "name": "TrueCrypt RIPEMD160 + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6221": {
+    "mode": 6221,
+    "name": "TrueCrypt SHA512 + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6222": {
+    "mode": 6222,
+    "name": "TrueCrypt SHA512 + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6223": {
+    "mode": 6223,
+    "name": "TrueCrypt SHA512 + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6231": {
+    "mode": 6231,
+    "name": "TrueCrypt Whirlpool + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6232": {
+    "mode": 6232,
+    "name": "TrueCrypt Whirlpool + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6233": {
+    "mode": 6233,
+    "name": "TrueCrypt Whirlpool + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6241": {
+    "mode": 6241,
+    "name": "TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6242": {
+    "mode": 6242,
+    "name": "TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6243": {
+    "mode": 6243,
+    "name": "TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6300": {
+    "mode": 6300,
+    "name": "AIX {smd5}",
+    "self_match": true,
+    "single_token": false,
+    "len": 37,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "6400": {
+    "mode": 6400,
+    "name": "AIX {ssha256}",
+    "self_match": true,
+    "single_token": false,
+    "len": 72,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{40}\\.[A-Za-z0-9+/=]{2}$"
+  },
+  "6500": {
+    "mode": 6500,
+    "name": "AIX {ssha512}",
+    "self_match": true,
+    "single_token": false,
+    "len": 115,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.\\.$"
+  },
+  "6600": {
+    "mode": 6600,
+    "name": "1Password, agilekeychain",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "6700": {
+    "mode": 6700,
+    "name": "AIX {ssha1}",
+    "self_match": true,
+    "single_token": false,
+    "len": 54,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.\\.[A-Za-z0-9+/=]{1}$"
+  },
+  "6800": {
+    "mode": 6800,
+    "name": "LastPass + LastPass sniffed",
+    "self_match": true,
+    "single_token": false,
+    "len": 56,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}:[A-Za-z0-9+/=]{2,1024}@[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "6900": {
+    "mode": 6900,
+    "name": "GOST R 34.11-94",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "7000": {
+    "mode": 7000,
+    "name": "FortiGate (FortiOS)",
+    "self_match": true,
+    "single_token": true,
+    "len": 47,
+    "regex": "^[A-Za-z0-9+/]{46}={1}$"
+  },
+  "7100": {
+    "mode": 7100,
+    "name": "macOS v10.8+ (PBKDF2-SHA512)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "7200": {
+    "mode": 7200,
+    "name": "GRUB 2",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[0-9a-fA-F]{2,1024}\\.[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "7300": {
+    "mode": 7300,
+    "name": "IPMI2 RAKP HMAC-SHA1",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "7400": {
+    "mode": 7400,
+    "name": "sha256crypt $5$, SHA256 (Unix)",
+    "self_match": true
+  },
+  "7401": {
+    "mode": 7401,
+    "name": "MySQL $A$ (sha256crypt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 140,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{40}\\*[0-9a-fA-F]{2,1024}$"
+  },
+  "7500": {
+    "mode": 7500,
+    "name": "Kerberos 5, etype 23, AS-REQ Pre-Auth",
+    "self_match": true,
+    "single_token": false,
+    "len": 131,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}$"
+  },
+  "7700": {
+    "mode": 7700,
+    "name": "SAP CODVN B (BCODE)",
+    "self_match": true,
+    "single_token": false,
+    "len": 29,
+    "regex": "^[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}$"
+  },
+  "7701": {
+    "mode": 7701,
+    "name": "SAP CODVN B (BCODE) from RFC_READ_TABLE",
+    "self_match": true,
+    "single_token": false,
+    "len": 29,
+    "regex": "^[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}$"
+  },
+  "7800": {
+    "mode": 7800,
+    "name": "SAP CODVN F/G (PASSCODE)",
+    "self_match": true,
+    "single_token": false,
+    "len": 53,
+    "regex": "^[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{40}$"
+  },
+  "7801": {
+    "mode": 7801,
+    "name": "SAP CODVN F/G (PASSCODE) from RFC_READ_TABLE",
+    "self_match": true,
+    "single_token": false,
+    "len": 53,
+    "regex": "^[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{40}$"
+  },
+  "7900": {
+    "mode": 7900,
+    "name": "Drupal7",
+    "self_match": true
+  },
+  "8000": {
+    "mode": 8000,
+    "name": "Sybase ASE",
+    "self_match": true,
+    "single_token": true,
+    "len": 86,
+    "regex": "^[A-Za-z0-9+/]{86}={0}$"
+  },
+  "8100": {
+    "mode": 8100,
+    "name": "Citrix NetScaler (SHA1)",
+    "self_match": true,
+    "single_token": true,
+    "len": 49,
+    "regex": "^[0-9a-fA-F]{49}$"
+  },
+  "8200": {
+    "mode": 8200,
+    "name": "1Password, cloudkeychain",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "8300": {
+    "mode": 8300,
+    "name": "DNSSEC (NSEC3)",
+    "self_match": true,
+    "single_token": false,
+    "len": 57,
+    "regex": "^[A-Za-z0-9+/=]{32}:\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{1}$"
+  },
+  "8400": {
+    "mode": 8400,
+    "name": "WBB3 (Woltlab Burning Board)",
+    "self_match": true,
+    "single_token": false,
+    "len": 81,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{40}$"
+  },
+  "8500": {
+    "mode": 8500,
+    "name": "RACF",
+    "self_match": true,
+    "single_token": false,
+    "len": 28,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}$"
+  },
+  "8600": {
+    "mode": 8600,
+    "name": "Lotus Notes/Domino 5",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "8700": {
+    "mode": 8700,
+    "name": "Lotus Notes/Domino 6",
+    "self_match": true,
+    "single_token": false,
+    "len": 22,
+    "regex": "^\\([A-Za-z0-9+/=]{2,1024}\\)$"
+  },
+  "8800": {
+    "mode": 8800,
+    "name": "Android FDE <= 4.3",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "8900": {
+    "mode": 8900,
+    "name": "scrypt",
+    "self_match": true,
+    "single_token": false,
+    "len": 74,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{1}:[0-9a-fA-F]{1}:[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "9000": {
+    "mode": 9000,
+    "name": "Password Safe v2",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "9100": {
+    "mode": 9100,
+    "name": "Lotus Notes/Domino 8",
+    "self_match": true,
+    "single_token": false,
+    "len": 51,
+    "regex": "^\\([A-Za-z0-9+/=]{2,1024}\\)$"
+  },
+  "9200": {
+    "mode": 9200,
+    "name": "Cisco-IOS $8$ (PBKDF2-SHA256)",
+    "self_match": true
+  },
+  "9300": {
+    "mode": 9300,
+    "name": "Cisco-IOS $9$ (scrypt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 61,
+    "regex": "^\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "9400": {
+    "mode": 9400,
+    "name": "MS Office 2007",
+    "self_match": true
+  },
+  "9500": {
+    "mode": 9500,
+    "name": "MS Office 2010",
+    "self_match": true
+  },
+  "9600": {
+    "mode": 9600,
+    "name": "MS Office 2013",
+    "self_match": true
+  },
+  "9700": {
+    "mode": 9700,
+    "name": "MS Office <= 2003 $0/$1, MD5 + RC4",
+    "self_match": true,
+    "single_token": false,
+    "len": 111,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}$"
+  },
+  "9710": {
+    "mode": 9710,
+    "name": "MS Office <= 2003 $0/$1, MD5 + RC4, collider #1",
+    "self_match": true,
+    "single_token": false,
+    "len": 111,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}$"
+  },
+  "9720": {
+    "mode": 9720,
+    "name": "MS Office <= 2003 $0/$1, MD5 + RC4, collider #2",
+    "self_match": true,
+    "single_token": false,
+    "len": 122,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "9800": {
+    "mode": 9800,
+    "name": "MS Office <= 2003 $3/$4, SHA1 + RC4",
+    "self_match": true,
+    "single_token": false,
+    "len": 119,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{40}$"
+  },
+  "9810": {
+    "mode": 9810,
+    "name": "MS Office <= 2003 $3, SHA1 + RC4, collider #1",
+    "self_match": true,
+    "single_token": false,
+    "len": 119,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{40}$"
+  },
+  "9820": {
+    "mode": 9820,
+    "name": "MS Office <= 2003 $3, SHA1 + RC4, collider #2",
+    "self_match": true,
+    "single_token": false,
+    "len": 130,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "9900": {
+    "mode": 9900,
+    "name": "Radmin2",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "10000": {
+    "mode": 10000,
+    "name": "Django (PBKDF2-SHA256)",
+    "self_match": true
+  },
+  "10100": {
+    "mode": 10100,
+    "name": "SipHash",
+    "self_match": true,
+    "single_token": false,
+    "len": 53,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{1}:[0-9a-fA-F]{1}:[0-9a-fA-F]{32}$"
+  },
+  "10200": {
+    "mode": 10200,
+    "name": "CRAM-MD5",
+    "self_match": true,
+    "single_token": false,
+    "len": 67,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "10300": {
+    "mode": 10300,
+    "name": "SAP CODVN H (PWDSALTEDHASH) iSSHA-1",
+    "self_match": true,
+    "single_token": false,
+    "len": 55,
+    "regex": "^\\{[A-Za-z0-9+/=]{1}\\-[A-Za-z0-9+/=]{2,1024},\\ [0-9a-fA-F]{2,1024}\\}[A-Za-z0-9+/=]{40}$"
+  },
+  "10400": {
+    "mode": 10400,
+    "name": "PDF 1.1 - 1.3 (Acrobat 2 - 4)",
+    "self_match": true,
+    "single_token": false,
+    "len": 188,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*\\-[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}$"
+  },
+  "10410": {
+    "mode": 10410,
+    "name": "PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #1",
+    "self_match": true,
+    "single_token": false,
+    "len": 188,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*\\-[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}$"
+  },
+  "10420": {
+    "mode": 10420,
+    "name": "PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #2",
+    "self_match": true,
+    "single_token": false,
+    "len": 199,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*\\-[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "10500": {
+    "mode": 10500,
+    "name": "PDF 1.4 - 1.6 (Acrobat 5 - 8)",
+    "self_match": true
+  },
+  "10600": {
+    "mode": 10600,
+    "name": "PDF 1.7 Level 3 (Acrobat 9)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*\\-[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "10700": {
+    "mode": 10700,
+    "name": "PDF 1.7 Level 8 (Acrobat 10 - 11)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*\\-[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "10800": {
+    "mode": 10800,
+    "name": "SHA2-384",
+    "self_match": true,
+    "single_token": true,
+    "len": 96,
+    "regex": "^[0-9a-fA-F]{96}$"
+  },
+  "10810": {
+    "mode": 10810,
+    "name": "sha384($pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 122,
+    "regex": "^[0-9a-fA-F]{96}:[0-9a-fA-F]{2,1024}$"
+  },
+  "10820": {
+    "mode": 10820,
+    "name": "sha384($salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 102,
+    "regex": "^[0-9a-fA-F]{96}:[0-9a-fA-F]{2,1024}$"
+  },
+  "10830": {
+    "mode": 10830,
+    "name": "sha384(utf16le($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 112,
+    "regex": "^[0-9a-fA-F]{96}:[0-9a-fA-F]{2,1024}$"
+  },
+  "10840": {
+    "mode": 10840,
+    "name": "sha384($salt.utf16le($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 106,
+    "regex": "^[0-9a-fA-F]{96}:[0-9a-fA-F]{2,1024}$"
+  },
+  "10870": {
+    "mode": 10870,
+    "name": "sha384(utf16le($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 96,
+    "regex": "^[0-9a-fA-F]{96}$"
+  },
+  "10900": {
+    "mode": 10900,
+    "name": "PBKDF2-HMAC-SHA256",
+    "self_match": true
+  },
+  "10901": {
+    "mode": 10901,
+    "name": "RedHat 389-DS LDAP (PBKDF2-HMAC-SHA256)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}\\}[A-Za-z0-9+/=]{32}\\.\\.\\.[A-Za-z0-9+/=]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "11000": {
+    "mode": 11000,
+    "name": "PrestaShop",
+    "self_match": true,
+    "single_token": false,
+    "len": 89,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{56}$"
+  },
+  "11100": {
+    "mode": 11100,
+    "name": "PostgreSQL CRAM (MD5)",
+    "self_match": true,
+    "single_token": false,
+    "len": 60,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}$"
+  },
+  "11200": {
+    "mode": 11200,
+    "name": "MySQL CRAM (SHA1)",
+    "self_match": true,
+    "single_token": false,
+    "len": 90,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{40}\\*[0-9a-fA-F]{40}$"
+  },
+  "11300": {
+    "mode": 11300,
+    "name": "Bitcoin/Litecoin wallet.dat",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "11400": {
+    "mode": 11400,
+    "name": "SIP digest authentication (MD5)",
+    "self_match": true,
+    "single_token": false,
+    "len": 127,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*\\*\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*\\*\\*\\*[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{32}$"
+  },
+  "11500": {
+    "mode": 11500,
+    "name": "CRC32",
+    "self_match": true,
+    "single_token": false,
+    "len": 17,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "11600": {
+    "mode": 11600,
+    "name": "7-Zip",
+    "self_match": true
+  },
+  "11700": {
+    "mode": 11700,
+    "name": "GOST R 34.11-2012 (Streebog) 256-bit, big-endian",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "11750": {
+    "mode": 11750,
+    "name": "HMAC-Streebog-256 (key = $pass), big-endian",
+    "self_match": true,
+    "single_token": false,
+    "len": 73,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "11760": {
+    "mode": 11760,
+    "name": "HMAC-Streebog-256 (key = $salt), big-endian",
+    "self_match": true,
+    "single_token": false,
+    "len": 73,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "11800": {
+    "mode": 11800,
+    "name": "GOST R 34.11-2012 (Streebog) 512-bit, big-endian",
+    "self_match": true,
+    "single_token": true,
+    "len": 128,
+    "regex": "^[0-9a-fA-F]{128}$"
+  },
+  "11850": {
+    "mode": 11850,
+    "name": "HMAC-Streebog-512 (key = $pass), big-endian",
+    "self_match": true,
+    "single_token": false,
+    "len": 137,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "11860": {
+    "mode": 11860,
+    "name": "HMAC-Streebog-512 (key = $salt), big-endian",
+    "self_match": true,
+    "single_token": false,
+    "len": 137,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{2,1024}$"
+  },
+  "11900": {
+    "mode": 11900,
+    "name": "PBKDF2-HMAC-MD5",
+    "self_match": true,
+    "single_token": false,
+    "len": 66,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "12000": {
+    "mode": 12000,
+    "name": "PBKDF2-HMAC-SHA1",
+    "self_match": true,
+    "single_token": false,
+    "len": 55,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "12001": {
+    "mode": 12001,
+    "name": "Atlassian (PBKDF2-HMAC-SHA1)",
+    "self_match": true,
+    "single_token": false,
+    "len": 73,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\}[A-Za-z0-9+/=]{64}$"
+  },
+  "12100": {
+    "mode": 12100,
+    "name": "PBKDF2-HMAC-SHA512",
+    "self_match": true
+  },
+  "12200": {
+    "mode": 12200,
+    "name": "eCryptfs",
+    "self_match": true,
+    "single_token": false,
+    "len": 47,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}$"
+  },
+  "12300": {
+    "mode": 12300,
+    "name": "Oracle T: Type (Oracle 12+)",
+    "self_match": true,
+    "single_token": true,
+    "len": 160,
+    "regex": "^[0-9a-fA-F]{160}$"
+  },
+  "12400": {
+    "mode": 12400,
+    "name": "BSDi Crypt, Extended DES",
+    "self_match": true,
+    "single_token": false,
+    "len": 20,
+    "regex": "^_[A-Za-z0-9+/=]{2}\\.\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "12500": {
+    "mode": 12500,
+    "name": "RAR3-hp",
+    "self_match": true
+  },
+  "12600": {
+    "mode": 12600,
+    "name": "ColdFusion 10+",
+    "self_match": true,
+    "single_token": false,
+    "len": 129,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{64}$"
+  },
+  "12700": {
+    "mode": 12700,
+    "name": "Blockchain, My Wallet",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "12800": {
+    "mode": 12800,
+    "name": "MS-AzureSync PBKDF2-HMAC-SHA256",
+    "self_match": true,
+    "single_token": false,
+    "len": 101,
+    "regex": "^[A-Za-z0-9+/=]{2};[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024},[0-9a-fA-F]{2,1024},[0-9a-fA-F]{2,1024},[0-9a-fA-F]{64}$"
+  },
+  "12900": {
+    "mode": 12900,
+    "name": "Android FDE (Samsung DEK)",
+    "self_match": true,
+    "single_token": true,
+    "len": 160,
+    "regex": "^[0-9a-fA-F]{160}$"
+  },
+  "13000": {
+    "mode": 13000,
+    "name": "RAR5",
+    "self_match": true
+  },
+  "13100": {
+    "mode": 13100,
+    "name": "Kerberos 5, etype 23, TGS-REP",
+    "self_match": true
+  },
+  "13200": {
+    "mode": 13200,
+    "name": "AxCrypt 1",
+    "self_match": true,
+    "single_token": false,
+    "len": 99,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{48}$"
+  },
+  "13300": {
+    "mode": 13300,
+    "name": "AxCrypt 1 in-memory SHA1",
+    "self_match": true,
+    "single_token": false,
+    "len": 46,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{32}$"
+  },
+  "13400": {
+    "mode": 13400,
+    "name": "KeePass 1 (AES/Twofish) and KeePass 2 (AES)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13500": {
+    "mode": 13500,
+    "name": "PeopleSoft PS_TOKEN",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13600": {
+    "mode": 13600,
+    "name": "WinZip",
+    "self_match": true,
+    "single_token": false,
+    "len": 66,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*\\*[0-9a-fA-F]{2,1024}\\*\\$[A-Za-z0-9+/=]{2,1024}\\$$"
+  },
+  "13711": {
+    "mode": 13711,
+    "name": "VeraCrypt RIPEMD160 + XTS 512 bit (legacy)",
+    "self_match": true
+  },
+  "13712": {
+    "mode": 13712,
+    "name": "VeraCrypt RIPEMD160 + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13713": {
+    "mode": 13713,
+    "name": "VeraCrypt RIPEMD160 + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13721": {
+    "mode": 13721,
+    "name": "VeraCrypt SHA512 + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13722": {
+    "mode": 13722,
+    "name": "VeraCrypt SHA512 + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13723": {
+    "mode": 13723,
+    "name": "VeraCrypt SHA512 + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13731": {
+    "mode": 13731,
+    "name": "VeraCrypt Whirlpool + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13732": {
+    "mode": 13732,
+    "name": "VeraCrypt Whirlpool + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13733": {
+    "mode": 13733,
+    "name": "VeraCrypt Whirlpool + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13741": {
+    "mode": 13741,
+    "name": "VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13742": {
+    "mode": 13742,
+    "name": "VeraCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13743": {
+    "mode": 13743,
+    "name": "VeraCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13751": {
+    "mode": 13751,
+    "name": "VeraCrypt SHA256 + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13752": {
+    "mode": 13752,
+    "name": "VeraCrypt SHA256 + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13753": {
+    "mode": 13753,
+    "name": "VeraCrypt SHA256 + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13761": {
+    "mode": 13761,
+    "name": "VeraCrypt SHA256 + XTS 512 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13762": {
+    "mode": 13762,
+    "name": "VeraCrypt SHA256 + XTS 1024 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13763": {
+    "mode": 13763,
+    "name": "VeraCrypt SHA256 + XTS 1536 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13771": {
+    "mode": 13771,
+    "name": "VeraCrypt Streebog-512 + XTS 512 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13772": {
+    "mode": 13772,
+    "name": "VeraCrypt Streebog-512 + XTS 1024 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13773": {
+    "mode": 13773,
+    "name": "VeraCrypt Streebog-512 + XTS 1536 bit (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13781": {
+    "mode": 13781,
+    "name": "VeraCrypt Streebog-512 + XTS 512 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13782": {
+    "mode": 13782,
+    "name": "VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13783": {
+    "mode": 13783,
+    "name": "VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode (legacy)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13800": {
+    "mode": 13800,
+    "name": "Windows Phone 8+ PIN/password",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "13900": {
+    "mode": 13900,
+    "name": "OpenCart",
+    "self_match": true,
+    "single_token": false,
+    "len": 50,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "14000": {
+    "mode": 14000,
+    "name": "DES (PT = $salt, key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 33,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "14100": {
+    "mode": 14100,
+    "name": "3DES (PT = $salt, key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 33,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "14400": {
+    "mode": 14400,
+    "name": "sha1(CX)",
+    "self_match": true,
+    "single_token": false,
+    "len": 61,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}$"
+  },
+  "14500": {
+    "mode": 14500,
+    "name": "Linux Kernel Crypto API (2.4)",
+    "self_match": true,
+    "single_token": false,
+    "len": 113,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{32}$"
+  },
+  "14600": {
+    "mode": 14600,
+    "name": "LUKS v1 (legacy)",
+    "self_match": true,
+    "single_token": true,
+    "len": 3,
+    "regex": "^[A-Za-z0-9+/]{3}={0}$"
+  },
+  "14700": {
+    "mode": 14700,
+    "name": "iTunes backup < 10.0",
+    "self_match": true,
+    "single_token": false,
+    "len": 147,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{80}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{40}\\*\\*$"
+  },
+  "14800": {
+    "mode": 14800,
+    "name": "iTunes backup >= 10.0",
+    "self_match": true,
+    "single_token": false,
+    "len": 192,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{80}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{40}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{40}$"
+  },
+  "14900": {
+    "mode": 14900,
+    "name": "Skip32 (PT = $salt, key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 17,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "15000": {
+    "mode": 15000,
+    "name": "FileZilla Server >= 0.9.55",
+    "self_match": true,
+    "single_token": false,
+    "len": 193,
+    "regex": "^[0-9a-fA-F]{128}:[0-9a-fA-F]{64}$"
+  },
+  "15100": {
+    "mode": 15100,
+    "name": "Juniper/NetBSD sha1crypt",
+    "self_match": true,
+    "single_token": false,
+    "len": 49,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "15200": {
+    "mode": 15200,
+    "name": "Blockchain, My Wallet, V2",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "15300": {
+    "mode": 15300,
+    "name": "DPAPI masterkey file v1 (context 1 and 2)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{1}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "15310": {
+    "mode": 15310,
+    "name": "DPAPI masterkey file v1 (context 3)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{1}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "15400": {
+    "mode": 15400,
+    "name": "ChaCha20",
+    "self_match": true,
+    "single_token": false,
+    "len": 81,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}$"
+  },
+  "15500": {
+    "mode": 15500,
+    "name": "JKS Java Key Store Private Keys (SHA1)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{2,1024}\\.\\.\\.\\*[A-Za-z0-9+/=]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "15600": {
+    "mode": 15600,
+    "name": "Ethereum Wallet, PBKDF2-HMAC-SHA256",
+    "self_match": true,
+    "single_token": false,
+    "len": 179,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{64}$"
+  },
+  "15700": {
+    "mode": 15700,
+    "name": "Ethereum Wallet, SCRYPT",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "15900": {
+    "mode": 15900,
+    "name": "DPAPI masterkey file v2 (context 1 and 2)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{1}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "15910": {
+    "mode": 15910,
+    "name": "DPAPI masterkey file v2 (context 3)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{1}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\-[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "16000": {
+    "mode": 16000,
+    "name": "Tripcode",
+    "self_match": true,
+    "single_token": true,
+    "len": 10,
+    "regex": "^[A-Za-z0-9+/]{10}={0}$"
+  },
+  "16100": {
+    "mode": 16100,
+    "name": "TACACS+",
+    "self_match": true,
+    "single_token": false,
+    "len": 41,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}$"
+  },
+  "16200": {
+    "mode": 16200,
+    "name": "Apple Secure Notes",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{48}$"
+  },
+  "16300": {
+    "mode": 16300,
+    "name": "Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{1}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "16400": {
+    "mode": 16400,
+    "name": "CRAM-MD5 Dovecot",
+    "self_match": true,
+    "single_token": false,
+    "len": 74,
+    "regex": "^\\{[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\}[0-9a-fA-F]{64}$"
+  },
+  "16500": {
+    "mode": 16500,
+    "name": "JWT (JSON Web Token)",
+    "self_match": true,
+    "single_token": false,
+    "len": 93,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "16600": {
+    "mode": 16600,
+    "name": "Electrum Wallet (Salt-Type 1-3)",
+    "self_match": true,
+    "single_token": false,
+    "len": 77,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}$"
+  },
+  "16700": {
+    "mode": 16700,
+    "name": "FileVault 2",
+    "self_match": true,
+    "single_token": false,
+    "len": 98,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{48}$"
+  },
+  "16800": {
+    "mode": 16800,
+    "name": "WPA-PMKID-PBKDF2",
+    "self_match": true,
+    "single_token": false,
+    "len": 91,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{32}$"
+  },
+  "16801": {
+    "mode": 16801,
+    "name": "WPA-PMKID-PMK",
+    "self_match": true,
+    "single_token": false,
+    "len": 58,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "16900": {
+    "mode": 16900,
+    "name": "Ansible Vault",
+    "self_match": true,
+    "single_token": false,
+    "len": 175,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{64}$"
+  },
+  "17010": {
+    "mode": 17010,
+    "name": "GPG (AES-128/AES-256 (SHA-1($pass)))",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "17200": {
+    "mode": 17200,
+    "name": "PKZIP (Compressed)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\*\\.\\.\\.[A-Za-z0-9+/=]{2,1024}\\$\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "17210": {
+    "mode": 17210,
+    "name": "PKZIP (Uncompressed)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[A-Za-z0-9+/=]{2,1024}\\$\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "17220": {
+    "mode": 17220,
+    "name": "PKZIP (Compressed Multi-File)",
+    "self_match": true
+  },
+  "17225": {
+    "mode": 17225,
+    "name": "PKZIP (Mixed Multi-File)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[A-Za-z0-9+/=]{2,1024}\\$\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "17230": {
+    "mode": 17230,
+    "name": "PKZIP (Mixed Multi-File Checksum-Only)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[A-Za-z0-9+/=]{2,1024}\\$\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "17300": {
+    "mode": 17300,
+    "name": "SHA3-224",
+    "self_match": true,
+    "single_token": true,
+    "len": 56,
+    "regex": "^[0-9a-fA-F]{56}$"
+  },
+  "17400": {
+    "mode": 17400,
+    "name": "SHA3-256",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "17500": {
+    "mode": 17500,
+    "name": "SHA3-384",
+    "self_match": true,
+    "single_token": true,
+    "len": 96,
+    "regex": "^[0-9a-fA-F]{96}$"
+  },
+  "17600": {
+    "mode": 17600,
+    "name": "SHA3-512",
+    "self_match": true,
+    "single_token": true,
+    "len": 128,
+    "regex": "^[0-9a-fA-F]{128}$"
+  },
+  "17700": {
+    "mode": 17700,
+    "name": "Keccak-224",
+    "self_match": true,
+    "single_token": true,
+    "len": 56,
+    "regex": "^[0-9a-fA-F]{56}$"
+  },
+  "17800": {
+    "mode": 17800,
+    "name": "Keccak-256",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "17900": {
+    "mode": 17900,
+    "name": "Keccak-384",
+    "self_match": true,
+    "single_token": true,
+    "len": 96,
+    "regex": "^[0-9a-fA-F]{96}$"
+  },
+  "18000": {
+    "mode": 18000,
+    "name": "Keccak-512",
+    "self_match": true,
+    "single_token": true,
+    "len": 128,
+    "regex": "^[0-9a-fA-F]{128}$"
+  },
+  "18100": {
+    "mode": 18100,
+    "name": "TOTP (HMAC-SHA1)",
+    "self_match": true,
+    "single_token": false,
+    "len": 11,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "18200": {
+    "mode": 18200,
+    "name": "Kerberos 5, etype 23, AS-REP",
+    "self_match": true
+  },
+  "18300": {
+    "mode": 18300,
+    "name": "Apple File System (APFS)",
+    "self_match": true,
+    "single_token": false,
+    "len": 130,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{80}$"
+  },
+  "18400": {
+    "mode": 18400,
+    "name": "Open Document Format (ODF) 1.2 (SHA-256, AES)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "18500": {
+    "mode": 18500,
+    "name": "sha1(md5(md5($pass)))",
+    "self_match": true,
+    "single_token": true,
+    "len": 40,
+    "regex": "^[0-9a-fA-F]{40}$"
+  },
+  "18600": {
+    "mode": 18600,
+    "name": "Open Document Format (ODF) 1.1 (SHA-1, Blowfish)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "18700": {
+    "mode": 18700,
+    "name": "Java Object hashCode()",
+    "self_match": true,
+    "single_token": true,
+    "len": 8,
+    "regex": "^[0-9a-fA-F]{8}$"
+  },
+  "18800": {
+    "mode": 18800,
+    "name": "Blockchain, My Wallet, Second Password (SHA256)",
+    "self_match": true,
+    "single_token": true,
+    "len": 80,
+    "regex": "^[A-Za-z0-9+/]{79}={1}$"
+  },
+  "18900": {
+    "mode": 18900,
+    "name": "Android Backup",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "19000": {
+    "mode": 19000,
+    "name": "QNX /etc/shadow (MD5)",
+    "self_match": true,
+    "single_token": false,
+    "len": 52,
+    "regex": "^@[A-Za-z0-9+/=]{1}@[0-9a-fA-F]{32}@[0-9a-fA-F]{2,1024}$"
+  },
+  "19100": {
+    "mode": 19100,
+    "name": "QNX /etc/shadow (SHA256)",
+    "self_match": true,
+    "single_token": false,
+    "len": 84,
+    "regex": "^@[A-Za-z0-9+/=]{1}@[0-9a-fA-F]{64}@[0-9a-fA-F]{2,1024}$"
+  },
+  "19200": {
+    "mode": 19200,
+    "name": "QNX /etc/shadow (SHA512)",
+    "self_match": true,
+    "single_token": false,
+    "len": 148,
+    "regex": "^@[A-Za-z0-9+/=]{1}@[0-9a-fA-F]{128}@[0-9a-fA-F]{2,1024}$"
+  },
+  "19300": {
+    "mode": 19300,
+    "name": "sha1($salt1.$pass.$salt2)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "19500": {
+    "mode": 19500,
+    "name": "Ruby on Rails Restful-Authentication",
+    "self_match": true,
+    "single_token": false,
+    "len": 73,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "19600": {
+    "mode": 19600,
+    "name": "Kerberos 5, etype 17, TGS-REP",
+    "self_match": true
+  },
+  "19700": {
+    "mode": 19700,
+    "name": "Kerberos 5, etype 18, TGS-REP",
+    "self_match": true
+  },
+  "19800": {
+    "mode": 19800,
+    "name": "Kerberos 5, etype 17, Pre-Auth",
+    "self_match": true
+  },
+  "19900": {
+    "mode": 19900,
+    "name": "Kerberos 5, etype 18, Pre-Auth",
+    "self_match": true,
+    "single_token": false,
+    "len": 149,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{112}$"
+  },
+  "20011": {
+    "mode": 20011,
+    "name": "DiskCryptor SHA512 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "20012": {
+    "mode": 20012,
+    "name": "DiskCryptor SHA512 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "20013": {
+    "mode": 20013,
+    "name": "DiskCryptor SHA512 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "20200": {
+    "mode": 20200,
+    "name": "Python passlib pbkdf2-sha512",
+    "self_match": true,
+    "single_token": false,
+    "len": 130,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "20300": {
+    "mode": 20300,
+    "name": "Python passlib pbkdf2-sha256",
+    "self_match": true,
+    "single_token": false,
+    "len": 87,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "20400": {
+    "mode": 20400,
+    "name": "Python passlib pbkdf2-sha1",
+    "self_match": true,
+    "single_token": false,
+    "len": 65,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "20500": {
+    "mode": 20500,
+    "name": "PKZIP Master Key",
+    "self_match": true,
+    "single_token": true,
+    "len": 24,
+    "regex": "^[0-9a-fA-F]{24}$"
+  },
+  "20510": {
+    "mode": 20510,
+    "name": "PKZIP Master Key (6 byte optimization)",
+    "self_match": true,
+    "single_token": true,
+    "len": 24,
+    "regex": "^[0-9a-fA-F]{24}$"
+  },
+  "20600": {
+    "mode": 20600,
+    "name": "Oracle Transportation Management (SHA256)",
+    "self_match": true,
+    "single_token": false,
+    "len": 71,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "20710": {
+    "mode": 20710,
+    "name": "sha256(sha256($pass).$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 81,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "20711": {
+    "mode": 20711,
+    "name": "AuthMe sha256",
+    "self_match": true,
+    "single_token": false,
+    "len": 86,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{64}$"
+  },
+  "20720": {
+    "mode": 20720,
+    "name": "sha256($salt.sha256($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 81,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "20800": {
+    "mode": 20800,
+    "name": "sha256(md5($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "20900": {
+    "mode": 20900,
+    "name": "md5(sha1($pass).md5($pass).sha1($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 32,
+    "regex": "^[0-9a-fA-F]{32}$"
+  },
+  "21000": {
+    "mode": 21000,
+    "name": "BitShares v0.x - sha512(sha512_bin(pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 128,
+    "regex": "^[0-9a-fA-F]{128}$"
+  },
+  "21100": {
+    "mode": 21100,
+    "name": "sha1(md5($pass.$salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 42,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{1}$"
+  },
+  "21200": {
+    "mode": 21200,
+    "name": "md5(sha1($salt).md5($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 52,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "21300": {
+    "mode": 21300,
+    "name": "md5($salt.sha1($salt.$pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 47,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "21400": {
+    "mode": 21400,
+    "name": "sha256(sha256_bin($pass))",
+    "self_match": true,
+    "single_token": true,
+    "len": 64,
+    "regex": "^[0-9a-fA-F]{64}$"
+  },
+  "21420": {
+    "mode": 21420,
+    "name": "sha256($salt.sha256_bin($pass))",
+    "self_match": true,
+    "single_token": false,
+    "len": 123,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "21500": {
+    "mode": 21500,
+    "name": "SolarWinds Orion",
+    "self_match": true,
+    "single_token": false,
+    "len": 108,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "21501": {
+    "mode": 21501,
+    "name": "SolarWinds Orion v2",
+    "self_match": true,
+    "single_token": false,
+    "len": 127,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "21600": {
+    "mode": 21600,
+    "name": "Web2py pbkdf2-sha512",
+    "self_match": true,
+    "single_token": false,
+    "len": 70,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\([0-9a-fA-F]{2,1024},[0-9a-fA-F]{2},[A-Za-z0-9+/=]{2,1024}\\)\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{40}$"
+  },
+  "21700": {
+    "mode": 21700,
+    "name": "Electrum Wallet (Salt-Type 4)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "21800": {
+    "mode": 21800,
+    "name": "Electrum Wallet (Salt-Type 5)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22000": {
+    "mode": 22000,
+    "name": "WPA-PBKDF2-PMKID+EAPOL",
+    "self_match": true
+  },
+  "22001": {
+    "mode": 22001,
+    "name": "WPA-PMK-PMKID+EAPOL",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*\\*\\*$"
+  },
+  "22100": {
+    "mode": 22100,
+    "name": "BitLocker",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22200": {
+    "mode": 22200,
+    "name": "Citrix NetScaler (SHA512)",
+    "self_match": true,
+    "single_token": true,
+    "len": 137,
+    "regex": "^[0-9a-fA-F]{137}$"
+  },
+  "22300": {
+    "mode": 22300,
+    "name": "sha256($salt.$pass.$salt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 70,
+    "regex": "^[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "22301": {
+    "mode": 22301,
+    "name": "Telegram Mobile App Passcode (SHA256)",
+    "self_match": true,
+    "single_token": false,
+    "len": 109,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{32}$"
+  },
+  "22400": {
+    "mode": 22400,
+    "name": "AES Crypt (SHA256)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22500": {
+    "mode": 22500,
+    "name": "MultiBit Classic .key (MD5)",
+    "self_match": true,
+    "single_token": false,
+    "len": 93,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{64}$"
+  },
+  "22600": {
+    "mode": 22600,
+    "name": "Telegram Desktop < v2.1.14 (PBKDF2-HMAC-SHA1)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22700": {
+    "mode": 22700,
+    "name": "MultiBit HD (scrypt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 110,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}$"
+  },
+  "22911": {
+    "mode": 22911,
+    "name": "RSA/DSA/EC/OpenSSH Private Keys ($0$)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22921": {
+    "mode": 22921,
+    "name": "RSA/DSA/EC/OpenSSH Private Keys ($6$)",
+    "self_match": true
+  },
+  "22931": {
+    "mode": 22931,
+    "name": "RSA/DSA/EC/OpenSSH Private Keys ($1, $3$)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22941": {
+    "mode": 22941,
+    "name": "RSA/DSA/EC/OpenSSH Private Keys ($4$)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "22951": {
+    "mode": 22951,
+    "name": "RSA/DSA/EC/OpenSSH Private Keys ($5$)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "23001": {
+    "mode": 23001,
+    "name": "SecureZIP AES-128",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{1}\\.[A-Za-z0-9+/=]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "23002": {
+    "mode": 23002,
+    "name": "SecureZIP AES-192",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{1}\\.[A-Za-z0-9+/=]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "23003": {
+    "mode": 23003,
+    "name": "SecureZIP AES-256",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{1}\\.[A-Za-z0-9+/=]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "23100": {
+    "mode": 23100,
+    "name": "Apple Keychain",
+    "self_match": true,
+    "single_token": false,
+    "len": 165,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{40}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{96}$"
+  },
+  "23200": {
+    "mode": 23200,
+    "name": "XMPP SCRAM PBKDF2-SHA1",
+    "self_match": true,
+    "single_token": false,
+    "len": 153,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{40}$"
+  },
+  "23300": {
+    "mode": 23300,
+    "name": "Apple iWork",
+    "self_match": true,
+    "single_token": false,
+    "len": 196,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{128}$"
+  },
+  "23400": {
+    "mode": 23400,
+    "name": "Bitwarden",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{2,1024}\\*[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "23500": {
+    "mode": 23500,
+    "name": "AxCrypt 2 AES-128",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "23600": {
+    "mode": 23600,
+    "name": "AxCrypt 2 AES-256",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "23700": {
+    "mode": 23700,
+    "name": "RAR3-p (Uncompressed)",
+    "self_match": true,
+    "single_token": false,
+    "len": 78,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2}$"
+  },
+  "23800": {
+    "mode": 23800,
+    "name": "RAR3-p (Compressed)",
+    "self_match": true,
+    "single_token": false,
+    "len": 110,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{2}$"
+  },
+  "23900": {
+    "mode": 23900,
+    "name": "BestCrypt v3 Volume Encryption",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "24100": {
+    "mode": 24100,
+    "name": "MongoDB ServerKey SCRAM-SHA-1",
+    "self_match": true,
+    "single_token": false,
+    "len": 86,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[A-Za-z0-9+/=]{2,1024}\\*[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "24200": {
+    "mode": 24200,
+    "name": "MongoDB ServerKey SCRAM-SHA-256",
+    "self_match": true,
+    "single_token": false,
+    "len": 118,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[A-Za-z0-9+/=]{40}\\*[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "24300": {
+    "mode": 24300,
+    "name": "sha1($salt.sha1($pass.$salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 56,
+    "regex": "^[0-9a-fA-F]{40}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "24410": {
+    "mode": 24410,
+    "name": "PKCS#8 Private Keys (PBKDF2-HMAC-SHA1 + 3DES/AES)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "24420": {
+    "mode": 24420,
+    "name": "PKCS#8 Private Keys (PBKDF2-HMAC-SHA256 + 3DES/AES)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "24500": {
+    "mode": 24500,
+    "name": "Telegram Desktop >= v2.1.14 (PBKDF2-HMAC-SHA512)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "24600": {
+    "mode": 24600,
+    "name": "SQLCipher",
+    "self_match": true,
+    "single_token": false,
+    "len": 116,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}$"
+  },
+  "24700": {
+    "mode": 24700,
+    "name": "Stuffit5",
+    "self_match": true,
+    "single_token": true,
+    "len": 10,
+    "regex": "^[0-9a-fA-F]{10}$"
+  },
+  "24800": {
+    "mode": 24800,
+    "name": "Umbraco HMAC-SHA1",
+    "self_match": true,
+    "single_token": true,
+    "len": 28,
+    "regex": "^[A-Za-z0-9+/]{27}={1}$"
+  },
+  "24900": {
+    "mode": 24900,
+    "name": "Dahua Authentication MD5",
+    "self_match": true,
+    "single_token": true,
+    "len": 8,
+    "regex": "^[A-Za-z0-9+/]{8}={0}$"
+  },
+  "25000": {
+    "mode": 25000,
+    "name": "SNMPv3 HMAC-MD5-96/HMAC-SHA1-96",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "25100": {
+    "mode": 25100,
+    "name": "SNMPv3 HMAC-MD5-96",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "25200": {
+    "mode": 25200,
+    "name": "SNMPv3 HMAC-SHA1-96",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "25300": {
+    "mode": 25300,
+    "name": "MS Office 2016 - SheetProtection",
+    "self_match": true,
+    "single_token": false,
+    "len": 135,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "25400": {
+    "mode": 25400,
+    "name": "PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass",
+    "self_match": true,
+    "single_token": false,
+    "len": 192,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*\\-[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{2}\\*[0-9a-fA-F]{64}$"
+  },
+  "25500": {
+    "mode": 25500,
+    "name": "Stargazer Stellar Wallet XLM",
+    "self_match": true,
+    "single_token": false,
+    "len": 147,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{96}$"
+  },
+  "25600": {
+    "mode": 25600,
+    "name": "bcrypt(md5($pass)) / bcryptmd5",
+    "self_match": true,
+    "single_token": false,
+    "len": 60,
+    "regex": "^\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "25700": {
+    "mode": 25700,
+    "name": "MurmurHash",
+    "self_match": true
+  },
+  "25800": {
+    "mode": 25800,
+    "name": "bcrypt(sha1($pass)) / bcryptsha1",
+    "self_match": true,
+    "single_token": false,
+    "len": 60,
+    "regex": "^\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "25900": {
+    "mode": 25900,
+    "name": "KNX IP Secure - Device Authentication Code",
+    "self_match": true,
+    "single_token": false,
+    "len": 145,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2}\\-[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{32}$"
+  },
+  "26000": {
+    "mode": 26000,
+    "name": "Mozilla key3.db",
+    "self_match": true,
+    "single_token": false,
+    "len": 129,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{40}\\*[0-9a-fA-F]{40}\\*[0-9a-fA-F]{32}$"
+  },
+  "26100": {
+    "mode": 26100,
+    "name": "Mozilla key4.db",
+    "self_match": true,
+    "single_token": false,
+    "len": 191,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{40}\\*[0-9a-fA-F]{64}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{32}\\*[0-9a-fA-F]{32}$"
+  },
+  "26200": {
+    "mode": 26200,
+    "name": "OpenEdge Progress Encode",
+    "self_match": true,
+    "single_token": true,
+    "len": 16,
+    "regex": "^[A-Za-z0-9+/]{16}={0}$"
+  },
+  "26300": {
+    "mode": 26300,
+    "name": "FortiGate256 (FortiOS256)",
+    "self_match": true,
+    "single_token": true,
+    "len": 63,
+    "regex": "^[A-Za-z0-9+/]{62}={1}$"
+  },
+  "26401": {
+    "mode": 26401,
+    "name": "AES-128-ECB NOKDF (PT = $salt, key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 65,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{32}$"
+  },
+  "26402": {
+    "mode": 26402,
+    "name": "AES-192-ECB NOKDF (PT = $salt, key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 65,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{32}$"
+  },
+  "26403": {
+    "mode": 26403,
+    "name": "AES-256-ECB NOKDF (PT = $salt, key = $pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 65,
+    "regex": "^[0-9a-fA-F]{32}:[0-9a-fA-F]{32}$"
+  },
+  "26500": {
+    "mode": 26500,
+    "name": "iPhone passcode (UID key + System Keybag)",
+    "self_match": true,
+    "single_token": false,
+    "len": 166,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{40}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{80}$"
+  },
+  "26600": {
+    "mode": 26600,
+    "name": "MetaMask Wallet",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.\\.\\.[A-Za-z0-9+/=]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "26700": {
+    "mode": 26700,
+    "name": "SNMPv3 HMAC-SHA224-128",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "26800": {
+    "mode": 26800,
+    "name": "SNMPv3 HMAC-SHA256-192",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "26900": {
+    "mode": 26900,
+    "name": "SNMPv3 HMAC-SHA384-256",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "27000": {
+    "mode": 27000,
+    "name": "NetNTLMv1 / NetNTLMv1+ESS (NT)",
+    "self_match": true,
+    "single_token": false,
+    "len": 121,
+    "regex": "^::[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{48}:[0-9a-fA-F]{48}:[0-9a-fA-F]{2,1024}$"
+  },
+  "27100": {
+    "mode": 27100,
+    "name": "NetNTLMv2 (NT)",
+    "self_match": true,
+    "single_token": false,
+    "len": 147,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}::[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{32}:[0-9a-fA-F]{2,1024}$"
+  },
+  "27200": {
+    "mode": 27200,
+    "name": "Ruby on Rails Restful Auth (one round, no sitekey)",
+    "self_match": true,
+    "single_token": false,
+    "len": 81,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{40}$"
+  },
+  "27300": {
+    "mode": 27300,
+    "name": "SNMPv3 HMAC-SHA512-384",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "27400": {
+    "mode": 27400,
+    "name": "VMware VMX (PBKDF2-HMAC-SHA1 + AES-256-CBC)",
+    "self_match": true,
+    "single_token": false,
+    "len": 110,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}\\$[0-9a-fA-F]{64}$"
+  },
+  "27500": {
+    "mode": 27500,
+    "name": "VirtualBox (PBKDF2-HMAC-SHA256 & AES-128-XTS)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "27600": {
+    "mode": 27600,
+    "name": "VirtualBox (PBKDF2-HMAC-SHA256 & AES-256-XTS)",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "27700": {
+    "mode": 27700,
+    "name": "MultiBit Classic .wallet (scrypt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 103,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{64}$"
+  },
+  "27800": {
+    "mode": 27800,
+    "name": "MurmurHash3",
+    "self_match": true,
+    "single_token": false,
+    "len": 17,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "27900": {
+    "mode": 27900,
+    "name": "CRC32C",
+    "self_match": true,
+    "single_token": false,
+    "len": 17,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "28000": {
+    "mode": 28000,
+    "name": "CRC64Jones",
+    "self_match": true,
+    "single_token": false,
+    "len": 33,
+    "regex": "^[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{2,1024}$"
+  },
+  "28100": {
+    "mode": 28100,
+    "name": "Windows Hello PIN/Password",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[A-Za-z0-9+/=]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "28200": {
+    "mode": 28200,
+    "name": "Exodus Desktop Wallet (scrypt)",
+    "self_match": true,
+    "single_token": false,
+    "len": 148,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}:[0-9a-fA-F]{2,1024}:[0-9a-fA-F]{1}:[0-9a-fA-F]{1}:[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "28300": {
+    "mode": 28300,
+    "name": "Teamspeak 3 (channel hash)",
+    "self_match": true,
+    "single_token": false,
+    "len": 194,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "28400": {
+    "mode": 28400,
+    "name": "bcrypt(sha512($pass)) / bcryptsha512",
+    "self_match": true,
+    "single_token": false,
+    "len": 60,
+    "regex": "^\\$[0-9a-fA-F]{2}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "28501": {
+    "mode": 28501,
+    "name": "Bitcoin WIF private key (P2PKH), compressed",
+    "self_match": true,
+    "single_token": true,
+    "len": 34,
+    "regex": "^[A-Za-z0-9+/]{34}={0}$"
+  },
+  "28502": {
+    "mode": 28502,
+    "name": "Bitcoin WIF private key (P2PKH), uncompressed",
+    "self_match": true,
+    "single_token": true,
+    "len": 34,
+    "regex": "^[A-Za-z0-9+/]{34}={0}$"
+  },
+  "28503": {
+    "mode": 28503,
+    "name": "Bitcoin WIF private key (P2WPKH, Bech32), compressed",
+    "self_match": true,
+    "single_token": true,
+    "len": 42,
+    "regex": "^[A-Za-z0-9+/]{42}={0}$"
+  },
+  "28504": {
+    "mode": 28504,
+    "name": "Bitcoin WIF private key (P2WPKH, Bech32), uncompressed",
+    "self_match": true,
+    "single_token": true,
+    "len": 42,
+    "regex": "^[A-Za-z0-9+/]{42}={0}$"
+  },
+  "28505": {
+    "mode": 28505,
+    "name": "Bitcoin WIF private key (P2SH(P2WPKH)), compressed",
+    "self_match": true,
+    "single_token": true,
+    "len": 34,
+    "regex": "^[A-Za-z0-9+/]{34}={0}$"
+  },
+  "28506": {
+    "mode": 28506,
+    "name": "Bitcoin WIF private key (P2SH(P2WPKH)), uncompressed",
+    "self_match": true,
+    "single_token": true,
+    "len": 34,
+    "regex": "^[A-Za-z0-9+/]{34}={0}$"
+  },
+  "28600": {
+    "mode": 28600,
+    "name": "PostgreSQL SCRAM-SHA-256",
+    "self_match": true,
+    "single_token": false,
+    "len": 133,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\-[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}:[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "28700": {
+    "mode": 28700,
+    "name": "Amazon AWS4-HMAC-SHA256",
+    "self_match": true,
+    "single_token": false,
+    "len": 173,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2}\\-[A-Za-z0-9+/=]{2,1024}\\-[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2}\\$[0-9a-fA-F]{64}\\$[0-9a-fA-F]{64}$"
+  },
+  "28800": {
+    "mode": 28800,
+    "name": "Kerberos 5, etype 17, DB",
+    "self_match": true,
+    "single_token": false,
+    "len": 59,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{32}$"
+  },
+  "28900": {
+    "mode": 28900,
+    "name": "Kerberos 5, etype 18, DB",
+    "self_match": true,
+    "single_token": false,
+    "len": 91,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{64}$"
+  },
+  "29000": {
+    "mode": 29000,
+    "name": "sha1($salt.sha1(utf16le($username).':'.utf16le($pass)))",
+    "self_match": true,
+    "single_token": false,
+    "len": 122,
+    "regex": "^[0-9a-fA-F]{40}:[0-9a-fA-F]{64}:[0-9a-fA-F]{2,1024}$"
+  },
+  "29100": {
+    "mode": 29100,
+    "name": "Flask Session Cookie ($salt.$salt.$pass)",
+    "self_match": true,
+    "single_token": false,
+    "len": 62,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}\\.[A-Za-z0-9+/=]{2,1024}_[A-Za-z0-9+/=]{2,1024}$"
+  },
+  "29200": {
+    "mode": 29200,
+    "name": "Radmin3",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{32}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29311": {
+    "mode": 29311,
+    "name": "TrueCrypt RIPEMD160 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29312": {
+    "mode": 29312,
+    "name": "TrueCrypt RIPEMD160 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29313": {
+    "mode": 29313,
+    "name": "TrueCrypt RIPEMD160 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29321": {
+    "mode": 29321,
+    "name": "TrueCrypt SHA512 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29322": {
+    "mode": 29322,
+    "name": "TrueCrypt SHA512 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29323": {
+    "mode": 29323,
+    "name": "TrueCrypt SHA512 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29331": {
+    "mode": 29331,
+    "name": "TrueCrypt Whirlpool + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29332": {
+    "mode": 29332,
+    "name": "TrueCrypt Whirlpool + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29333": {
+    "mode": 29333,
+    "name": "TrueCrypt Whirlpool + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29341": {
+    "mode": 29341,
+    "name": "TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29342": {
+    "mode": 29342,
+    "name": "TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29343": {
+    "mode": 29343,
+    "name": "TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29411": {
+    "mode": 29411,
+    "name": "VeraCrypt RIPEMD160 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29412": {
+    "mode": 29412,
+    "name": "VeraCrypt RIPEMD160 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29413": {
+    "mode": 29413,
+    "name": "VeraCrypt RIPEMD160 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29421": {
+    "mode": 29421,
+    "name": "VeraCrypt SHA512 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29422": {
+    "mode": 29422,
+    "name": "VeraCrypt SHA512 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29423": {
+    "mode": 29423,
+    "name": "VeraCrypt SHA512 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29431": {
+    "mode": 29431,
+    "name": "VeraCrypt Whirlpool + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29432": {
+    "mode": 29432,
+    "name": "VeraCrypt Whirlpool + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29433": {
+    "mode": 29433,
+    "name": "VeraCrypt Whirlpool + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29441": {
+    "mode": 29441,
+    "name": "VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29442": {
+    "mode": 29442,
+    "name": "VeraCrypt RIPEMD160 + XTS 1024 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29443": {
+    "mode": 29443,
+    "name": "VeraCrypt RIPEMD160 + XTS 1536 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29451": {
+    "mode": 29451,
+    "name": "VeraCrypt SHA256 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29452": {
+    "mode": 29452,
+    "name": "VeraCrypt SHA256 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29453": {
+    "mode": 29453,
+    "name": "VeraCrypt SHA256 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29461": {
+    "mode": 29461,
+    "name": "VeraCrypt SHA256 + XTS 512 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29462": {
+    "mode": 29462,
+    "name": "VeraCrypt SHA256 + XTS 1024 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29463": {
+    "mode": 29463,
+    "name": "VeraCrypt SHA256 + XTS 1536 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29471": {
+    "mode": 29471,
+    "name": "VeraCrypt Streebog-512 + XTS 512 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29472": {
+    "mode": 29472,
+    "name": "VeraCrypt Streebog-512 + XTS 1024 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29473": {
+    "mode": 29473,
+    "name": "VeraCrypt Streebog-512 + XTS 1536 bit",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29481": {
+    "mode": 29481,
+    "name": "VeraCrypt Streebog-512 + XTS 512 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29482": {
+    "mode": 29482,
+    "name": "VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29483": {
+    "mode": 29483,
+    "name": "VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29511": {
+    "mode": 29511,
+    "name": "LUKS v1 SHA-1 + AES",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29512": {
+    "mode": 29512,
+    "name": "LUKS v1 SHA-1 + Serpent",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29513": {
+    "mode": 29513,
+    "name": "LUKS v1 SHA-1 + Twofish",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29521": {
+    "mode": 29521,
+    "name": "LUKS v1 SHA-256 + AES",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29522": {
+    "mode": 29522,
+    "name": "LUKS v1 SHA-256 + Serpent",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29523": {
+    "mode": 29523,
+    "name": "LUKS v1 SHA-256 + Twofish",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29531": {
+    "mode": 29531,
+    "name": "LUKS v1 SHA-512 + AES",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29532": {
+    "mode": 29532,
+    "name": "LUKS v1 SHA-512 + Serpent",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29533": {
+    "mode": 29533,
+    "name": "LUKS v1 SHA-512 + Twofish",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29541": {
+    "mode": 29541,
+    "name": "LUKS v1 RIPEMD-160 + AES",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}:[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29542": {
+    "mode": 29542,
+    "name": "LUKS v1 RIPEMD-160 + Serpent",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29543": {
+    "mode": 29543,
+    "name": "LUKS v1 RIPEMD-160 + Twofish",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{1}\\$[A-Za-z0-9+/=]{2,1024}\\$[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\-[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "29600": {
+    "mode": 29600,
+    "name": "Terra Station Wallet (AES256-CBC(PBKDF2($pass)))",
+    "self_match": true,
+    "single_token": true,
+    "len": 172,
+    "regex": "^[A-Za-z0-9+/]{171}={1}$"
+  },
+  "29700": {
+    "mode": 29700,
+    "name": "KeePass 1 (AES/Twofish) and KeePass 2 (AES) - keyfile only mode",
+    "self_match": true,
+    "single_token": false,
+    "len": 95,
+    "regex": "^\\$[A-Za-z0-9+/=]{2,1024}\\$\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\*[0-9a-fA-F]{1}\\*[0-9a-fA-F]{2,1024}\\.\\.\\.[0-9a-fA-F]{2,1024}\\ \\[[A-Za-z0-9+/=]{2,1024},\\ [A-Za-z0-9+/=]{2,1024}\\ \\-\\-[A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\ [A-Za-z0-9+/=]{2,1024}\\]$"
+  },
+  "30000": {
+    "mode": 30000,
+    "name": "Python Werkzeug MD5 (HMAC-MD5 (key = $salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 42,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{32}$"
+  },
+  "30120": {
+    "mode": 30120,
+    "name": "Python Werkzeug SHA256 (HMAC-SHA256 (key = $salt))",
+    "self_match": true,
+    "single_token": false,
+    "len": 83,
+    "regex": "^[A-Za-z0-9+/=]{2,1024}\\$[0-9a-fA-F]{2,1024}\\$[0-9a-fA-F]{64}$"
+  },
+  "99999": {
+    "mode": 99999,
+    "name": "Plaintext",
+    "self_match": true,
+    "single_token": true,
+    "len": 7,
+    "regex": "^[A-Za-z0-9+/]{7}={0}$"
+  }
+}

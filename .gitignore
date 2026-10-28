@@ -1,0 +1,94 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.pyo
+.hypothesis/
+.pytest_cache/
+
+# Databases & local state
+*.sqlite3
+*.db
+db/*.sqlite3
+sessions/
+reports/
+
+# Scratch & ad-hoc files
+_*
+_*.py
+_*.txt
+
+# Ad-hoc debugging artifacts (previously committed by accident)
+test_*.hash
+test_*.pot
+*.pot
+reports/
+hashvault-format-check.log
+hashvault.log
+tmp_out.txt
+_backup_*/
+
+# Large external resources fetched via fetch_resources
+data/wordlists/rockyou.txt
+data/wordlists/seclists/
+tools/hashcat/
+tools/john/
+
+# Multi-megabyte wordlists: GitHub rejects blobs over 100 MB and the repo would
+# otherwise carry ~707 MB.  They are restored by `hashvault fetch-resources`.
+data/wordlists/Pwdb_top-*.txt
+data/wordlists/xato-net-*.txt
+data/wordlists/100k-most-used-passwords-NCSC.txt
+
+# Keep manifest files in repository
+!data/rules/manifest.json
+!data/wordlists/manifest.json
+
+# IDEs and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

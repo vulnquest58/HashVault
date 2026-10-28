@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180" role="img" aria-label="HashVault wordmark by vulnquest">
+  <title>HashVault — vulnquest</title>
+  <style>
+    .bg      { fill: #0b1020; }
+    .mark    { font-family: "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
+               font-size: 30px; letter-spacing: 0; }
+    .bright  { fill: #4fd6ff; }
+    .cyan    { fill: #29b6d8; }
+    .white   { fill: #eef4f8; }
+    .name    { fill: #4fd6ff; font-family: "Cascadia Mono", "Consolas", monospace;
+               font-size: 20px; font-weight: 700; }
+    .link    { fill: #8fa6b8; font-family: "Cascadia Mono", "Consolas", monospace;
+               font-size: 13px; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="640" height="180" rx="14"/>
+  <rect x="0.5" y="0.5" width="639" height="179" rx="14"
+        fill="none" stroke="#1d2b45" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <text class="mark" x="40" y="62">
+    <tspan class="bright">▄</tspan><tspan class="white"> </tspan><tspan class="cyan">▄</tspan><tspan class="white"> </tspan><tspan class="bright">▄</tspan><tspan class="cyan">▄</tspan><tspan class="white">  </tspan><tspan class="bright">▄</tspan><tspan class="cyan">▄▄</tspan><tspan class="white">  </tspan><tspan class="bright">▄</tspan><tspan class="white"> </tspan><tspan class="cyan">▄</tspan><tspan class="white"> </tspan><tspan class="bright">▄</tspan><tspan class="white"> </tspan><tspan class="cyan">▄</tspan><tspan class="white"> </tspan><tspan class="bright">▄</tspan><tspan class="cyan">▄</tspan><tspan class="white">  </tspan><tspan class="bright">▄</tspan><tspan class="white"> </tspan><tspan class="cyan">▄</tspan><tspan class="white"> </tspan><tspan class="bright">▄</tspan><tspan class="white">   </tspan><tspan class="bright">▄</tspan><tspan class="cyan">▄▄</tspan>
+  </text>
+
+  <!-- Row 2 -->
+  <text class="mark" x="40" y="96">
+    <tspan class="cyan">█▄█</tspan><tspan class="white"> </tspan><tspan class="cyan">█▄█</tspan><tspan class="white"> </tspan><tspan class="cyan">▀▄</tspan><tspan class="white">  </tspan><tspan class="cyan">█▄█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█▄█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white">    </tspan><tspan class="cyan">█</tspan>
+  </text>
+
+  <!-- Row 3 -->
+  <text class="mark" x="40" y="130">
+    <tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">▄▄▀</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">▀▄▀</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">█</tspan><tspan class="white"> </tspan><tspan class="cyan">▀▄█</tspan><tspan class="white"> </tspan><tspan class="cyan">█▄▄</tspan><tspan class="white">  </tspan><tspan class="cyan">█</tspan>
+  </text>
+
+  <text class="name" x="42" y="158">vulnquest</text>
+  <text class="link" x="150" y="158">github.com/vulnquest58</text>
+  <text class="link" x="380" y="158">github.com/vulnquest58/HashVault</text>
+</svg>
