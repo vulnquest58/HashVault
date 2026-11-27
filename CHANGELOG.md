@@ -45,6 +45,8 @@ the project uses [Semantic Versioning](https://semver.org/).
   instructions.
 - Removed the obsolete private-repository publishing script and generated
   `live-test-*` wordlist artifacts from the repository.
+- Fixed Python 3.11 compatibility in the CLI f-string used by `analyze`.
+- Fixed the release workflow's source-distribution content check.
 - Debian working copy no longer carries a stray root-level `cli.py`.
 
 ### Verification

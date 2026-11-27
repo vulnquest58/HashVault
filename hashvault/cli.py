@@ -612,7 +612,7 @@ def analyze_cmd(
 
         console.print("[bold blue]\u2550\u2550\u2550\u2550\u2550\u2550\u2550 Deep Analysis Result \u2550\u2550\u2550\u2550\u2550\u2550\u2550[/bold blue]")
         console.print(f"Raw input      : [white]{res.raw_input[:120]}[/white]")
-        console.print(f"Unwrap chain   : [cyan]{res.unwrap_chain or '(none \u2014 already bare)'}[/cyan]")
+        console.print(f"Unwrap chain   : [cyan]{res.unwrap_chain or '(none - already bare)'}[/cyan]")
         console.print(f"Layers applied : {res.trace.layers_applied}")
         for layer in res.trace.layers:
             console.print(

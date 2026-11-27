@@ -30,9 +30,10 @@ jobs:
         run: |
           set -euo pipefail
           archive="$(ls dist/*.tar.gz)"
-          tar -tf "$archive" | grep -q '/data/patterns/patterns.json'
-          tar -tf "$archive" | grep -q '/docs/CORPUS.md'
-          tar -tf "$archive" | grep -q '/examples/0xdf-demo.txt'
+          tar -tf "$archive" > /tmp/sdist-files.txt
+          grep -q '/data/patterns/patterns.json' /tmp/sdist-files.txt
+          grep -q '/docs/CORPUS.md' /tmp/sdist-files.txt
+          grep -q '/examples/0xdf-demo.txt' /tmp/sdist-files.txt
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
