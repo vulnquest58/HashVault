@@ -77,6 +77,7 @@ cd HashVault
 
 uv venv
 uv pip install -e ".[dev,builtin]"
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 hashvault setup
 hashvault doctor
@@ -103,6 +104,7 @@ Release wheels bundle the runtime `data/` and `config/` trees:
 ```bash
 uv venv
 uv pip install "https://github.com/vulnquest58/HashVault/releases/download/v2.0.1/hashvault-2.0.1-py3-none-any.whl"
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 hashvault setup
 hashvault doctor
