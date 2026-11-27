@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use HashVault in research or an assessment, cite this repository."
+title: "HashVault"
+abstract: "Evidence-driven password hash analysis, recovery, and audit reporting for authorized security testing."
+type: software
+authors:
+  - name: "vulnquest"
+    website: "https://github.com/vulnquest58"
+repository-code: "https://github.com/vulnquest58/HashVault"
+url: "https://github.com/vulnquest58/HashVault"
+license: MIT
+version: "2.0.0"
+date-released: "2026-11-27"
+keywords:
+  - password security
+  - hash identification
+  - password auditing
+  - security testing
+  - hashcat
+  - john the ripper

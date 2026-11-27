@@ -1,0 +1,72 @@
+name: Bug report
+description: Report a reproducible defect in HashVault
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include plaintext secrets, customer hashes, tokens, or private keys.
+        For security vulnerabilities, use the private reporting link in SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: HashVault version or commit
+      placeholder: "2.0.0 or a commit SHA"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Linux
+        - Windows
+        - macOS
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.12.16"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or workflow
+      description: The exact command or interactive steps.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include sanitized logs or a minimal reproduction.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Relevant environment
+      description: Hashcat/John availability, optional extras, config changes, corpus used.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I am using this only on systems/data I am authorized to test.
+          required: true
+        - label: I removed secrets and customer data from this report.
+          required: true
+        - label: I searched existing issues.
+          required: true

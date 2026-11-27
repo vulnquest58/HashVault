@@ -1,0 +1,25 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+include SECURITY.md
+include CODE_OF_CONDUCT.md
+include CITATION.cff
+include pyproject.toml
+include uv.lock
+
+recursive-include config *
+recursive-include data *
+recursive-include docs *
+recursive-include examples *
+recursive-include scripts *
+recursive-include tests *
+
+global-exclude *.py[cod]
+global-exclude __pycache__
+global-exclude .DS_Store
+global-exclude *.sqlite3
+global-exclude *.sqlite3-shm
+global-exclude *.sqlite3-wal
+global-exclude *.pot
+global-exclude *.log

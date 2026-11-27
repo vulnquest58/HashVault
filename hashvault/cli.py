@@ -16,6 +16,16 @@ from rich.table import Table
 from rich import box
 
 from hashvault.analysis.analyzer import AnalysisHandoff, analyze_input, prepare_input
+from hashvault.campaign import (
+    CampaignEngine,
+    Target,
+    build_certificate,
+    generate_certificate_keypair,
+    parse_corpus_file,
+    sign_certificate,
+    verify_certificate,
+    write_certificate,
+)
 from hashvault.analysis.replay import (
     RecipeReplayError,
     load_recipe,
@@ -82,6 +92,8 @@ app = typer.Typer(
 console = Console(highlight=False, width=120, force_jupyter=False)
 strategies_app = typer.Typer(help="Adaptive strategy feedback statistics.")
 app.add_typer(strategies_app, name="strategies")
+campaign_app = typer.Typer(help="Compile a credential corpus into a proof-carrying recovery campaign.")
+app.add_typer(campaign_app, name="campaign")
 
 
 @app.command("banner")
@@ -2100,6 +2112,266 @@ def selftest_cmd(
     if result.failed_operations:
         console.print(f"[red]Failing operations:[/red] {', '.join(result.failed_operations)}")
     if result.failed:
+        raise typer.Exit(1)
+
+
+def _campaign_targets(
+    corpus: Path,
+    *,
+    hint: Optional[HashCategory],
+    max_patterns: int,
+) -> list[Target]:
+    records = parse_corpus_file(corpus)
+    if not records:
+        raise typer.BadParameter("corpus contains no usable credential records")
+    config = load_config()
+    init_db(
+        config.paths.database,
+        seed_patterns_path="data/patterns/patterns.json",
+        seed_corpus_paths=DEFAULT_CORPUS_FILES,
+    )
+    targets: list[Target] = []
+    with get_db_session() as session:
+        for index, record in enumerate(records, start=1):
+            patterns = []
+            confidence = 0.0
+            method = "unidentified"
+            try:
+                result = identify(
+                    record.hash_value,
+                    session,
+                    config,
+                    SourceContext(
+                        origin_file=record.source,
+                        user_declared_hint=hint,
+                    ),
+                )
+                patterns = [
+                    candidate.pattern
+                    for candidate in result.candidates[:max_patterns]
+                ]
+                if result.confidence_score is not None:
+                    confidence = float(result.confidence_score)
+                elif result.candidates:
+                    confidence = float(result.candidates[0].confidence)
+                method = result.method
+            except (NoCandidateError, HashVaultError) as exc:
+                method = f"unidentified: {exc}"
+            targets.append(
+                Target(
+                    target_id=f"t{index:04d}",
+                    raw_hash=record.hash_value,
+                    normalized_hash=record.hash_value,
+                    username=record.username,
+                    source=record.source,
+                    patterns=patterns,
+                    confidence=confidence,
+                    metadata={
+                        "format": record.metadata.get("format", ""),
+                        "identification": method,
+                    },
+                )
+            )
+    return targets
+
+
+def _load_known_plaintexts(
+    known_file: Optional[Path],
+    known: Optional[List[str]],
+) -> dict[str, str]:
+    mapping: dict[str, str] = {}
+    if known_file is not None:
+        data = json.loads(known_file.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            mapping.update({str(key): str(value) for key, value in data.items()})
+        elif isinstance(data, list):
+            for row in data:
+                if not isinstance(row, dict):
+                    continue
+                key = row.get("target_id") or row.get("username")
+                if key and "plaintext" in row:
+                    mapping[str(key)] = str(row["plaintext"])
+        else:
+            raise typer.BadParameter("known-file must contain a JSON object or list")
+    for item in known or []:
+        separator = "=" if "=" in item else ":"
+        if separator not in item:
+            raise typer.BadParameter("--known entries must use key=plaintext")
+        key, value = item.split(separator, 1)
+        mapping[key] = value
+    return mapping
+
+
+def _render_campaign_plan(plan) -> None:
+    table = Table(
+        title="HashVault Recovery Campaign Plan",
+        header_style="bold cyan",
+        box=box.SIMPLE_HEAVY,
+        expand=True,
+    )
+    table.add_column("Stage", style="magenta", no_wrap=True)
+    table.add_column("Kind", style="cyan")
+    table.add_column("Targets", justify="right")
+    table.add_column("Candidates", justify="right")
+    table.add_column("Expected", justify="right")
+    table.add_column("Cost (s)", justify="right")
+    table.add_column("Priority", justify="right")
+    for stage in plan.stages:
+        table.add_row(
+            stage.name,
+            stage.kind,
+            str(len(stage.target_ids)),
+            str(stage.candidates),
+            f"{stage.expected_recoveries:.2f}",
+            f"{stage.cost_seconds:.3f}",
+            f"{stage.priority:.2f}",
+        )
+    console.print(table)
+    console.print(
+        f"[bold]Targets:[/bold] {plan.total_targets}  "
+        f"[bold]Built-in verifiable:[/bold] {plan.supported_targets}  "
+        f"[bold]Slow:[/bold] {plan.slow_targets}"
+    )
+    for note in plan.notes:
+        console.print(f"[yellow]Note:[/yellow] {note}")
+
+
+def _render_campaign_report(report, *, redact: bool) -> None:
+    table = Table(
+        title="HashVault Recovery Campaign",
+        header_style="bold cyan",
+        box=box.SIMPLE_HEAVY,
+        expand=True,
+    )
+    table.add_column("Target", style="cyan", no_wrap=True)
+    table.add_column("User", style="magenta")
+    table.add_column("Status", justify="center")
+    table.add_column("Pattern", style="yellow")
+    table.add_column("Method", style="green")
+    table.add_column("Plaintext" if not redact else "Plaintext (redacted)")
+    for target in report.targets:
+        status = "[green]resolved[/green]" if target.resolved else "[yellow]open[/yellow]"
+        plaintext = "-" if redact else (target.plaintext or "-")
+        table.add_row(
+            target.target_id,
+            target.username or "-",
+            status,
+            target.pattern_name or "-",
+            target.method or "-",
+            plaintext,
+        )
+    console.print(table)
+    summary = report.summary()
+    console.print(
+        f"[bold]Recovered:[/bold] {summary['resolved']}/{summary['targets']}  "
+        f"[bold]Checks:[/bold] {summary['checks']}  "
+        f"[bold]Candidates:[/bold] {summary['candidates_generated']}  "
+        f"[bold]Elapsed:[/bold] {summary['elapsed_seconds']:.2f}s"
+    )
+    for note in report.notes:
+        console.print(f"[yellow]Note:[/yellow] {note}")
+
+
+@campaign_app.command("plan")
+def campaign_plan_cmd(
+    corpus: Path = typer.Argument(..., exists=True, readable=True, help="Corpus file"),
+    hint: Optional[HashCategory] = typer.Option(None, "--hint", help="Category hint"),
+    max_patterns: int = typer.Option(5, "--max-patterns", help="Candidate patterns per target"),
+    max_candidates: int = typer.Option(50_000, "--max-candidates", help="Synthetic candidate limit"),
+    json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
+) -> None:
+    """Show the staged recovery plan for a corpus."""
+    targets = _campaign_targets(corpus, hint=hint, max_patterns=max_patterns)
+    plan = CampaignEngine(
+        targets,
+        max_candidates=max_candidates,
+        max_patterns=max_patterns,
+    ).plan()
+    if json_out:
+        print(json.dumps(plan.to_dict(), indent=2))
+        return
+    _render_campaign_plan(plan)
+
+
+@campaign_app.command("run")
+def campaign_run_cmd(
+    corpus: Path = typer.Argument(..., exists=True, readable=True, help="Corpus file"),
+    wordlist: Optional[Path] = typer.Option(None, "--wordlist", "-w", exists=True, readable=True),
+    known: Optional[List[str]] = typer.Option(None, "--known", help="Known plaintext: key=value"),
+    known_file: Optional[Path] = typer.Option(None, "--known-file", exists=True, readable=True),
+    hint: Optional[HashCategory] = typer.Option(None, "--hint", help="Category hint"),
+    max_patterns: int = typer.Option(5, "--max-patterns", help="Candidate patterns per target"),
+    max_candidates: int = typer.Option(50_000, "--max-candidates", help="Synthetic candidate limit"),
+    include_slow: bool = typer.Option(False, "--include-slow", help="Include slow KDFs in mutations"),
+    redact: bool = typer.Option(False, "--redact", help="Hide recovered plaintext"),
+    certificate: Optional[Path] = typer.Option(None, "--certificate", help="Write a recovery certificate"),
+    sign_key: Optional[Path] = typer.Option(None, "--sign-key", exists=True, readable=True),
+    json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
+) -> None:
+    """Run a corpus recovery campaign."""
+    targets = _campaign_targets(corpus, hint=hint, max_patterns=max_patterns)
+    known_plaintexts = _load_known_plaintexts(known_file, known)
+    engine = CampaignEngine(
+        targets,
+        known_plaintexts=known_plaintexts,
+        wordlist=wordlist,
+        max_candidates=max_candidates,
+        max_patterns=max_patterns,
+        include_slow=include_slow,
+    )
+    report = engine.run()
+    if certificate is not None:
+        document = build_certificate(report)
+        if sign_key is not None:
+            document = sign_certificate(document, sign_key.read_bytes())
+        write_certificate(document, certificate)
+        if not json_out:
+            console.print(f"[green]Certificate written to[/green] {certificate}")
+    if json_out:
+        print(json.dumps(report.to_dict(include_plaintext=not redact), indent=2))
+        return
+    _render_campaign_report(report, redact=redact)
+
+
+@campaign_app.command("keygen")
+def campaign_keygen_cmd(
+    private_out: Path = typer.Argument(..., help="Private key output path"),
+    public_out: Path = typer.Argument(..., help="Public key output path"),
+) -> None:
+    """Generate an Ed25519 certificate signing keypair."""
+    private_pem, public_pem = generate_certificate_keypair()
+    private_out.parent.mkdir(parents=True, exist_ok=True)
+    public_out.parent.mkdir(parents=True, exist_ok=True)
+    private_out.write_bytes(private_pem)
+    public_out.write_bytes(public_pem)
+    console.print(f"[green]Private key:[/green] {private_out}")
+    console.print(f"[green]Public key:[/green] {public_out}")
+
+
+@campaign_app.command("verify")
+def campaign_verify_cmd(
+    certificate: Path = typer.Argument(..., exists=True, readable=True),
+    public_key: Optional[Path] = typer.Option(None, "--public-key", exists=True, readable=True),
+    json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
+) -> None:
+    """Verify a recovery certificate's payload and signature."""
+    document = json.loads(certificate.read_text(encoding="utf-8"))
+    key = public_key.read_bytes() if public_key is not None else None
+    ok, reasons = verify_certificate(document, key)
+    payload = document.get("payload", {})
+    result = {
+        "valid": ok,
+        "campaign_id": payload.get("campaign_id"),
+        "reasons": reasons,
+    }
+    if json_out:
+        print(json.dumps(result, indent=2))
+    else:
+        style = "green" if ok else "red"
+        console.print(f"[{style}]Certificate valid:[/{style}] {ok}")
+        for reason in reasons:
+            console.print(f"[red]Reason:[/red] {reason}")
+    if not ok:
         raise typer.Exit(1)
 
 

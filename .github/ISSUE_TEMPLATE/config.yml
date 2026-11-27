@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/vulnquest58/HashVault/security/advisories/new
+    about: Report vulnerabilities privately. Do not open a public issue.
+  - name: Documentation
+    url: https://github.com/vulnquest58/HashVault/tree/main/docs
+    about: Read the CLI, architecture, corpus, and release documentation.
+  - name: Questions and ideas
+    url: https://github.com/vulnquest58/HashVault/discussions
+    about: Ask usage questions or discuss ideas in Discussions.

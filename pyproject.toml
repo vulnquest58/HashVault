@@ -1,18 +1,37 @@
 [project]
 name = "hashvault"
-version = "0.1.0"
-description = "Security auditing tool for password strength assessment"
+version = "2.0.0"
+description = "Evidence-driven password hash analysis, recovery, and audit reporting for authorized security testing"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 authors = [
     {name = "vulnquest", email = "vulnquest58@users.noreply.github.com"}
 ]
+keywords = [
+    "password-security",
+    "hash-identification",
+    "password-auditing",
+    "security-tools",
+    "hashcat",
+    "john-the-ripper",
+    "ctf",
+    "digital-forensics",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+]
 
-[project.urls]
-Homepage = "https://github.com/vulnquest58/HashVault"
-Repository = "https://github.com/vulnquest58/HashVault"
-Author = "https://github.com/vulnquest58"
 dependencies = [
     "typer>=0.12.0",
     "rich>=13.7.0",
@@ -25,6 +44,15 @@ dependencies = [
     "cryptography>=42.0.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/vulnquest58/HashVault"
+Documentation = "https://github.com/vulnquest58/HashVault/tree/main/docs"
+Repository = "https://github.com/vulnquest58/HashVault"
+Changelog = "https://github.com/vulnquest58/HashVault/blob/main/CHANGELOG.md"
+Issues = "https://github.com/vulnquest58/HashVault/issues"
+Security = "https://github.com/vulnquest58/HashVault/security/policy"
+Author = "https://github.com/vulnquest58"
+
 [project.optional-dependencies]
 builtin = [
     "passlib>=1.7.4",
@@ -36,10 +64,11 @@ dev = [
     "pytest-cov>=5.0.0",
     "ruff>=0.5.0",
     "mypy>=1.10.0",
+    "bcrypt>=4.0.0",
 ]
 
 [project.scripts]
-hashvault = "hashvault.__main__:app"
+hashvault = "hashvault.__main__:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]

@@ -50,6 +50,8 @@ coverage.xml
 
 # Databases & local state
 *.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
 *.db
 db/*.sqlite3
 sessions/
@@ -59,6 +61,7 @@ reports/
 _*
 _*.py
 _*.txt
+!**/__*.py
 
 # Ad-hoc debugging artifacts (previously committed by accident)
 test_*.hash
@@ -69,6 +72,9 @@ hashvault-format-check.log
 hashvault.log
 tmp_out.txt
 _backup_*/
+
+# Generated wordlists from live tests
+data/wordlists/live-test-*
 
 # Large external resources fetched via fetch_resources
 data/wordlists/rockyou.txt
