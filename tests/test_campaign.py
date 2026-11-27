@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 
@@ -14,12 +15,26 @@ from hashvault.campaign import (
     sign_certificate,
     verify_certificate,
 )
+from hashvault.core.builtin import _nt_hash, verify_plaintext
 from hashvault.core.registry import HashCategory
 from hashvault.models.schemas import PatternSchema
 
 
 def _md5(value: str) -> str:
     return hashlib.md5(value.encode("utf-8")).hexdigest()
+
+
+def _ntlm(value: str) -> str:
+    return _nt_hash(value).hex()
+
+
+def _ab64encode(data: bytes) -> str:
+    return base64.b64encode(data).decode("ascii").replace("+", ".").rstrip("=")
+
+
+def _pbkdf2_sha256_shadow(value: str, salt: bytes = b"fixturesalt", rounds: int = 1) -> str:
+    digest = hashlib.pbkdf2_hmac("sha256", value.encode("utf-8"), salt, rounds, 32)
+    return f"$pbkdf2-sha256${rounds}${_ab64encode(salt)}${_ab64encode(digest)}"
 
 
 def _pattern(name: str = "MD5", mode: int = 0, *, slow: bool = False) -> PatternSchema:
@@ -182,3 +197,101 @@ def test_certificate_signs_verifies_and_omits_plaintext(tmp_path):
     ok, reasons = verify_certificate(document, public_pem)
     assert not ok
     assert any("digest mismatch" in reason for reason in reasons)
+
+
+def test_mixed_shadow_and_pwdump_campaign_regression():
+    alice_ntlm = _ntlm("summer")
+    bob_shadow = _pbkdf2_sha256_shadow("summer")
+    carol_ntlm = _ntlm("Summer2026!")
+    dave_slow_shadow = "$6$fixturesalt$placeholderhashvalueforregressiontest0123456789"
+
+    corpus = "\n".join(
+        [
+            "# Synthetic mixed pwdump + shadow regression fixture",
+            f"alice:1000:aad3b435b51404eeaad3b435b51404ee:{alice_ntlm}:::",
+            f"bob:{bob_shadow}:19000:0:99999:7:::",
+            f"carol:1001:aad3b435b51404eeaad3b435b51404ee:{carol_ntlm}:::",
+            f"dave:{dave_slow_shadow}:19000:0:99999:7:::",
+        ]
+    )
+
+    records = parse_corpus_text(corpus, source="mixed_fixture.txt")
+    assert len(records) == 4
+    assert [record.metadata.get("format") for record in records] == [
+        "pwdump",
+        "shadow",
+        "pwdump",
+        "shadow",
+    ]
+
+    ntlm_pattern = PatternSchema(
+        name="NTLM",
+        regex="^[a-fA-F0-9]{32}$",
+        hashcat_mode=1000,
+        category=HashCategory.WINDOWS,
+        is_slow=False,
+    )
+    pbkdf2_shadow_pattern = PatternSchema(
+        name="PBKDF2-SHA256",
+        regex=r"^\$pbkdf2-sha256\$\d+\$[./A-Za-z0-9]+\$[./A-Za-z0-9]+$",
+        hashcat_mode=10900,
+        category=HashCategory.LINUX_UNIX,
+        is_slow=False,
+    )
+    slow_shadow_pattern = PatternSchema(
+        name="sha512crypt",
+        regex=r"^\$6\$[^$]+\$.+$",
+        hashcat_mode=1800,
+        category=HashCategory.LINUX_UNIX,
+        is_slow=True,
+    )
+
+    patterns_by_user = {
+        "alice": [ntlm_pattern],
+        "bob": [pbkdf2_shadow_pattern],
+        "carol": [ntlm_pattern],
+        "dave": [slow_shadow_pattern],
+    }
+    targets = [
+        _target(
+            f"t{index:04d}",
+            record.hash_value,
+            patterns_by_user[record.username or ""],
+            record.username,
+        )
+        for index, record in enumerate(records, start=1)
+    ]
+
+    report = CampaignEngine(
+        targets,
+        known_plaintexts={"t0001": "summer"},
+        max_candidates=10_000,
+    ).run()
+
+    by_user = {target.username: target for target in report.targets}
+    assert by_user["alice"].resolved
+    assert by_user["alice"].plaintext == "summer"
+    assert by_user["alice"].method == "known-plaintext"
+
+    assert by_user["bob"].resolved
+    assert by_user["bob"].plaintext == "summer"
+    assert by_user["bob"].method == "exact-reuse"
+
+    assert by_user["carol"].resolved
+    assert by_user["carol"].plaintext == "Summer2026!"
+    assert by_user["carol"].method == "context-mutation"
+
+    assert not by_user["dave"].resolved
+    assert any("slow targets" in note for note in report.notes)
+
+    for username in ("alice", "bob", "carol"):
+        target = by_user[username]
+        assert target.plaintext is not None
+        assert (
+            verify_plaintext(
+                target.normalized_hash,
+                target.patterns[0],
+                target.plaintext,
+            )
+            is True
+        )
