@@ -1,6 +1,6 @@
 # HashVault CLI Reference
 
-This document is the complete command reference for HashVault v2.0.0.
+This document is the complete command reference for HashVault v2.0.1.
 
 ## Legal and Ethical Use
 

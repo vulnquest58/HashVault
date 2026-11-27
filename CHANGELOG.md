@@ -5,6 +5,20 @@ All notable changes to HashVault are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 the project uses [Semantic Versioning](https://semver.org/).
 
+## [2.0.1] - 2026-11-27
+
+### Fixed
+
+- Installed packages now bundle the runtime `data/` and `config/` trees and
+  resolve them from the active virtual environment when the working directory
+  is elsewhere.
+- `load_config` now finds the bundled `config/default.yaml` for installed
+  packages.
+- Verified `hashvault setup`, `identify`, `doctor`, and `campaign run` from a
+  clean wheel installation outside the repository.
+- Added wheel data-file packaging and a release smoke test for the installed
+  package layout.
+
 ## [2.0.0] - 2026-11-27
 
 ### Added

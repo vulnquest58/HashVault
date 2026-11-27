@@ -164,6 +164,10 @@ def load_config(config_path: str | Path | None = None) -> Config:
     """
     if config_path is None:
         config_path = Path("config/default.yaml")
+        if not config_path.exists():
+            from hashvault.core.database import resolve_resource_path
+
+            config_path = resolve_resource_path(config_path)
 
     config_file = Path(config_path)
     yaml_data = {}

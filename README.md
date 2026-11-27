@@ -14,7 +14,7 @@
   <a href="https://github.com/vulnquest58/HashVault"><img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="Python 3.11+"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="MIT License"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/security-policy-blue.svg" alt="Security policy"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2.0.0-informational.svg" alt="Version 2.0.0"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2.0.1-informational.svg" alt="Version 2.0.1"></a>
 </p>
 
 HashVault is an offline-first password hash workbench. It identifies hashes,
@@ -95,6 +95,18 @@ hashvault doctor
 `hashvault setup` initializes the local SQLite catalogue and resources.
 `hashvault doctor` checks the database, patterns, corpora, wordlists, rules,
 engines, optional verifiers, and configuration.
+
+### Install a release wheel
+
+Release wheels bundle the runtime `data/` and `config/` trees:
+
+```bash
+uv venv
+uv pip install "https://github.com/vulnquest58/HashVault/releases/download/v2.0.1/hashvault-2.0.1-py3-none-any.whl"
+
+hashvault setup
+hashvault doctor
+```
 
 ### First commands
 

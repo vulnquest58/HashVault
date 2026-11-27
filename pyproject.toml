@@ -1,6 +1,6 @@
 [project]
 name = "hashvault"
-version = "2.0.0"
+version = "2.0.1"
 description = "Evidence-driven password hash analysis, recovery, and audit reporting for authorized security testing"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -77,6 +77,15 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["hashvault*"]
+
+[tool.setuptools.data-files]
+"config" = ["config/default.yaml"]
+"data" = ["data/test_hashes.json"]
+"data/corpus" = ["data/corpus/*.json"]
+"data/patterns" = ["data/patterns/*.json", "data/patterns/*.txt"]
+"data/rules" = ["data/rules/*.rule", "data/rules/*.json", "data/rules/.gitkeep"]
+"data/rules/hashcat-rules" = ["data/rules/hashcat-rules/*.rule"]
+"data/wordlists" = ["data/wordlists/*.txt", "data/wordlists/*.json", "data/wordlists/.gitkeep"]
 
 [tool.ruff]
 line-length = 88

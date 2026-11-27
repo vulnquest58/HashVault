@@ -21,17 +21,17 @@ from typing import Any, Iterable, Optional, Sequence
 from hashvault.config import Config
 from hashvault.core.builtin import BuiltinCracker, builtin_supports
 from hashvault.core.cracker import create_crack_session, release_session_artifacts
+from hashvault.core.database import resolve_resource_path
 from hashvault.core.identifier import Identifier
 from hashvault.core.registry import HashCategory
 from hashvault.exceptions import NoCandidateError
 from hashvault.models.schemas import PatternSchema
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_HASHCAT_CORPUS = PROJECT_ROOT / "data" / "corpus" / "hashcat_examples.json"
-DEFAULT_XDF_CORPUS = PROJECT_ROOT / "data" / "corpus" / "0xdf_cases.json"
-DEFAULT_CRYPTO_CORPUS = PROJECT_ROOT / "data" / "corpus" / "crypto_vectors.json"
-DEFAULT_CTF_CORPUS = PROJECT_ROOT / "data" / "corpus" / "ctf_writeups.json"
-DEFAULT_CTF_PUBLIC_CORPUS = PROJECT_ROOT / "data" / "corpus" / "ctf_public.json"
+DEFAULT_HASHCAT_CORPUS = resolve_resource_path("data/corpus/hashcat_examples.json")
+DEFAULT_XDF_CORPUS = resolve_resource_path("data/corpus/0xdf_cases.json")
+DEFAULT_CRYPTO_CORPUS = resolve_resource_path("data/corpus/crypto_vectors.json")
+DEFAULT_CTF_CORPUS = resolve_resource_path("data/corpus/ctf_writeups.json")
+DEFAULT_CTF_PUBLIC_CORPUS = resolve_resource_path("data/corpus/ctf_public.json")
 DEFAULT_CORPUS_FILES = (
     DEFAULT_HASHCAT_CORPUS,
     DEFAULT_XDF_CORPUS,

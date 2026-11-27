@@ -23,8 +23,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Build source distribution
-        run: uv build --sdist
+      - name: Build distributions
+        run: uv build
 
       - name: Verify source distribution contents
         run: |
@@ -35,9 +35,30 @@ jobs:
           grep -q '/docs/CORPUS.md' /tmp/sdist-files.txt
           grep -q '/examples/0xdf-demo.txt' /tmp/sdist-files.txt
 
+      - name: Verify wheel contents
+        run: |
+          set -euo pipefail
+          wheel="$(ls dist/*.whl)"
+          python -m zipfile -l "$wheel" > /tmp/wheel-files.txt
+          grep -q 'data/corpus/hashcat_examples.json' /tmp/wheel-files.txt
+          grep -q 'data/patterns/patterns.json' /tmp/wheel-files.txt
+          grep -q 'config/default.yaml' /tmp/wheel-files.txt
+
+      - name: Smoke-test wheel installation
+        run: |
+          set -euo pipefail
+          uv venv /tmp/hashvault-release
+          uv pip install --python /tmp/hashvault-release/bin/python dist/*.whl
+          mkdir -p /tmp/hashvault-release-run
+          cd /tmp/hashvault-release-run
+          /tmp/hashvault-release/bin/hashvault setup
+          /tmp/hashvault-release/bin/hashvault identify 5f4dcc3b5aa765d61d8327deb882cf99
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.tar.gz
+          files: |
+            dist/*.tar.gz
+            dist/*.whl
           generate_release_notes: true
           fail_on_unmatched_files: true

@@ -8,6 +8,7 @@ import hashlib
 import json
 import logging
 import os
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -38,19 +39,25 @@ def resolve_resource_path(path: str | Path) -> Path:
     """Resolve a bundled resource path to an absolute path.
 
     A relative path is tried against the current directory first (so working
-    inside the repository keeps behaving as before) and then against the
-    package root.  Without that second step, ``hashvault setup`` launched from
-    any other directory silently seeded an empty pattern catalogue, and every
-    later ``identify`` failed with "No patterns in database".
+    inside the repository keeps behaving as before), then against the package
+    root and the active virtual environment.  The virtual-environment fallback
+    is required for wheel installs, where setuptools places ``data-files``
+    under ``sys.prefix`` rather than inside the package tree.
     """
     candidate = Path(path)
     if candidate.is_absolute():
         return candidate
     if candidate.exists():
         return candidate.resolve()
-    fallback = (package_root() / candidate).resolve()
-    if fallback.exists():
-        return fallback
+    search_roots = [package_root(), Path(sys.prefix), Path(sys.base_prefix)]
+    seen: set[Path] = set()
+    for root in search_roots:
+        if root in seen:
+            continue
+        seen.add(root)
+        fallback = (root / candidate).resolve()
+        if fallback.exists():
+            return fallback
     return candidate
 
 

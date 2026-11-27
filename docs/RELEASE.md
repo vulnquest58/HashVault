@@ -26,7 +26,7 @@ python -m ruff check hashvault/campaign tests/test_campaign.py
 python -m compileall -q hashvault tests
 ```
 
-Expected baseline for v2.0.0: `436 passed`.
+Expected baseline for v2.0.1: `436 passed`.
 
 Then verify the corpus and campaign smoke path:
 
@@ -53,30 +53,32 @@ or plaintext reports.
 ```bash
 rm -rf dist/
 uv build
-python -m zipfile -l dist/hashvault-2.0.0-py3-none-any.whl | head
+python -m zipfile -l dist/hashvault-2.0.1-py3-none-any.whl | head
 ```
 
 The source distribution is the canonical GitHub release artifact because it
-contains the bundled `data/` and `docs/` trees. Verify the sdist contains those
-paths before uploading:
+contains the bundled `data/` and `docs/` trees. The wheel also bundles the
+runtime `data/` and `config/` trees; smoke-test it from a clean virtual
+environment before publishing. Verify the sdist contains those paths before
+uploading:
 
 ```bash
-tar -tf dist/hashvault-2.0.0.tar.gz | grep -E 'data/|docs/|examples/' | head
+tar -tf dist/hashvault-2.0.1.tar.gz | grep -E 'data/|docs/|examples/' | head
 ```
 
 ## Tag and publish
 
 ```bash
-git tag -a v2.0.0 -m "HashVault v2.0.0"
+git tag -a v2.0.1 -m "HashVault v2.0.1"
 git push origin main
-git push origin v2.0.0
+git push origin v2.0.1
 ```
 
 Create the GitHub release from the tag with:
 
-- title: `HashVault v2.0.0`
+- title: `HashVault v2.0.1`
 - summary from `CHANGELOG.md`
-- assets: source distribution, optional wheel
+- assets: source distribution and wheel
 - notes: breaking changes, campaign engine, corpus provenance, test count,
   and upgrade guidance
 
