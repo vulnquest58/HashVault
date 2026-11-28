@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Official vendored auto2john engine for HashVault.
 
 Detect protected files, run the matching John the Ripper *2john helper, and
