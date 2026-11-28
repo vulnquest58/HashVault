@@ -21,6 +21,9 @@ class PathsConfig(BaseModel):
     rules_dir: str = "data/rules"
     sessions_dir: str = "sessions"
     quick_wordlist: str = "data/wordlists/quick_1000.txt"
+    converters_dir: str = "tools/converters"
+    conversions_dir: str = "conversions"
+    checkpoints_dir: str = "checkpoints"
 
 
 class TimeoutsConfig(BaseModel):
@@ -113,6 +116,9 @@ class Config(BaseSettings):
         self.paths.rules_dir = str((base_dir / self.paths.rules_dir).resolve())
         self.paths.sessions_dir = str((base_dir / self.paths.sessions_dir).resolve())
         self.paths.quick_wordlist = str((base_dir / self.paths.quick_wordlist).resolve())
+        self.paths.converters_dir = str((base_dir / self.paths.converters_dir).resolve())
+        self.paths.conversions_dir = str((base_dir / self.paths.conversions_dir).resolve())
+        self.paths.checkpoints_dir = str((base_dir / self.paths.checkpoints_dir).resolve())
 
 
 def _coerce_section(section: BaseModel, name: str, raw: str):

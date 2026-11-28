@@ -1,6 +1,6 @@
 # Release Process
 
-HashVault uses semantic versioning. The current release line is `2.0.x`.
+HashVault uses semantic versioning. The current release line is `2.2.x`.
 
 ## Version locations
 
@@ -21,12 +21,15 @@ Run from a clean checkout on the Debian build host:
 git status --short
 uv venv
 uv pip install -e ".[dev,builtin]"
-python -m pytest -q
-python -m ruff check hashvault/campaign tests/test_campaign.py
+python -m pytest -q --cov=hashvault --cov-fail-under=70
+python -m ruff check hashvault/campaign hashvault/core/evidence.py \
+  hashvault/core/evidence_schema.py hashvault/core/corpus_validator.py \
+  tests/test_campaign.py tests/test_evidence_schema.py \
+  tests/test_corpus_validator.py
 python -m compileall -q hashvault tests
 ```
 
-Expected baseline for v2.0.1: `436 passed`.
+Expected baseline for v2.2.0: `464 passed`.
 
 Then verify the corpus and campaign smoke path:
 
@@ -53,30 +56,31 @@ or plaintext reports.
 ```bash
 rm -rf dist/
 uv build
-python -m zipfile -l dist/hashvault-2.0.1-py3-none-any.whl | head
+python -m zipfile -l dist/hashvault-2.2.0-py3-none-any.whl | head
 ```
 
 The source distribution is the canonical GitHub release artifact because it
 contains the bundled `data/` and `docs/` trees. The wheel also bundles the
 runtime `data/` and `config/` trees; smoke-test it from a clean virtual
-environment before publishing. Verify the sdist contains those paths before
-uploading:
+environment and an empty working directory so installed-path regressions are
+caught. Run `hashvault setup` there, then confirm `hashvault doctor --json`
+reports `"ok": true`. Verify the sdist contains those paths before uploading:
 
 ```bash
-tar -tf dist/hashvault-2.0.1.tar.gz | grep -E 'data/|docs/|examples/' | head
+tar -tf dist/hashvault-2.2.0.tar.gz | grep -E 'data/|docs/|examples/' | head
 ```
 
 ## Tag and publish
 
 ```bash
-git tag -a v2.0.1 -m "HashVault v2.0.1"
+git tag -a v2.2.0 -m "HashVault v2.2.0"
 git push origin main
-git push origin v2.0.1
+git push origin v2.2.0
 ```
 
 Create the GitHub release from the tag with:
 
-- title: `HashVault v2.0.1`
+- title: `HashVault v2.2.0`
 - summary from `CHANGELOG.md`
 - assets: source distribution and wheel
 - notes: breaking changes, campaign engine, corpus provenance, test count,

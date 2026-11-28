@@ -6,6 +6,9 @@ paths:
   rules_dir: "data/rules"
   sessions_dir: "sessions"
   quick_wordlist: "data/wordlists/rockyou.txt"
+  converters_dir: "tools/converters"
+  conversions_dir: "conversions"
+  checkpoints_dir: "checkpoints"
 
 timeouts:
   fast_hash_seconds: 3600

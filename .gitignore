@@ -55,6 +55,8 @@ coverage.xml
 *.db
 db/*.sqlite3
 sessions/
+conversions/
+checkpoints/
 reports/
 
 # Scratch & ad-hoc files

@@ -1,0 +1,4 @@
+# Copied John helper programs and generated manifests are local artefacts.
+*2john*
+manifest.json
+lib/*.pm

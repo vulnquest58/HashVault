@@ -18,12 +18,14 @@ from rich import box
 from hashvault.analysis.analyzer import AnalysisHandoff, analyze_input, prepare_input
 from hashvault.campaign import (
     CampaignEngine,
+    CheckpointError,
     Target,
     build_certificate,
     generate_certificate_keypair,
-    parse_corpus_file,
+    iter_corpus_file,
+    load_potfile,
+    potfile_mapping,
     sign_certificate,
-    verify_certificate,
     write_certificate,
 )
 from hashvault.analysis.replay import (
@@ -35,6 +37,7 @@ from hashvault.analysis.replay import (
 )
 from hashvault.config import load_config
 from hashvault.corpus import DEFAULT_CORPUS_FILES
+from hashvault.core.corpus_validator import validate_corpus_dir
 from hashvault.core.cracker import purge_session_dirs
 from hashvault.core.database import (
     get_db_session,
@@ -42,7 +45,14 @@ from hashvault.core.database import (
     resolve_resource_path,
     seed_patterns,
 )
-from hashvault.core.doctor import DoctorReport, FAIL, OK, WARN, run_doctor
+from hashvault.core.doctor import (
+    DoctorReport,
+    FAIL,
+    OK,
+    WARN,
+    apply_doctor_fixes,
+    run_doctor,
+)
 from hashvault.core.identifier import identify
 from hashvault.core.insights import run_insights
 from hashvault.core.integrity import (
@@ -64,7 +74,14 @@ from hashvault.core.reporter import (
 )
 from hashvault.core.wordlist_manager import import_wordlist as mgr_import_wordlist, list_rules, list_wordlists
 from hashvault.exceptions import HashVaultError, NoCandidateError
-from hashvault.ingestors.converters import convert_file, detect_file_type
+from hashvault.ingestors.conversion_service import convert_auto
+from hashvault.ingestors.converter_store import (
+    ConverterStoreError,
+    converter_store_status,
+    resolve_converter_root,
+    sync_converters,
+)
+from hashvault.ingestors.converters import detect_file_type
 from hashvault.ingestors.john_catalog import (
     build_hashcat_command,
     build_john_command,
@@ -87,13 +104,15 @@ from hashvault.ui.interactive import start_interactive_shell
 app = typer.Typer(
     name="hashvault",
     help="HashVault — Enterprise Password Hash Identification & Auditing Framework v2.0",
-    add_completion=False,
+    add_completion=True,
 )
 console = Console(highlight=False, width=120, force_jupyter=False)
 strategies_app = typer.Typer(help="Adaptive strategy feedback statistics.")
 app.add_typer(strategies_app, name="strategies")
 campaign_app = typer.Typer(help="Compile a credential corpus into a proof-carrying recovery campaign.")
 app.add_typer(campaign_app, name="campaign")
+corpus_app = typer.Typer(help="Inspect and validate curated corpus files.")
+app.add_typer(corpus_app, name="corpus")
 
 
 @app.command("banner")
@@ -1164,16 +1183,26 @@ def doctor_cmd(
         "--probe",
         help="Run hashcat backend detection (no external network access)",
     ),
+    fix: bool = typer.Option(
+        False,
+        "--fix",
+        help="Create missing local data directories before reporting",
+    ),
 ) -> None:
     """Check database, data, engines, paths, and optional integrations."""
     config = load_config()
-    report: DoctorReport
+    fixes: list[str] = []
+    if fix:
+        preflight = DoctorReport()
+        apply_doctor_fixes(config, preflight)
+        fixes = preflight.fixes
     try:
         init_db(config.paths.database)
         with get_db_session() as session:
             report = run_doctor(config, session, probe=probe)
     except Exception as exc:
         report = run_doctor(config, None, db_error=str(exc))
+    report.fixes = fixes + report.fixes
 
     if json_out:
         print(json.dumps(report.to_dict(), indent=2))
@@ -1195,6 +1224,9 @@ def doctor_cmd(
             check.detail,
         )
     console.print(table)
+    if report.fixes:
+        for fix in report.fixes:
+            console.print(f"[green]Fix:[/green] {fix}")
     summary = report.summary()
     console.print(
         f"[bold]Doctor:[/bold] {summary['ok']} ok, "
@@ -1679,6 +1711,13 @@ def evidence_cmd(
     public_key: Optional[Path] = typer.Option(
         None, "--public-key", help="Public key (PEM) for verification"
     ),
+    trust_store: Optional[Path] = typer.Option(
+        None,
+        "--trust-store",
+        help="JSON trust store of approved signing keys",
+        exists=True,
+        readable=True,
+    ),
     limit: int = typer.Option(0, "--limit", help="Include at most N records"),
     json_output: bool = typer.Option(False, "--json", help="Print the document"),
 ) -> None:
@@ -1688,9 +1727,10 @@ def evidence_cmd(
         build_evidence_report,
         generate_keypair,
         sign_report,
-        verify_report,
+        verify_document,
         write_report,
     )
+    from hashvault.core.evidence_schema import load_trust_store
 
     if gen_key is not None:
         private_pem, public_pem = generate_keypair()
@@ -1710,19 +1750,39 @@ def evidence_cmd(
         document = json.loads(verify.read_text(encoding="utf-8"))
         pem = public_key.read_bytes() if public_key else None
         try:
-            ok, reasons = verify_report(document, pem)
-        except EvidenceError as exc:
+            store = load_trust_store(trust_store) if trust_store else None
+            ok, reasons, kind = verify_document(
+                document, pem, trust_store=store
+            )
+        except (EvidenceError, ValueError, OSError) as exc:
             console.print(f"[red]Verification error: {exc}[/red]")
             raise typer.Exit(2)
+        if json_output:
+            print(
+                json.dumps(
+                    {
+                        "valid": ok,
+                        "kind": kind,
+                        "reasons": reasons,
+                        "trust_store": str(trust_store) if trust_store else None,
+                    },
+                    indent=2,
+                )
+            )
+            raise typer.Exit(0 if ok else 1)
         if ok:
-            console.print("[bold green]Report integrity verified.[/bold green]")
-            if pem is None:
+            console.print(
+                f"[bold green]Document integrity verified[/bold green] "
+                f"[dim]({kind or 'unknown kind'})[/dim]"
+            )
+            if pem is None and store is None:
                 console.print(
-                    "[yellow]No --public-key supplied: payload integrity was "
-                    "checked, the signature was not.[/yellow]"
+                    "[yellow]No --public-key or --trust-store supplied: "
+                    "payload integrity was checked, the signer was not "
+                    "authenticated.[/yellow]"
                 )
             raise typer.Exit(0)
-        console.print("[bold red]Report verification FAILED[/bold red]")
+        console.print("[bold red]Document verification FAILED[/bold red]")
         for reason in reasons:
             console.print(f"  - {reason}")
         raise typer.Exit(1)
@@ -1771,6 +1831,8 @@ def _gallery_payload(rows) -> list[dict]:
             "input": row.profile.source_label,
             "extensions": list(row.profile.extensions),
             "converter": row.converter_name,
+            "converter_path": row.converter_path,
+            "storage": row.storage,
             "john_format": row.profile.john_format,
             "hashcat_mode": row.profile.hashcat_mode,
             "runtime": row.runtime,
@@ -1817,11 +1879,78 @@ def convert_cmd(
     tool: CrackTool = typer.Option(CrackTool.AUTO, "--tool", help="Cracking engine backend"),
     json_out: bool = typer.Option(False, "--json", help="Output as JSON"),
     list_formats: bool = typer.Option(False, "--list-formats", help="List all John conversion profiles"),
+    sync: bool = typer.Option(False, "--sync", help="Copy John converters into the managed store"),
+    force: bool = typer.Option(False, "--force", help="Overwrite stored converters during --sync"),
+    show_paths: bool = typer.Option(False, "--paths", help="Show converter, output, and checkpoint directories"),
+    save: bool = typer.Option(False, "--save", help="Write extracted hashes to the configured conversions directory"),
+    out_dir: Optional[Path] = typer.Option(None, "--out-dir", help="Write extracted hashes into this directory"),
 ) -> None:
     """Convert encrypted files to John/hashcat input, with a selectable converter gallery."""
 
     config = load_config()
     john_bin = config.paths.john_bin
+    store_root = resolve_converter_root(config.paths.converters_dir)
+
+    if sync:
+        try:
+            sync_report = sync_converters(
+                john_bin, store_root, force=force
+            )
+        except ConverterStoreError as exc:
+            if json_out:
+                print(json.dumps({"success": False, "error": str(exc)}, indent=2))
+            else:
+                console.print(f"[bold red]Converter sync failed:[/bold red] {exc}")
+            raise typer.Exit(1)
+        if json_out:
+            print(json.dumps(sync_report.to_dict(), indent=2))
+        else:
+            console.print(
+                f"[bold green]Converters synchronized to[/bold green] {store_root}"
+            )
+            console.print(
+                f"[dim]{sync_report.stored} profile(s), "
+                f"{sync_report.copied} file(s) copied, "
+                f"{len(sync_report.missing)} missing.[/dim]"
+            )
+            if sync_report.missing:
+                console.print(
+                    "[yellow]Missing:[/yellow] " + ", ".join(sync_report.missing)
+                )
+            if sync_report.manifest:
+                console.print(f"[dim]Manifest: {sync_report.manifest}[/dim]")
+        return
+
+    if show_paths:
+        status = converter_store_status(config.paths.converters_dir)
+        payload = {
+            "converter_store": status.to_dict(),
+            "conversions_dir": str(Path(config.paths.conversions_dir)),
+            "checkpoints_dir": str(Path(config.paths.checkpoints_dir)),
+            "john_bin": john_bin,
+        }
+        if json_out:
+            print(json.dumps(payload, indent=2))
+        else:
+            console.print(f"[bold]Converter store:[/bold] {status.root}")
+            console.print(
+                f"  [dim]{status.converters} converter file(s), "
+                f"{len(status.missing)} missing profile(s), "
+                f"manifest={'yes' if status.manifest else 'no'}[/dim]"
+            )
+            console.print(
+                f"[bold]Conversion output:[/bold] {config.paths.conversions_dir}"
+            )
+            console.print(
+                f"[bold]Campaign checkpoints:[/bold] {config.paths.checkpoints_dir}"
+            )
+            console.print(f"[bold]John binary:[/bold] {john_bin}")
+            if status.missing:
+                console.print(
+                    "[yellow]Run `hashvault convert --sync` to populate "
+                    "missing converters.[/yellow]"
+                )
+        return
 
     if list_formats or gallery:
         if target and not list_formats:
@@ -1837,15 +1966,24 @@ def convert_cmd(
             rows = gallery_rows(john_bin, query=filter)
             title = "John Conversion Gallery"
         if json_out:
-            print(json.dumps({"profiles": _gallery_payload(rows)}, indent=2))
+            print(
+                json.dumps(
+                    {
+                        "profiles": _gallery_payload(rows),
+                        "store": str(store_root),
+                    },
+                    indent=2,
+                )
+            )
         else:
             render_conversion_gallery(console, rows, title=title)
             discovered = len(discover_converters(john_bin))
             ready = sum(1 for row in rows if row.available)
             console.print(
                 f"[dim]{len(rows)} profile(s), {ready} ready, "
-                f"{discovered} bundled converter(s) discovered.[/dim]"
+                f"{discovered} converter(s) discovered.[/dim]"
             )
+            console.print(f"[dim]Managed store: {store_root}[/dim]")
             if not target:
                 console.print(
                     "[dim]Select a profile with --profile KEY, or run "
@@ -1872,12 +2010,13 @@ def convert_cmd(
         if not json_out:
             console.print(f"[bold blue]Converting:[/bold blue] {path.name}")
             console.print(
-                f"[dim]Profile:[/dim] {selected_profile.key} — "
+                f"[dim]Profile:[/dim] {selected_profile.key} - "
                 f"{selected_profile.title}"
             )
         result = convert_with_profile(
             selected_profile, path, john_bin=john_bin
         )
+        result.profile = selected_profile.key
     else:
         if not json_out:
             console.print(f"[bold blue]Converting:[/bold blue] {path.name}")
@@ -1886,28 +2025,46 @@ def convert_cmd(
             console.print(
                 f"[dim]Detected format:[/dim] {detected_fmt or 'unknown'}"
             )
-        result = convert_file(path, john_bin=john_bin, format_override=format)
+        result = convert_auto(path, john_bin=john_bin, format_override=format)
 
     if not result.success:
         if json_out:
             print(
                 json.dumps(
-                    {"success": False, "error": result.error, "file": str(path)},
+                    {
+                        "success": False,
+                        "error": result.error,
+                        "file": str(path),
+                        "attempts": list(result.attempts),
+                        "store": str(store_root),
+                    },
                     indent=2,
                 )
             )
         else:
             console.print(f"[bold red]Conversion failed:[/bold red] {result.error}")
+            for attempt in result.attempts:
+                console.print(f"  [dim]Attempt: {attempt}[/dim]")
             if selected_profile is None:
                 console.print(
-                    "[dim]Try the John gallery for additional formats: "
+                    "[dim]Try the converter gallery for additional formats: "
                     "`hashvault convert --gallery`.[/dim]"
                 )
         raise typer.Exit(1)
 
-    suggested_hash_path = hash_out or Path("hashes.john")
+    if hash_out is None and out_dir is not None:
+        hash_out = Path(out_dir) / f"{path.stem}.john"
+    if hash_out is None and save:
+        hash_out = Path(config.paths.conversions_dir) / f"{path.stem}.john"
+    suggested_hash_path = hash_out or (
+        Path(config.paths.conversions_dir) / f"{path.stem}.john"
+    )
     wordlist_path = _resolve_wordlist_reference(config, wordlist)
-    active_profile = selected_profile or get_profile(result.format_detected)
+    active_profile = (
+        selected_profile
+        or get_profile(result.profile)
+        or get_profile(result.format_detected)
+    )
     john_command = ""
     show_command = ""
     hashcat_command = ""
@@ -1938,6 +2095,9 @@ def convert_cmd(
             "profile": active_profile.key if active_profile else None,
             "john_format": active_profile.john_format if active_profile else None,
             "hashcat_mode": active_profile.hashcat_mode if active_profile else None,
+            "converter": result.hashes[0].tool_used if result.hashes else "",
+            "store": str(store_root),
+            "attempts": list(result.attempts),
             "hash_file": str(hash_out) if hash_out else None,
             "commands": {
                 "john": john_command,
@@ -1959,7 +2119,7 @@ def convert_cmd(
         print(json.dumps(out_data, indent=2))
     else:
         console.print(
-            f"[bold green]✓ Extracted {len(result.hashes)} hash(es):[/bold green]"
+            f"[bold green]Extracted {len(result.hashes)} hash(es):[/bold green]"
         )
         for index, item in enumerate(result.hashes, 1):
             preview = item.raw_hash[:120]
@@ -1976,8 +2136,8 @@ def convert_cmd(
             console.print("\n[bold blue]Suggested John workflow[/bold blue]")
             if not hash_out:
                 console.print(
-                    "[dim]Save the extracted lines first with "
-                    "--hash-out hashes.john.[/dim]"
+                    "[dim]Save the extracted lines with --save or "
+                    f"--hash-out {suggested_hash_path}.[/dim]"
                 )
             console.print(f"  [cyan]{john_command}[/cyan]")
             console.print(f"  [cyan]{show_command}[/cyan]")
@@ -2115,15 +2275,28 @@ def selftest_cmd(
         raise typer.Exit(1)
 
 
+def _parse_shard(spec: Optional[str]) -> tuple[int, int]:
+    if not spec:
+        return 1, 1
+    try:
+        index_text, total_text = spec.split("/", 1)
+        index = int(index_text)
+        total = int(total_text)
+    except (ValueError, AttributeError) as exc:
+        raise typer.BadParameter("--shard must use INDEX/TOTAL, e.g. 1/4") from exc
+    if total < 1 or index < 1 or index > total:
+        raise typer.BadParameter("--shard index must be between 1 and TOTAL")
+    return index, total
+
+
 def _campaign_targets(
     corpus: Path,
     *,
     hint: Optional[HashCategory],
     max_patterns: int,
+    shard: Optional[str] = None,
 ) -> list[Target]:
-    records = parse_corpus_file(corpus)
-    if not records:
-        raise typer.BadParameter("corpus contains no usable credential records")
+    shard_index, shard_total = _parse_shard(shard)
     config = load_config()
     init_db(
         config.paths.database,
@@ -2132,7 +2305,9 @@ def _campaign_targets(
     )
     targets: list[Target] = []
     with get_db_session() as session:
-        for index, record in enumerate(records, start=1):
+        for index, record in enumerate(iter_corpus_file(corpus), start=1):
+            if shard_total > 1 and (index - 1) % shard_total != shard_index - 1:
+                continue
             patterns = []
             confidence = 0.0
             method = "unidentified"
@@ -2172,6 +2347,8 @@ def _campaign_targets(
                     },
                 )
             )
+    if not targets:
+        raise typer.BadParameter("corpus contains no usable credential records")
     return targets
 
 
@@ -2278,10 +2455,13 @@ def campaign_plan_cmd(
     hint: Optional[HashCategory] = typer.Option(None, "--hint", help="Category hint"),
     max_patterns: int = typer.Option(5, "--max-patterns", help="Candidate patterns per target"),
     max_candidates: int = typer.Option(50_000, "--max-candidates", help="Synthetic candidate limit"),
+    shard: Optional[str] = typer.Option(None, "--shard", help="Process one deterministic shard, e.g. 1/4"),
     json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
 ) -> None:
     """Show the staged recovery plan for a corpus."""
-    targets = _campaign_targets(corpus, hint=hint, max_patterns=max_patterns)
+    targets = _campaign_targets(
+        corpus, hint=hint, max_patterns=max_patterns, shard=shard
+    )
     plan = CampaignEngine(
         targets,
         max_candidates=max_candidates,
@@ -2299,27 +2479,63 @@ def campaign_run_cmd(
     wordlist: Optional[Path] = typer.Option(None, "--wordlist", "-w", exists=True, readable=True),
     known: Optional[List[str]] = typer.Option(None, "--known", help="Known plaintext: key=value"),
     known_file: Optional[Path] = typer.Option(None, "--known-file", exists=True, readable=True),
+    potfile: Optional[Path] = typer.Option(None, "--potfile", exists=True, readable=True, help="Import hashcat/John potfile"),
     hint: Optional[HashCategory] = typer.Option(None, "--hint", help="Category hint"),
     max_patterns: int = typer.Option(5, "--max-patterns", help="Candidate patterns per target"),
     max_candidates: int = typer.Option(50_000, "--max-candidates", help="Synthetic candidate limit"),
     include_slow: bool = typer.Option(False, "--include-slow", help="Include slow KDFs in mutations"),
+    shard: Optional[str] = typer.Option(None, "--shard", help="Process one deterministic shard, e.g. 1/4"),
+    checkpoint: Optional[Path] = typer.Option(None, "--checkpoint", help="Write resumable state to this file"),
+    resume: Optional[Path] = typer.Option(None, "--resume", exists=True, readable=True, help="Resume from a checkpoint"),
+    progress: bool = typer.Option(False, "--progress", help="Print stage progress"),
     redact: bool = typer.Option(False, "--redact", help="Hide recovered plaintext"),
     certificate: Optional[Path] = typer.Option(None, "--certificate", help="Write a recovery certificate"),
     sign_key: Optional[Path] = typer.Option(None, "--sign-key", exists=True, readable=True),
     json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
 ) -> None:
     """Run a corpus recovery campaign."""
-    targets = _campaign_targets(corpus, hint=hint, max_patterns=max_patterns)
+    targets = _campaign_targets(
+        corpus, hint=hint, max_patterns=max_patterns, shard=shard
+    )
     known_plaintexts = _load_known_plaintexts(known_file, known)
+    known_origins: dict[str, str] = {}
+    if potfile is not None:
+        try:
+            entries = load_potfile(potfile)
+        except OSError as exc:
+            raise typer.BadParameter(f"cannot read potfile: {exc}") from exc
+        for hash_value, plaintext in potfile_mapping(entries).items():
+            known_plaintexts[hash_value] = plaintext
+            known_origins[hash_value] = f"potfile:{potfile.name}"
+        if not json_out:
+            console.print(
+                f"[dim]Imported {len(entries)} potfile entrie(s) from "
+                f"{potfile}.[/dim]"
+            )
     engine = CampaignEngine(
         targets,
         known_plaintexts=known_plaintexts,
+        known_origins=known_origins,
         wordlist=wordlist,
         max_candidates=max_candidates,
         max_patterns=max_patterns,
         include_slow=include_slow,
     )
-    report = engine.run()
+    if resume is not None and checkpoint is None:
+        checkpoint = resume
+
+    def _progress(stage_name: str, event: str) -> None:
+        if not json_out:
+            console.print(f"[dim]Stage {stage_name}: {event}[/dim]")
+
+    try:
+        report = engine.run(
+            checkpoint_path=checkpoint,
+            resume_path=resume,
+            progress=_progress if progress else None,
+        )
+    except CheckpointError as exc:
+        raise typer.BadParameter(str(exc)) from exc
     if certificate is not None:
         document = build_certificate(report)
         if sign_key is not None:
@@ -2352,16 +2568,23 @@ def campaign_keygen_cmd(
 def campaign_verify_cmd(
     certificate: Path = typer.Argument(..., exists=True, readable=True),
     public_key: Optional[Path] = typer.Option(None, "--public-key", exists=True, readable=True),
+    trust_store: Optional[Path] = typer.Option(None, "--trust-store", exists=True, readable=True),
     json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
 ) -> None:
     """Verify a recovery certificate's payload and signature."""
+    from hashvault.core.evidence import verify_document
+    from hashvault.core.evidence_schema import load_trust_store
+
     document = json.loads(certificate.read_text(encoding="utf-8"))
     key = public_key.read_bytes() if public_key is not None else None
-    ok, reasons = verify_certificate(document, key)
+    store = load_trust_store(trust_store) if trust_store is not None else None
+    ok, reasons, _kind = verify_document(document, key, trust_store=store)
     payload = document.get("payload", {})
+    signature = document.get("signature") if isinstance(document.get("signature"), dict) else {}
     result = {
         "valid": ok,
         "campaign_id": payload.get("campaign_id"),
+        "key_id": signature.get("key_id") if signature else None,
         "reasons": reasons,
     }
     if json_out:
@@ -2372,6 +2595,53 @@ def campaign_verify_cmd(
         for reason in reasons:
             console.print(f"[red]Reason:[/red] {reason}")
     if not ok:
+        raise typer.Exit(1)
+
+
+@corpus_app.command("validate")
+def corpus_validate_cmd(
+    path: Optional[Path] = typer.Option(None, "--path", help="Corpus file or directory"),
+    json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
+    strict: bool = typer.Option(False, "--strict", help="Fail on warnings too"),
+) -> None:
+    """Validate corpus schema, provenance, counts, and duplicate ids."""
+    target = path or Path(resolve_resource_path("data/corpus"))
+    if not target.exists():
+        raise typer.BadParameter(f"corpus path does not exist: {target}")
+    report = validate_corpus_dir(target)
+    if json_out:
+        print(json.dumps(report.to_dict(), indent=2))
+    else:
+        table = Table(title="Corpus validation", box=box.SIMPLE_HEAVY)
+        table.add_column("File")
+        table.add_column("Cases", justify="right")
+        table.add_column("Errors", justify="right")
+        table.add_column("Warnings", justify="right")
+        for item in report.files:
+            table.add_row(
+                Path(item.path).name,
+                str(item.cases),
+                str(len(item.errors)),
+                str(len(item.warnings)),
+            )
+        console.print(table)
+        console.print(
+            f"Total cases: {report.total_cases}; errors: {len(report.errors)}; "
+            f"warnings: {len(report.warnings)}"
+        )
+        for issue in report.errors:
+            console.print(
+                f"[red]{issue.file}:{issue.case_id}[/red] {issue.code}: {issue.message}"
+            )
+        for issue in report.warnings:
+            console.print(
+                f"[yellow]{issue.file}:{issue.case_id}[/yellow] {issue.code}: {issue.message}"
+            )
+        if report.duplicate_ids:
+            console.print(
+                f"[red]Duplicate ids:[/red] {', '.join(sorted(report.duplicate_ids))}"
+            )
+    if not report.ok or (strict and report.warnings):
         raise typer.Exit(1)
 
 

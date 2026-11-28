@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from hashvault.campaign.models import CampaignReport, Target
-from hashvault.core.evidence import EvidenceError, generate_keypair
+from hashvault.core.evidence import EvidenceError, generate_keypair, public_key_id
 
 
 def _canonical(payload: dict[str, Any]) -> bytes:
@@ -42,6 +42,7 @@ def _target_certificate(target: Target) -> dict[str, Any]:
 
 def build_certificate(report: CampaignReport) -> dict[str, Any]:
     payload: dict[str, Any] = {
+        "schema_version": 1,
         "version": 1,
         "kind": "hashvault.campaign.certificate",
         "campaign_id": report.campaign_id,
@@ -53,7 +54,10 @@ def build_certificate(report: CampaignReport) -> dict[str, Any]:
 
 
 def sign_certificate(
-    document: dict[str, Any], private_key_pem: bytes
+    document: dict[str, Any],
+    private_key_pem: bytes,
+    *,
+    key_id: str = "",
 ) -> dict[str, Any]:
     try:
         from cryptography.hazmat.primitives import serialization
@@ -84,6 +88,7 @@ def sign_certificate(
         "algorithm": "ed25519",
         "value": signature.hex(),
         "payload_sha256": hashlib.sha256(canonical).hexdigest(),
+        "key_id": key_id or public_key_id(public_pem),
     }
     document["signer_public_key"] = public_pem.decode("utf-8")
     return document
@@ -92,6 +97,12 @@ def sign_certificate(
 def verify_certificate(
     document: dict[str, Any], public_key_pem: bytes | None = None
 ) -> tuple[bool, list[str]]:
+    from hashvault.core.evidence_schema import validate_certificate_document
+
+    schema_errors = validate_certificate_document(document)
+    if schema_errors:
+        return False, schema_errors
+
     reasons: list[str] = []
     payload = document.get("payload")
     signature_block = document.get("signature")
@@ -113,6 +124,14 @@ def verify_certificate(
     if public_key_pem is None:
         reasons.append("no public key available for signature verification")
         return False, reasons
+
+    recorded_key_id = signature_block.get("key_id")
+    if (
+        isinstance(recorded_key_id, str)
+        and recorded_key_id.startswith("ed25519:")
+        and recorded_key_id != public_key_id(public_key_pem)
+    ):
+        reasons.append("signature key id does not match the verification key")
 
     try:
         from cryptography.exceptions import InvalidSignature

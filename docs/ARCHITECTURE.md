@@ -49,8 +49,12 @@ input
 | `hashvault/core/doctor.py` | Offline readiness checks |
 | `hashvault/core/integrity.py` | Cracked-record verification |
 | `hashvault/core/insights.py` | Aggregate analytics without plaintext exposure |
-| `hashvault/core/evidence.py` | Ed25519 evidence primitives |
-| `hashvault/campaign/` | Corpus ingestion, planning, mutations, recovery, certificates |
+| `hashvault/core/evidence.py` | Ed25519 evidence primitives and unified verification |
+| `hashvault/core/evidence_schema.py` | Document validation, key ids, trust stores |
+| `hashvault/core/corpus_validator.py` | Corpus schema, provenance, count, and duplicate checks |
+| `hashvault/ingestors/converter_store.py` | Managed John converter store and manifest |
+| `hashvault/ingestors/conversion_service.py` | Ranked auto-conversion orchestration |
+| `hashvault/campaign/` | Corpus ingestion, planning, mutations, recovery, checkpoints, potfiles, certificates |
 | `hashvault/cli.py` | Typer command surface |
 | `hashvault/ui/` | Rich rendering and interactive shell |
 | `config/default.yaml` | Runtime defaults |
@@ -73,9 +77,14 @@ operates on a parsed corpus and treats each target as a unit of evidence.
    fast targets.
 6. **Verification** - every reported recovery is verified against its target
    hash before it is accepted.
-7. **Certificate** - emit a plaintext-free report containing hashes, methods,
+7. **Checkpoint** - optionally write verified recoveries and stage counters so
+   a long run can resume. Restored plaintexts are re-verified.
+8. **Potfile import** - merge already-recovered hashcat/John values and record
+   their source in recovery evidence.
+9. **Certificate** - emit a plaintext-free report containing hashes, methods,
    plaintext SHA-256 commitments, coverage notes, and uncertainty.
 
+`--shard INDEX/TOTAL` assigns records deterministically for parallel workers.
 The engine is deterministic for a fixed corpus, configuration, and candidate
 limit. It does not call external services.
 
@@ -89,6 +98,8 @@ commit to facts without leaking secrets.
   notes.
 - Ed25519 signatures protect the canonical payload.
 - Verification checks both the payload digest and the signature.
+- A trust store maps approved key ids to public keys and revocations; embedded
+  keys are not trusted when a store is supplied.
 
 The signing key is generated with `hashvault campaign keygen`. Treat private
 keys as sensitive; public keys can be distributed with the evidence.

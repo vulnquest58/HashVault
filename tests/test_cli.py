@@ -283,3 +283,72 @@ def test_cli_replay_json(tmp_path):
     assert data["verified"] is True
     assert data["finalized_input"] == "hello"
 
+
+
+def test_cli_corpus_validate_json():
+    result = runner.invoke(app, ["corpus", "validate", "--json"])
+    assert result.exit_code == 0
+    data = json.loads(result.stdout)
+    assert data["valid"] is True
+    assert data["total_cases"] >= 680
+
+
+def test_cli_campaign_potfile_and_checkpoint(tmp_path):
+    corpus = tmp_path / "corpus.txt"
+    corpus.write_text(
+        "alice:5f4dcc3b5aa765d61d8327deb882cf99\n",
+        encoding="utf-8",
+    )
+    potfile = tmp_path / "recovered.pot"
+    potfile.write_text(
+        "5f4dcc3b5aa765d61d8327deb882cf99:password\n",
+        encoding="utf-8",
+    )
+    checkpoint = tmp_path / "campaign.json"
+    result = runner.invoke(
+        app,
+        [
+            "campaign",
+            "run",
+            str(corpus),
+            "--potfile",
+            str(potfile),
+            "--checkpoint",
+            str(checkpoint),
+            "--json",
+        ],
+    )
+    assert result.exit_code == 0, result.stdout
+    data = json.loads(result.stdout)
+    assert data["recoveries"][0]["method"] == "known-plaintext"
+    assert checkpoint.exists()
+
+    resumed = runner.invoke(
+        app,
+        ["campaign", "run", str(corpus), "--resume", str(checkpoint), "--json"],
+    )
+    assert resumed.exit_code == 0, resumed.stdout
+    resumed_data = json.loads(resumed.stdout)
+    assert resumed_data["recoveries"][0]["method"] == "known-plaintext"
+
+
+def test_cli_doctor_fix_reports_created_directories(tmp_path, monkeypatch):
+    from hashvault.config import load_config
+
+    config = load_config()
+    sessions = tmp_path / "sessions"
+    monkeypatch.setattr(config.paths, "sessions_dir", str(sessions))
+    monkeypatch.setattr("hashvault.cli.load_config", lambda: config)
+    result = runner.invoke(app, ["doctor", "--fix", "--json"])
+    assert result.exit_code == 0, result.stdout
+    data = json.loads(result.stdout)
+    assert isinstance(data.get("fixes"), list)
+    assert sessions.exists()
+
+def test_cli_convert_paths_json():
+    result = runner.invoke(app, ["convert", "--paths", "--json"])
+    assert result.exit_code == 0, result.stdout
+    data = json.loads(result.stdout)
+    assert "converter_store" in data
+    assert "conversions_dir" in data
+    assert "checkpoints_dir" in data

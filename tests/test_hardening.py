@@ -38,7 +38,6 @@ from hashvault.mutation.context import ContextProfile
 from hashvault.mutation.llm import LLMError, LLMSettings, OllamaSeeder, _is_loopback
 from hashvault.utils.system import find_executable
 
-
 # ---------------------------------------------------------------------------
 # Bounded decompression (compression-bomb resistance)
 # ---------------------------------------------------------------------------
@@ -166,6 +165,21 @@ def test_resolve_resource_path_falls_back_to_package_root(tmp_path, monkeypatch)
     monkeypatch.chdir(tmp_path)
     resolved = resolve_resource_path("hashvault/__init__.py")
     assert resolved.is_file()
+
+
+def test_resolve_resource_path_falls_back_to_sys_prefix(tmp_path, monkeypatch):
+    # Wheel installs place setuptools data-files under sys.prefix, outside the
+    # package tree.
+    prefix = tmp_path / "prefix"
+    resource = prefix / "data" / "corpus" / "vectors.json"
+    resource.parent.mkdir(parents=True)
+    resource.write_text("[]", encoding="utf-8")
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(
+        "hashvault.core.database.package_root", lambda: tmp_path / "empty"
+    )
+    monkeypatch.setattr("hashvault.core.database.sys.prefix", str(prefix))
+    assert resolve_resource_path("data/corpus/vectors.json") == resource.resolve()
 
 
 # ---------------------------------------------------------------------------

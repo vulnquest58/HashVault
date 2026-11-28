@@ -1,6 +1,6 @@
 # HashVault CLI Reference
 
-This document is the complete command reference for HashVault v2.0.1.
+This document is the complete command reference for HashVault v2.2.0.
 
 ## Legal and Ethical Use
 
@@ -63,21 +63,21 @@ hashvault banner --json
 | `crack` | Crack one hash or a file with retries, budgets, adaptive tools, and recipe export |
 | `check` | Query the local cracked-hash cache |
 | `audit` | Re-verify stored cracked plaintexts against their hashes |
-| `doctor` | Offline health/capability checks; `--probe` runs hashcat device discovery |
+| `doctor` | Offline health/capability checks; `--probe` runs hashcat device discovery; `--fix` creates missing data directories |
 | `insights` | Aggregate local analysis, cracking, and strategy activity |
 | `parameters` | Parse encoded hash parameters and estimate work factor |
 | `mutate` | Build bounded context-aware candidates, Arabizi variants, and rules |
 | `replay` | Deterministically replay a saved analysis recipe |
-| `convert` | Browse the John converter gallery and extract crackable hashes from files |
+| `convert` | Browse the John converter gallery and extract crackable hashes from files; `--sync`, `--paths`, `--save` |
 | `campaign plan` | Show the staged recovery plan for a corpus |
-| `campaign run` | Run a corpus recovery campaign |
+| `campaign run` | Run a corpus recovery campaign; `--potfile`, `--checkpoint`, `--resume`, `--shard`, `--progress` |
 | `campaign keygen` | Generate an Ed25519 certificate signing keypair |
-| `campaign verify` | Verify a recovery certificate payload and signature |
+| `campaign verify` | Verify a recovery certificate payload and signature; `--trust-store` |
 | `selftest` | Run the operation/cracking matrix |
 | `benchmark-layers` | Validate layered recipe chains and optional plaintext recovery |
 | `stats` | Show database, session, attempt, and analysis-log counters |
 | `strategies stats` | Show adaptive tool/pattern feedback |
-| `strategies reset --yes` | Clear adaptive feedback |
+| `strategies reset --yes` | Clear adaptive feedback |\n| `corpus validate` | Validate corpus schema, provenance, counts, and duplicate ids |
 | `sessions` | List isolated cracking sessions; `--purge` deletes their working directories |
 | `patterns-audit` | Check the pattern catalogue for broken regexes, mode/example drift, and ranking ties |
 | `calibrate` | Measure identification confidence against corpus truth and suggest weights |
@@ -244,11 +244,58 @@ hashvault sessions --purge --older-than-days 7 --dry-run
 `audit` re-verifies stored plaintexts without exposing them in reports.
 `insights` reads local SQLite tables only.
 
+## Conversions
+
+```bash
+hashvault convert --gallery
+hashvault convert --sync
+hashvault convert protected.zip
+hashvault convert protected.7z --save
+hashvault convert --paths
+```
+
+The managed store lives under `paths.converters_dir` (default
+`tools/converters`). `--sync` copies John helper programs and shared modules
+from the configured John installation; nothing is downloaded. `--save` writes
+to `paths.conversions_dir`, and `--out-dir` writes elsewhere. See
+[docs/CONVERSIONS.md](CONVERSIONS.md).
+
+## Campaign Recovery
+
+```bash
+hashvault campaign plan corpus.txt --shard 1/4
+hashvault campaign run corpus.txt --known-file known.json
+hashvault campaign run corpus.txt --potfile hashcat.potfile
+hashvault campaign run corpus.txt --checkpoint checkpoints/run.json
+hashvault campaign run corpus.txt --resume checkpoints/run.json --progress
+hashvault campaign run corpus.txt --certificate campaign.json --sign-key key.pem
+hashvault campaign verify campaign.json --trust-store trust.json
+```
+
+Checkpoints contain verified recoveries and are re-verified on resume. They may
+contain plaintext, so keep them under the gitignored `checkpoints/` directory
+or encrypted storage. `--shard INDEX/TOTAL` assigns records deterministically
+for parallel workers. `--potfile` imports hashcat/John `hash:plaintext` lines,
+including `$HEX[...]` plaintexts, and records the source in recovery evidence.
+
+## Corpus Validation
+
+```bash
+hashvault corpus validate
+hashvault corpus validate --json
+hashvault corpus validate --strict
+```
+
+Validation checks schema, stable and duplicate ids, provenance, multiline or
+empty hash material, contradictory usability flags, and declared counts.
+
 ## Evidence
 
 ```bash
+hashvault evidence --generate-key auditor.pem
 hashvault evidence --sign-key auditor.pem --out audit-evidence.json
 hashvault evidence --verify audit-evidence.json --public-key auditor.pub.pem
+hashvault evidence --verify audit-evidence.json --trust-store trust.json
 ```
 
 Evidence documents record no plaintext, only SHA-256 commitments, together with
@@ -282,7 +329,7 @@ HASHVAULT_ENRICHMENT__WORDLIST_PATHS='["data/wordlists/local-names.txt"]'
 
 | Section | Controls |
 | --- | --- |
-| `paths` | Database, wordlist/rule directories, sessions, quick wordlist, tool binaries |
+| `paths` | Database, wordlist/rule directories, sessions, quick wordlist, converter store, conversions, checkpoints, tool binaries |
 | `timeouts` | Fast/slow hash cracking timeouts and hashcat backend probe timeout |
 | `strategy` | Default tool, trial disambiguation, retries, budget, adaptive ordering, hashcat backend/workload, session artifact retention, cache verification |
 | `mutation` | Candidate limits, history/enrichment seed caps, years, Arabic/Arabizi mode |

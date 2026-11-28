@@ -5,6 +5,44 @@ All notable changes to HashVault are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 the project uses [Semantic Versioning](https://semver.org/).
 
+## [2.2.0] - 2026-11-28
+
+### Added
+
+- Managed John converter store under `tools/converters` with category layout,
+  shared Perl modules, SHA-256 manifest, and `hashvault convert --sync`.
+- Unified `hashvault convert` workflow: gallery, automatic profile selection,
+  built-in fallback, `--paths`, `--save`, `--out-dir`, and JSON attempt
+  reporting.
+- Bounded-memory file-type detection for conversions: magic bytes only, with
+  JSON parsing limited to small inputs.
+- Resumable campaigns: checkpoints, `--checkpoint`, `--resume`, stage progress,
+  and re-verification of every restored plaintext.
+- Hashcat/John potfile import through `--potfile`, including `$HEX[...]`
+  plaintext decoding and source provenance in recovery evidence.
+- Deterministic campaign sharding with `--shard INDEX/TOTAL`.
+- Streaming corpus ingestion through `iter_corpus_file`.
+- Evidence schema and trust layer: document kind detection, structural
+  validation, `key_id` support, trust stores, revocation, and unified
+  `verify_document` for reports and certificates.
+- `hashvault corpus validate` with schema, provenance, count, duplicate-id,
+  duplicate-hash, and negative-case checks.
+- `hashvault doctor --fix` for safe local directory creation and converter
+  store diagnostics.
+- Windows CI, coverage gate, package smoke test, and corpus validation in CI.
+- Documentation: `docs/CONVERSIONS.md`, `docs/EVIDENCE.md`, expanded CLI,
+  corpus, README, and release guidance.
+
+### Changed
+
+- Campaign certificates now include `schema_version`, `signature.key_id`, and
+  schema validation before signature checks.
+- Evidence reports include `kind` and `signature.key_id`; embedded-key
+  verification is explicit and trust-store lookup takes precedence.
+- `convert` output paths are configurable through `paths.conversions_dir` and
+  `paths.checkpoints_dir`.
+- Test baseline increased to 464 tests with 70% coverage gate.
+
 ## [2.0.1] - 2026-11-27
 
 ### Fixed

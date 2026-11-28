@@ -21,9 +21,9 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 SCHEMA_VERSION = 1
 
@@ -62,6 +62,7 @@ class EvidenceReport:
     def payload(self) -> dict[str, Any]:
         """The document that gets signed (everything except the signature)."""
         return {
+            "kind": "hashvault.evidence.report",
             "schema_version": self.schema_version,
             "generated_at": self.generated_at,
             "tool_version": self.tool_version,
@@ -109,17 +110,17 @@ def _tool_version() -> str:
         from hashvault import __version__ as version  # type: ignore[attr-defined]
 
         return str(version)
-    except Exception:  # pragma: no cover - package metadata optional
+    except Exception:  # noqa: BLE001  # pragma: no cover - package metadata optional
         return "unknown"
 
 
 def build_evidence_report(
     session: Any,
     *,
-    patterns_file: Optional[str | Path] = None,
-    corpus_files: Optional[list[str | Path]] = None,
-    limit: Optional[int] = None,
-    metadata: Optional[dict[str, Any]] = None,
+    patterns_file: str | Path | None = None,
+    corpus_files: list[str | Path] | None = None,
+    limit: int | None = None,
+    metadata: dict[str, Any] | None = None,
 ) -> EvidenceReport:
     """Collect verification results into an unsigned evidence document."""
     from hashvault.core.integrity import verify_cracked_hashes
@@ -162,11 +163,11 @@ def build_evidence_report(
                 )
             ).encode("utf-8")
         ).hexdigest()
-    except Exception:  # pragma: no cover - defensive
+    except Exception:  # noqa: BLE001  # pragma: no cover - defensive
         database_fingerprint = ""
 
     return EvidenceReport(
-        generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        generated_at=datetime.now(UTC).isoformat(timespec="seconds"),
         tool_version=_tool_version(),
         schema_version=SCHEMA_VERSION,
         patterns_fingerprint=(
@@ -212,7 +213,17 @@ def generate_keypair() -> tuple[bytes, bytes]:
     return private_pem, public_pem
 
 
-def sign_report(report: EvidenceReport, private_key_pem: bytes) -> dict[str, Any]:
+def public_key_id(public_key_pem: bytes) -> str:
+    """Return a stable short identifier for an Ed25519 public key."""
+    return "ed25519:" + hashlib.sha256(public_key_pem).hexdigest()[:16]
+
+
+def sign_report(
+    report: EvidenceReport,
+    private_key_pem: bytes,
+    *,
+    key_id: str = "",
+) -> dict[str, Any]:
     """Attach an Ed25519 signature over the canonical payload."""
     try:
         from cryptography.hazmat.primitives import serialization
@@ -231,6 +242,10 @@ def sign_report(report: EvidenceReport, private_key_pem: bytes) -> dict[str, Any
     if not isinstance(key, Ed25519PrivateKey):
         raise EvidenceError("Signing key must be Ed25519.")
 
+    public_pem = key.public_key().public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo,
+    )
     payload = report.canonical_bytes()
     signature = key.sign(payload)
 
@@ -239,17 +254,24 @@ def sign_report(report: EvidenceReport, private_key_pem: bytes) -> dict[str, Any
         "algorithm": "ed25519",
         "value": signature.hex(),
         "payload_sha256": hashlib.sha256(payload).hexdigest(),
+        "key_id": key_id or public_key_id(public_pem),
+        "public_key": public_pem.decode("utf-8"),
     }
     return document
 
 
 def verify_report(
     document: dict[str, Any],
-    public_key_pem: Optional[bytes] = None,
+    public_key_pem: bytes | None = None,
+    *,
+    allow_embedded: bool = False,
 ) -> tuple[bool, list[str]]:
     """Check the signature and the payload digest of a signed report.
 
-    Returns ``(ok, reasons)``; ``reasons`` explains every failed check.
+    Returns ``(ok, reasons)``; ``reasons`` explains every failed check.  When
+    no key is supplied only payload integrity is checked.  Set
+    ``allow_embedded`` to verify against the public key stored in the
+    signature block; that proves self-consistency, not publisher identity.
     """
     reasons: list[str] = []
     signature_block = document.get("signature")
@@ -274,6 +296,11 @@ def verify_report(
         reasons.append(
             "payload digest mismatch: the document was modified after signing"
         )
+
+    if public_key_pem is None and allow_embedded:
+        embedded = signature_block.get("public_key")
+        if isinstance(embedded, str) and embedded.strip():
+            public_key_pem = embedded.encode("utf-8")
 
     if public_key_pem is None:
         # Integrity of the payload is still checkable without the key.
@@ -301,10 +328,64 @@ def verify_report(
         key.verify(bytes.fromhex(signature_block.get("value", "")), canonical)
     except (InvalidSignature, ValueError):
         reasons.append("signature does not match the public key")
-    except Exception as exc:  # pragma: no cover - malformed input
+    except Exception as exc:  # noqa: BLE001  # pragma: no cover - malformed input
         reasons.append(f"signature verification failed: {exc}")
 
     return (not reasons), reasons
+
+
+def verify_document(
+    document: dict[str, Any],
+    public_key_pem: bytes | None = None,
+    *,
+    trust_store: Any = None,
+) -> tuple[bool, list[str], str]:
+    """Verify either an evidence report or a campaign certificate.
+
+    ``trust_store`` is a :class:`hashvault.core.evidence_schema.TrustStore`.
+    When supplied, the document's ``signature.key_id`` must resolve to a
+    non-revoked key in the store; embedded keys are not trusted.
+    """
+    from hashvault.core.evidence_schema import (
+        CERTIFICATE_KIND,
+        public_key_from_trust_store,
+        validate_evidence_document,
+    )
+
+    kind = ""
+    try:
+        from hashvault.core.evidence_schema import detect_document_kind
+
+        kind = detect_document_kind(document)
+    except Exception:  # noqa: BLE001  # pragma: no cover - defensive
+        kind = ""
+
+    errors = validate_evidence_document(document)
+    if errors:
+        return False, errors, kind
+
+    if trust_store is not None:
+        trusted = public_key_from_trust_store(document, trust_store)
+        if trusted is None:
+            return (
+                False,
+                ["signing key is unknown or revoked in the trust store"],
+                kind,
+            )
+        public_key_pem = trusted
+
+    if kind == CERTIFICATE_KIND:
+        from hashvault.campaign.certificate import verify_certificate
+
+        ok, reasons = verify_certificate(document, public_key_pem)
+        return ok, reasons, kind
+
+    ok, reasons = verify_report(
+        document,
+        public_key_pem,
+        allow_embedded=public_key_pem is None,
+    )
+    return ok, reasons, kind
 
 
 def write_report(document: dict[str, Any], path: str | Path) -> Path:

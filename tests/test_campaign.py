@@ -10,7 +10,11 @@ from hashvault.campaign import (
     Target,
     build_certificate,
     generate_certificate_keypair,
+    iter_corpus_file,
+    load_checkpoint,
     parse_corpus_text,
+    parse_potfile_text,
+    potfile_mapping,
     sign_certificate,
     verify_certificate,
 )
@@ -182,3 +186,54 @@ def test_certificate_signs_verifies_and_omits_plaintext(tmp_path):
     ok, reasons = verify_certificate(document, public_pem)
     assert not ok
     assert any("digest mismatch" in reason for reason in reasons)
+
+def test_checkpoint_resumes_verified_recoveries(tmp_path):
+    checkpoint = tmp_path / "campaign.json"
+    targets = [_target("t0001", _md5("password"), [_pattern()])]
+    first = CampaignEngine(
+        targets, known_plaintexts={"t0001": "password"}
+    ).run(checkpoint_path=checkpoint)
+    assert first.targets[0].resolved
+    snapshot = load_checkpoint(checkpoint)
+    assert "exact-reuse" in snapshot["completed_stages"]
+
+    resumed_targets = [_target("t0001", _md5("password"), [_pattern()])]
+    report = CampaignEngine(resumed_targets).run(resume_path=checkpoint)
+    assert resumed_targets[0].resolved
+    assert resumed_targets[0].method == "known-plaintext"
+    assert any("restored 1 verified" in note for note in report.notes)
+
+
+def test_checkpoint_rejects_plaintext_that_no_longer_verifies(tmp_path):
+    checkpoint = tmp_path / "campaign.json"
+    targets = [_target("t0001", _md5("password"), [_pattern()])]
+    CampaignEngine(targets, known_plaintexts={"t0001": "password"}).run(
+        checkpoint_path=checkpoint
+    )
+    document = load_checkpoint(checkpoint)
+    document["targets"][0]["plaintext"] = "wrong"
+    checkpoint.write_text(json.dumps(document), encoding="utf-8")
+    resumed = [_target("t0001", _md5("password"), [_pattern()])]
+    report = CampaignEngine(resumed).run(resume_path=checkpoint)
+    assert not resumed[0].resolved
+    assert any("rejected 1 checkpoint" in note for note in report.notes)
+
+
+def test_potfile_parser_decodes_hex_and_last_value_wins():
+    entries = parse_potfile_text(
+        "abc:plain\n# comment\n$HEX[70617373]:$HEX[70617373]\nabc:last\n"
+    )
+    assert len(entries) == 3
+    assert entries[1].plaintext == "pass"
+    assert potfile_mapping(entries) == {"abc": "last", "$HEX[70617373]": "pass"}
+
+
+def test_iter_corpus_file_streams_records(tmp_path):
+    corpus = tmp_path / "corpus.txt"
+    corpus.write_text(
+        "alice:" + _md5("password") + "\n# comment\n"
+        "bob:" + _md5("hunter2") + "\n",
+        encoding="utf-8",
+    )
+    records = list(iter_corpus_file(corpus))
+    assert [record.username for record in records] == ["alice", "bob"]

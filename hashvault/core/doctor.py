@@ -15,12 +15,11 @@ from urllib.parse import urlparse
 from sqlalchemy.orm import Session
 
 from hashvault.config import Config
+from hashvault.core.database import resolve_resource_path
 from hashvault.corpus import DEFAULT_CORPUS_FILES
 from hashvault.models.orm import CorpusEntryRecord, Pattern, Rule, Wordlist
 from hashvault.utils.system import detect_gpu, find_executable
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OK = "ok"
 WARN = "warn"
 FAIL = "fail"
@@ -40,6 +39,7 @@ class DoctorCheck:
 @dataclass
 class DoctorReport:
     checks: list[DoctorCheck] = field(default_factory=list)
+    fixes: list[str] = field(default_factory=list)
     generated_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
@@ -69,6 +69,7 @@ class DoctorReport:
             "generated_at": self.generated_at,
             "ok": self.ok,
             "summary": self.summary(),
+            "fixes": list(self.fixes),
             "checks": [check.to_dict() for check in self.checks],
         }
 
@@ -145,7 +146,7 @@ def _check_database(
         _add(report, "Database", "Queries", FAIL, str(exc))
         return
 
-    catalog_path = PROJECT_ROOT / "data" / "patterns" / "patterns.json"
+    catalog_path = Path(resolve_resource_path("data/patterns/patterns.json"))
     catalog_count = _count_entries(catalog_path)
     if pattern_count == 0:
         _add(
@@ -207,7 +208,7 @@ def _check_database(
 
 
 def _check_data(report: DoctorReport, session: Optional[Session]) -> None:
-    layer_path = PROJECT_ROOT / "data" / "corpus" / "layer_vectors.json"
+    layer_path = Path(resolve_resource_path("data/corpus/layer_vectors.json"))
     layer_count = _count_entries(layer_path)
     if layer_count is None:
         _add(report, "Data", "Layer corpus", FAIL, f"Missing or invalid: {layer_path}")
@@ -477,6 +478,70 @@ def _check_quality_features(report: DoctorReport, config: Config) -> None:
         )
 
 
+def _check_converters(report: DoctorReport, config: Config) -> None:
+    """Report the managed converter store and John helper availability."""
+    from hashvault.ingestors.converter_store import (
+        ConverterStoreError,
+        converter_store_status,
+        resolve_converter_root,
+    )
+
+    try:
+        root = resolve_converter_root(config.paths.converters_dir)
+        status = converter_store_status(root)
+    except (ConverterStoreError, OSError) as exc:
+        _add(report, "Converters", "Managed store", WARN, str(exc))
+        return
+    if status.converters:
+        _add(
+            report,
+            "Converters",
+            "Managed store",
+            OK,
+            f"{status.converters} converter(s), {status.profiles} profile(s) in {status.root}",
+        )
+    else:
+        _add(
+            report,
+            "Converters",
+            "Managed store",
+            WARN,
+            f"empty store at {status.root}; run `hashvault convert --sync`",
+        )
+    if status.missing:
+        _add(
+            report,
+            "Converters",
+            "Missing profiles",
+            WARN,
+            ", ".join(status.missing[:8]),
+        )
+    else:
+        _add(report, "Converters", "Missing profiles", OK, "None")
+
+
+def apply_doctor_fixes(config: Config, report: DoctorReport) -> None:
+    """Create safe local directories that doctor expects to exist."""
+    directories = (
+        ("Sessions directory", config.paths.sessions_dir),
+        ("Wordlist directory", config.paths.wordlist_dir),
+        ("Rules directory", config.paths.rules_dir),
+        ("Converter store", config.paths.converters_dir),
+        ("Conversions directory", config.paths.conversions_dir),
+        ("Checkpoints directory", config.paths.checkpoints_dir),
+    )
+    for label, configured in directories:
+        directory = Path(configured)
+        if directory.exists():
+            continue
+        try:
+            directory.mkdir(parents=True, exist_ok=True)
+        except OSError as exc:
+            report.fixes.append(f"could not create {label} ({directory}): {exc}")
+        else:
+            report.fixes.append(f"created {label}: {directory}")
+
+
 def _check_optional_services(report: DoctorReport, config: Config) -> None:
     if not config.llm.enabled:
         _add(report, "Optional services", "Local LLM", OK, "Disabled")
@@ -548,6 +613,7 @@ def run_doctor(
     _check_paths(report, config)
     _check_engines(report, config, probe=probe)
     _check_builtin_coverage(report, session)
+    _check_converters(report, config)
     _check_quality_features(report, config)
     _check_optional_services(report, config)
     return report

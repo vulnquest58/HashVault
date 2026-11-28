@@ -19,9 +19,13 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Optional, Sequence
 
+from hashvault.ingestors.converter_store import (
+    CONVERTER_SUFFIXES,
+    default_converter_root,
+    find_stored_converter,
+    iter_stored_converters,
+)
 from hashvault.ingestors.converters import ConversionResult, ExtractedHash
-
-CONVERTER_SUFFIXES: tuple[str, ...] = (".exe", ".py", ".pl", ".js", ".lua")
 PY3_COMPAT_RUNNER = Path(__file__).with_name("john_py3_compat.py")
 
 
@@ -74,6 +78,8 @@ class GalleryRow:
     runtime: str
     available: bool
     reason: str
+    converter_path: str = ""
+    storage: str = ""
 
 
 def _profile(
@@ -426,6 +432,11 @@ _FORMAT_INDEX = {
 _CONVERTER_INDEX = {
     Path(profile.converter).stem.lower(): profile for profile in PROFILES
 }
+_ALIAS_INDEX = {
+    f"john2{Path(profile.converter).stem.lower()[:-5]}": profile
+    for profile in PROFILES
+    if Path(profile.converter).stem.lower().endswith("2john")
+}
 
 
 def get_profile(key: str) -> Optional[ConversionProfile]:
@@ -437,6 +448,7 @@ def get_profile(key: str) -> Optional[ConversionProfile]:
         _PROFILE_INDEX.get(normalized)
         or _FORMAT_INDEX.get(normalized)
         or _CONVERTER_INDEX.get(normalized)
+        or _ALIAS_INDEX.get(normalized)
     )
 
 
@@ -510,20 +522,41 @@ def john_run_dir(john_bin: str) -> Optional[Path]:
 
 
 def discover_converters(john_bin: str) -> dict[str, list[Path]]:
-    """Return bundled converter paths grouped by converter stem."""
-    run_dir = john_run_dir(john_bin)
-    if run_dir is None or not run_dir.is_dir():
-        return {}
+    """Return converter paths grouped by converter stem.
+
+    The managed ``tools/converters`` store is merged with the John run
+    directory so the gallery reports both local and bundled helpers.
+    """
     converters: dict[str, list[Path]] = {}
-    for path in sorted(run_dir.glob("*2john*")):
+    paths: list[Path] = list(iter_stored_converters())
+    run_dir = john_run_dir(john_bin)
+    if run_dir is not None and run_dir.is_dir():
+        paths.extend(sorted(run_dir.glob("*2john*")))
+    seen: set[Path] = set()
+    for path in paths:
         if not path.is_file() or path.suffix.lower() not in CONVERTER_SUFFIXES:
             continue
+        try:
+            resolved = path.resolve()
+        except OSError:
+            continue
+        if resolved in seen:
+            continue
+        seen.add(resolved)
         converters.setdefault(path.stem, []).append(path)
     return converters
 
 
 def resolve_converter(profile: ConversionProfile, john_bin: str) -> Optional[Path]:
-    """Resolve the best available converter for a profile."""
+    """Resolve the best available converter for a profile.
+
+    The managed store is preferred so a synchronized installation does not
+    depend on John's install layout.  The John run directory remains the
+    fallback for fresh checkouts and custom installations.
+    """
+    stored = find_stored_converter(profile)
+    if stored is not None:
+        return stored
     run_dir = john_run_dir(john_bin)
     if run_dir is None or not run_dir.is_dir():
         return None
@@ -639,13 +672,17 @@ def profile_availability(
     converter_path = resolve_converter(profile, john_bin)
     if converter_path is None:
         run_dir = john_run_dir(john_bin)
-        location = str(run_dir) if run_dir else john_bin
+        locations = [str(default_converter_root())]
+        if run_dir is not None:
+            locations.append(str(run_dir))
+        if not locations:
+            locations.append(john_bin)
         return ConverterAvailability(
             profile=profile,
             converter_path=None,
             runtime="missing",
             available=False,
-            reason=f"converter not found in {location}",
+            reason="converter not found in " + " or ".join(locations),
         )
     _, runtime, reason = resolve_runtime(converter_path, python_bin=python_bin)
     return ConverterAvailability(
@@ -674,6 +711,17 @@ def gallery_rows(
             if availability.converter_path
             else profile.converter
         )
+        storage = ""
+        converter_path = ""
+        if availability.converter_path is not None:
+            converter_path = str(availability.converter_path)
+            try:
+                availability.converter_path.resolve().relative_to(
+                    default_converter_root().resolve()
+                )
+                storage = "store"
+            except ValueError:
+                storage = "john"
         rows.append(
             GalleryRow(
                 profile=profile,
@@ -681,6 +729,8 @@ def gallery_rows(
                 runtime=availability.runtime,
                 available=availability.available,
                 reason=availability.reason,
+                converter_path=converter_path,
+                storage=storage,
             )
         )
     return tuple(rows)
@@ -808,6 +858,7 @@ def convert_with_profile(
         success=True,
         hashes=extracted,
         format_detected=selected.key,
+        profile=selected.key,
     )
 
 
@@ -875,3 +926,4 @@ def available_profile_keys(
         for row in gallery_rows(john_bin, python_bin=python_bin)
         if row.available
     }
+

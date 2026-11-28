@@ -1,6 +1,10 @@
 {
   "version": 1,
   "description": "Deterministic wrapped-hash vectors for recipe benchmarking.",
+  "provenance": {
+    "generator": "hashvault/layers",
+    "verification": "deterministic transform tests in tests/test_layers.py"
+  },
   "counts": {
     "total": 18,
     "with_plaintext": 18,

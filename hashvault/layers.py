@@ -14,11 +14,13 @@ from hashvault.analysis.analyzer import prepare_input
 from hashvault.config import Config
 from hashvault.core.builtin import BuiltinCracker, builtin_supports
 from hashvault.core.cracker import create_crack_session, release_session_artifacts
+from hashvault.core.database import resolve_resource_path
 from hashvault.core.identifier import identify
 from hashvault.exceptions import NoCandidateError
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_LAYER_CORPUS = PROJECT_ROOT / "data" / "corpus" / "layer_vectors.json"
+DEFAULT_LAYER_CORPUS = Path(
+    resolve_resource_path("data/corpus/layer_vectors.json")
+)
 
 
 @dataclass(frozen=True)

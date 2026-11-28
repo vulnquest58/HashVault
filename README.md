@@ -14,7 +14,7 @@
   <a href="https://github.com/vulnquest58/HashVault"><img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="Python 3.11+"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="MIT License"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/security-policy-blue.svg" alt="Security policy"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2.0.1-informational.svg" alt="Version 2.0.1"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2.2.0-informational.svg" alt="Version 2.2.0"></a>
 </p>
 
 HashVault is an offline-first password hash workbench. It identifies hashes,
@@ -49,6 +49,7 @@ without exposing plaintext.
   extractors.
 - **Multi-layer identification** - 482 curated patterns, 473 generated hashcat
   modes, confidence scoring, and empirical ambiguity resolution.
+- **File-to-hash conversions** - managed John helper store, auto-profile selection, and bounded-memory file detection.
 - **Campaign recovery** - corpus-wide inference with exact-reuse propagation,
   context mutations, wordlist passes, slow-KDF controls, and JSON reports.
 - **Proof-carrying results** - plaintext-free Ed25519-signed certificates with
@@ -56,7 +57,8 @@ without exposing plaintext.
 - **Multiple engines** - hashcat, John the Ripper, and a dependency-light
   built-in engine for dictionary, rule, mask, and hybrid attacks.
 - **Audit operations** - `doctor`, `audit`, `insights`, `parameters`,
-  `patterns-audit`, `calibrate`, `plan`, and signed `evidence` reports.
+  `patterns-audit`, `calibrate`, `plan`, signed `evidence` reports, and
+  `corpus validate`.
 - **Offline by default** - no telemetry, no cloud calls, and optional local-only
   LLM assistance that is disabled unless explicitly configured.
 
@@ -103,7 +105,7 @@ Release wheels bundle the runtime `data/` and `config/` trees:
 
 ```bash
 uv venv
-uv pip install "https://github.com/vulnquest58/HashVault/releases/download/v2.0.1/hashvault-2.0.1-py3-none-any.whl"
+uv pip install "https://github.com/vulnquest58/HashVault/releases/download/v2.2.0/hashvault-2.2.0-py3-none-any.whl"
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 hashvault setup
@@ -125,6 +127,13 @@ hashvault crack 5f4dcc3b5aa765d61d8327deb882cf99 \
 
 # Inspect the corpus recovery plan without touching a hash
 hashvault campaign plan examples/0xdf-demo.txt
+
+# Convert a protected file, then identify or crack the extracted material
+hashvault convert --sync
+hashvault convert protected.zip --save
+
+# Validate the shipped corpus before trusting its counts
+hashvault corpus validate
 ```
 
 ## Campaign Recovery
@@ -144,6 +153,16 @@ hashvault campaign run examples/0xdf-demo.txt \
 hashvault campaign run examples/0xdf-demo.txt \
   --known-file examples/0xdf-known.json \
   --wordlist data/wordlists/quick_1000.txt
+
+# Resume a long campaign from a checkpoint
+hashvault campaign run examples/0xdf-demo.txt \
+  --checkpoint checkpoints/demo.json --progress
+hashvault campaign run examples/0xdf-demo.txt \
+  --resume checkpoints/demo.json --progress
+
+# Import already-recovered values from hashcat/John
+hashvault campaign run examples/0xdf-demo.txt \
+  --potfile hashcat.potfile
 
 # Create a plaintext-free, signed recovery certificate
 hashvault campaign keygen campaign.key campaign.pub
@@ -225,6 +244,8 @@ generation. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for details.
 - [CLI reference](docs/CLI.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Corpus provenance and 0xdf cases](docs/CORPUS.md)
+- [File-to-hash conversions](docs/CONVERSIONS.md)
+- [Evidence reports and trust](docs/EVIDENCE.md)
 - [Release process](docs/RELEASE.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Launch and promotion kit](docs/PROMOTION.md)
@@ -239,13 +260,17 @@ generation. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for details.
 ```bash
 uv venv
 uv pip install -e ".[dev,builtin]"
-python -m pytest -q
-python -m ruff check hashvault/campaign tests/test_campaign.py
+python -m pytest -q --cov=hashvault --cov-fail-under=70
+python -m ruff check hashvault/campaign hashvault/core/evidence.py \
+  hashvault/core/evidence_schema.py hashvault/core/corpus_validator.py \
+  tests/test_campaign.py tests/test_evidence_schema.py \
+  tests/test_corpus_validator.py
 python -m compileall -q hashvault tests
 ```
 
-The current suite contains 436 tests. The campaign package is lint-clean; the
-legacy codebase has a larger lint/type backlog tracked in the roadmap.
+The current suite contains 464 tests. The campaign, evidence, and corpus
+validation packages are lint-clean; the legacy codebase has a larger lint/type
+backlog tracked in the roadmap.
 
 ## Security and Legal
 

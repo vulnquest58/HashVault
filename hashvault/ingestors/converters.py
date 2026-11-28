@@ -85,6 +85,8 @@ class ConversionResult:
     hashes: List[ExtractedHash] = field(default_factory=list)
     error: Optional[str] = None
     format_detected: str = ""
+    profile: str = ""
+    attempts: List[str] = field(default_factory=list)
 
     @property
     def first_hash(self) -> Optional[str]:
@@ -141,7 +143,8 @@ def detect_file_type(path: Path) -> str:
     files are still handled correctly.
     """
     try:
-        data = path.read_bytes()
+        with path.open("rb") as handle:
+            data = handle.read(512)
     except OSError:
         return path.suffix.lower().lstrip(".")
 
@@ -149,9 +152,13 @@ def detect_file_type(path: Path) -> str:
         if data[offset:offset + len(magic)] == magic:
             return fmt
 
-    # Special Ethereum UTC keystore: JSON with "crypto" key
+    # Special Ethereum UTC keystore: JSON with "crypto" key.  Only inspect
+    # reasonably small JSON documents so a multi-gigabyte wallet/backup cannot
+    # be pulled into memory during detection.
     if path.suffix.lower() == ".json":
         try:
+            if path.stat().st_size > 8 * 1024 * 1024:
+                return SUPPORTED_EXTENSIONS.get(path.suffix.lower(), "")
             obj = json.loads(path.read_text(encoding="utf-8"))
             if isinstance(obj, dict) and "crypto" in obj:
                 return "ethereum"

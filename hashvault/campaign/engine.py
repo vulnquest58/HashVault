@@ -31,9 +31,11 @@ class CampaignEngine:
         max_candidates: int = 50_000,
         max_patterns: int = 5,
         include_slow: bool = False,
+        known_origins: dict[str, str] | None = None,
     ) -> None:
         self.targets = list(targets)
         self.known_plaintexts = dict(known_plaintexts or {})
+        self.known_origins = dict(known_origins or {})
         self.wordlist = Path(wordlist) if wordlist else None
         self.max_candidates = max(1, int(max_candidates))
         self.max_patterns = max(1, int(max_patterns))
@@ -44,6 +46,9 @@ class CampaignEngine:
         self._recoveries: list[Recovery] = []
         self._known: list[tuple[str, str]] = []
         self._pattern_cache: dict[int, list[Any]] = {}
+        self._elapsed_offset = 0.0
+        self._last_plan_stages: list[Stage] = []
+        self._checkpoint_stage_stats: dict[str, dict[str, Any]] = {}
         self._seed_targets()
         self._add_coverage_notes()
 
@@ -70,7 +75,8 @@ class CampaignEngine:
             if pattern_name is None:
                 self.notes.append(f"known plaintext rejected for {target.target_id}")
                 continue
-            self._resolve(target, value, pattern_name, "known-plaintext", "seed")
+            origin = self._lookup_known_origin(target)
+            self._resolve(target, value, pattern_name, "known-plaintext", origin)
             self._known.append((value, target.target_id))
 
     def _lookup_known(self, target: Target) -> str | None:
@@ -81,6 +87,15 @@ class CampaignEngine:
             if key and key in self.known_plaintexts:
                 return self.known_plaintexts[key]
         return None
+
+    def _lookup_known_origin(self, target: Target) -> str:
+        keys = [target.target_id, target.normalized_hash, target.raw_hash]
+        if target.username:
+            keys.extend([target.username, target.username.lower()])
+        for key in keys:
+            if key and key in self.known_origins:
+                return self.known_origins[key]
+        return "seed"
 
     def _add_coverage_notes(self) -> None:
         ambiguous = [
@@ -220,6 +235,7 @@ class CampaignEngine:
                 priority=(len(unresolved) * 0.05) / wordlist_cost,
             ),
         ]
+        self._last_plan_stages = stages
         return CampaignPlan(
             stages=stages,
             total_targets=len(self.targets),
@@ -280,10 +296,46 @@ class CampaignEngine:
                 unresolved = [target for target in unresolved if not target.resolved]
         stage.elapsed_seconds = time.perf_counter() - start
 
-    def run(self) -> CampaignReport:
+    def run(
+        self,
+        *,
+        checkpoint_path: str | Path | None = None,
+        resume_path: str | Path | None = None,
+        progress: Any = None,
+    ) -> CampaignReport:
+        from hashvault.campaign.checkpoint import (
+            build_snapshot,
+            load_checkpoint,
+            restore_snapshot,
+            write_checkpoint,
+        )
+
         start = time.perf_counter()
+        campaign_id = uuid.uuid4().hex[:12]
+        completed: set[str] = set()
+        if resume_path is not None:
+            snapshot = load_checkpoint(resume_path)
+            campaign_id = str(snapshot.get("campaign_id") or campaign_id)
+            completed = restore_snapshot(self, snapshot)
+            self.notes.append(f"resumed campaign from {resume_path}")
+
         plan = self.plan()
         for stage in plan.stages:
+            saved = self._checkpoint_stage_stats.get(stage.name)
+            if saved:
+                stage.tested = int(saved.get("tested", 0) or 0)
+                stage.recoveries = int(saved.get("recoveries", 0) or 0)
+                stage.elapsed_seconds = float(saved.get("elapsed_seconds", 0.0) or 0.0)
+
+        def emit(stage_name: str, event: str) -> None:
+            if callable(progress):
+                progress(stage_name, event)
+
+        for stage in plan.stages:
+            if stage.name in completed:
+                emit(stage.name, "skipped")
+                continue
+            emit(stage.name, "started")
             if stage.kind == "reuse":
                 self._run_exact_reuse(stage)
             elif stage.kind == "mutation":
@@ -300,9 +352,33 @@ class CampaignEngine:
                     "wordlist",
                     f"wordlist:{self.wordlist.name if self.wordlist else 'none'}",
                 )
-        elapsed = time.perf_counter() - start
+            completed.add(stage.name)
+            emit(stage.name, "completed")
+            if checkpoint_path is not None:
+                write_checkpoint(
+                    build_snapshot(
+                        self,
+                        completed_stages=completed,
+                        campaign_id=campaign_id,
+                        elapsed_seconds=self._elapsed_offset
+                        + (time.perf_counter() - start),
+                    ),
+                    checkpoint_path,
+                )
+
+        elapsed = self._elapsed_offset + (time.perf_counter() - start)
+        if checkpoint_path is not None:
+            write_checkpoint(
+                build_snapshot(
+                    self,
+                    completed_stages=completed,
+                    campaign_id=campaign_id,
+                    elapsed_seconds=elapsed,
+                ),
+                checkpoint_path,
+            )
         return CampaignReport(
-            campaign_id=uuid.uuid4().hex[:12],
+            campaign_id=campaign_id,
             created_at=utc_now(),
             targets=self.targets,
             recoveries=self._recoveries,

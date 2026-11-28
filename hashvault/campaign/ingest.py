@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -30,12 +31,22 @@ def parse_corpus_text(text: str, *, source: str = "") -> list[CorpusRecord]:
     return records
 
 
+def iter_corpus_file(path: str | Path) -> Iterator[CorpusRecord]:
+    """Yield corpus records one line at a time without loading the file."""
+    target = Path(path)
+    with target.open("r", encoding="utf-8", errors="replace") as handle:
+        for raw_line in handle:
+            line = raw_line.strip()
+            if not line or line.startswith(("#", ";")):
+                continue
+            record = _parse_line(line, source=str(target))
+            if record is not None:
+                yield record
+
+
 def parse_corpus_file(path: str | Path) -> list[CorpusRecord]:
     target = Path(path)
-    return parse_corpus_text(
-        target.read_text(encoding="utf-8", errors="replace"),
-        source=str(target),
-    )
+    return list(iter_corpus_file(target))
 
 
 def _parse_line(line: str, *, source: str) -> CorpusRecord | None:

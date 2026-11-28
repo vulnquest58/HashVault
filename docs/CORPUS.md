@@ -38,7 +38,16 @@ The corpus is used by `tests/test_corpus.py` and by the demonstration files in
 
 ```bash
 python -m pytest -q tests/test_corpus.py
+hashvault corpus validate
+hashvault corpus validate --json
 ```
+
+`hashvault corpus validate` checks schema versions, stable ids, duplicate ids
+(within and across files), provenance/reference fields, multiline or empty
+hash material, contradictory `usable_for_*` flags, and declared counts. It
+fails on errors; `--strict` also treats warnings as failures. The validator does
+not re-crack every case -- `tests/test_corpus.py` and `hashvault evaluate` do
+that.
 
 ### Benchmark it
 
