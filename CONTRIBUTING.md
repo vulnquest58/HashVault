@@ -39,8 +39,11 @@ python -m pytest -q tests/test_campaign.py
 python -m pytest -q tests/test_corpus.py
 ```
 
-The baseline is 436 passing tests. New behavior needs a test that fails before
+The baseline is 473 passing tests. New behavior needs a test that fails before
 the change and passes after it. Use published, non-sensitive fixtures only.
+Changes to the vendored auto2john engine should also keep
+`tests/test_auto2john_integration.py` passing and preserve the upstream
+provenance note in `hashvault/auto2john.py`.
 
 ## Style
 

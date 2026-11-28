@@ -14,7 +14,7 @@
   <a href="https://github.com/vulnquest58/HashVault"><img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="Python 3.11+"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="MIT License"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/security-policy-blue.svg" alt="Security policy"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2.2.0-informational.svg" alt="Version 2.2.0"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-2.3.0-informational.svg" alt="Version 2.3.0"></a>
 </p>
 
 HashVault is an offline-first password hash workbench. It identifies hashes,
@@ -49,7 +49,10 @@ without exposing plaintext.
   extractors.
 - **Multi-layer identification** - 482 curated patterns, 473 generated hashcat
   modes, confidence scoring, and empirical ambiguity resolution.
-- **File-to-hash conversions** - managed John helper store, auto-profile selection, and bounded-memory file detection.
+- **File-to-hash conversions** - managed John helper store, auto-profile
+  selection, bounded-memory file detection, and the official
+  [auto2john](https://github.com/vulnquest58/auto2john) engine as a vendored
+  component.
 - **Campaign recovery** - corpus-wide inference with exact-reuse propagation,
   context mutations, wordlist passes, slow-KDF controls, and JSON reports.
 - **Proof-carrying results** - plaintext-free Ed25519-signed certificates with
@@ -105,7 +108,7 @@ Release wheels bundle the runtime `data/` and `config/` trees:
 
 ```bash
 uv venv
-uv pip install "https://github.com/vulnquest58/HashVault/releases/download/v2.2.0/hashvault-2.2.0-py3-none-any.whl"
+uv pip install "https://github.com/vulnquest58/HashVault/releases/download/v2.3.0/hashvault-2.3.0-py3-none-any.whl"
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 hashvault setup
@@ -131,6 +134,10 @@ hashvault campaign plan examples/0xdf-demo.txt
 # Convert a protected file, then identify or crack the extracted material
 hashvault convert --sync
 hashvault convert protected.zip --save
+
+# Inspect or run the official auto2john engine directly
+hashvault auto2john protected.zip --detect-only
+hashvault auto2john protected.zip --json
 
 # Validate the shipped corpus before trusting its counts
 hashvault corpus validate
@@ -194,6 +201,7 @@ documentation only.
 | Context-aware mutation | `hashvault mutate` |
 | Hash parameter and work-factor analysis | `hashvault parameters` |
 | File-to-hash conversion gallery | `hashvault convert` |
+| Official auto2john engine | `hashvault auto2john` |
 | Environment readiness checks | `hashvault doctor` |
 | Re-verify stored plaintexts | `hashvault audit` |
 | Aggregate audit insights | `hashvault insights` |
@@ -211,7 +219,7 @@ See [docs/CLI.md](docs/CLI.md) for the full command reference and examples.
 input
   |
   v
-[0] convert (optional)  file -> hash material
+[0] convert (optional)  file -> hash material (convert / auto2john)
   |
   v
 [1] analyzer            bounded beam search across reversible operations
@@ -268,7 +276,7 @@ python -m ruff check hashvault/campaign hashvault/core/evidence.py \
 python -m compileall -q hashvault tests
 ```
 
-The current suite contains 464 tests. The campaign, evidence, and corpus
+The current suite contains 473 tests. The campaign, evidence, and corpus
 validation packages are lint-clean; the legacy codebase has a larger lint/type
 backlog tracked in the roadmap.
 

@@ -5,6 +5,29 @@ All notable changes to HashVault are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 the project uses [Semantic Versioning](https://semver.org/).
 
+## [2.3.0] - 2026-11-28
+
+### Added
+
+- Official `auto2john` engine vendored as `hashvault/auto2john.py` from the
+  standalone 0.1.0 release: 57 profiles, magic/filename/extension detection,
+  optional `python-magic` hints, bounded timeouts, JSON output, and atomic
+  permission-restricted output.
+- `hashvault auto2john` command wired to `paths.john_bin`,
+  `paths.converters_dir`, and `paths.conversions_dir`, with `--detect-only`,
+  `--list`, `--list-tools`, `--tool-dir`, `--dry-run`, and `--force`.
+- `hashvault/ingestors/auto2john_bridge.py` with profile-key aliases
+  (`applenotes` to `notes`, `androidbackup` to `android-backup`) and a ranking
+  hint that can add a profile when the gallery has no match.
+- Integration tests for the vendored profile count, alias mapping, misnamed
+  OOXML detection, CLI detection/list/conversion, and managed tool discovery.
+
+### Changed
+
+- `hashvault convert` now uses the auto2john detection as its first ranking
+  hint while preserving the full 70-profile gallery and built-in fallback.
+- Test baseline increased to 473 tests.
+
 ## [2.2.0] - 2026-11-28
 
 ### Added

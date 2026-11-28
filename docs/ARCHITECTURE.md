@@ -10,7 +10,7 @@ every stage should be able to explain what it saw and what it did.
 input
   |
   v
-[0] convert (optional)  file -> hash material
+[0] convert (optional)  file -> hash material (convert / auto2john)
   |
   v
 [1] analyzer            bounded beam search across reversible operations
@@ -54,6 +54,8 @@ input
 | `hashvault/core/corpus_validator.py` | Corpus schema, provenance, count, and duplicate checks |
 | `hashvault/ingestors/converter_store.py` | Managed John converter store and manifest |
 | `hashvault/ingestors/conversion_service.py` | Ranked auto-conversion orchestration |
+| `hashvault/auto2john.py` | Official vendored auto2john detection and extraction engine |
+| `hashvault/ingestors/auto2john_bridge.py` | Profile-key mapping and auto2john ranking hint |
 | `hashvault/campaign/` | Corpus ingestion, planning, mutations, recovery, checkpoints, potfiles, certificates |
 | `hashvault/cli.py` | Typer command surface |
 | `hashvault/ui/` | Rich rendering and interactive shell |

@@ -1,6 +1,6 @@
 [project]
 name = "hashvault"
-version = "2.2.0"
+version = "2.3.0"
 description = "Evidence-driven password hash analysis, recovery, and audit reporting for authorized security testing"
 readme = "README.md"
 requires-python = ">=3.11"

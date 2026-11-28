@@ -1,6 +1,6 @@
 # Release Process
 
-HashVault uses semantic versioning. The current release line is `2.2.x`.
+HashVault uses semantic versioning. The current release line is `2.3.x`.
 
 ## Version locations
 
@@ -29,7 +29,7 @@ python -m ruff check hashvault/campaign hashvault/core/evidence.py \
 python -m compileall -q hashvault tests
 ```
 
-Expected baseline for v2.2.0: `464 passed`.
+Expected baseline for v2.3.0: `473 passed`.
 
 Then verify the corpus and campaign smoke path:
 
@@ -56,7 +56,7 @@ or plaintext reports.
 ```bash
 rm -rf dist/
 uv build
-python -m zipfile -l dist/hashvault-2.2.0-py3-none-any.whl | head
+python -m zipfile -l dist/hashvault-2.3.0-py3-none-any.whl | head
 ```
 
 The source distribution is the canonical GitHub release artifact because it
@@ -67,20 +67,20 @@ caught. Run `hashvault setup` there, then confirm `hashvault doctor --json`
 reports `"ok": true`. Verify the sdist contains those paths before uploading:
 
 ```bash
-tar -tf dist/hashvault-2.2.0.tar.gz | grep -E 'data/|docs/|examples/' | head
+tar -tf dist/hashvault-2.3.0.tar.gz | grep -E 'data/|docs/|examples/' | head
 ```
 
 ## Tag and publish
 
 ```bash
-git tag -a v2.2.0 -m "HashVault v2.2.0"
+git tag -a v2.3.0 -m "HashVault v2.3.0"
 git push origin main
-git push origin v2.2.0
+git push origin v2.3.0
 ```
 
 Create the GitHub release from the tag with:
 
-- title: `HashVault v2.2.0`
+- title: `HashVault v2.3.0`
 - summary from `CHANGELOG.md`
 - assets: source distribution and wheel
 - notes: breaking changes, campaign engine, corpus provenance, test count,

@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from hashvault.ingestors.auto2john_bridge import rank_with_auto2john
 from hashvault.ingestors.converters import (
     SUPPORTED_EXTENSIONS,
     ConversionResult,
@@ -45,12 +46,12 @@ def _rank_candidates(
     path: Path,
     candidates: tuple[ConversionProfile, ...],
 ) -> list[ConversionProfile]:
-    """Put magic-detected formats first, then preserve filename/extension rank."""
+    """Rank candidates by built-in magic, then by the auto2john detection hint."""
     if not candidates:
-        return []
+        return rank_with_auto2john(path, ())
     detected = detect_file_type(path)
     if not detected:
-        return list(candidates)
+        return rank_with_auto2john(path, candidates)
     normalized = detected.lower()
     preferred: list[ConversionProfile] = []
     rest: list[ConversionProfile] = []
@@ -60,7 +61,7 @@ def _rank_candidates(
             preferred.append(profile)
         else:
             rest.append(profile)
-    return preferred + rest
+    return rank_with_auto2john(path, preferred + rest)
 
 
 def convert_auto(

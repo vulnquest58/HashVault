@@ -9,7 +9,7 @@ authors:
 repository-code: "https://github.com/vulnquest58/HashVault"
 url: "https://github.com/vulnquest58/HashVault"
 license: MIT
-version: "2.2.0"
+version: "2.3.0"
 date-released: "2026-11-28"
 keywords:
   - password security

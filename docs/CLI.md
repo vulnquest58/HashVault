@@ -1,6 +1,6 @@
 # HashVault CLI Reference
 
-This document is the complete command reference for HashVault v2.2.0.
+This document is the complete command reference for HashVault v2.3.0.
 
 ## Legal and Ethical Use
 
@@ -69,6 +69,7 @@ hashvault banner --json
 | `mutate` | Build bounded context-aware candidates, Arabizi variants, and rules |
 | `replay` | Deterministically replay a saved analysis recipe |
 | `convert` | Browse the John converter gallery and extract crackable hashes from files; `--sync`, `--paths`, `--save` |
+| `auto2john` | Run the official auto2john engine with HashVault paths; `--detect-only`, `--list`, `--list-tools` |
 | `campaign plan` | Show the staged recovery plan for a corpus |
 | `campaign run` | Run a corpus recovery campaign; `--potfile`, `--checkpoint`, `--resume`, `--shard`, `--progress` |
 | `campaign keygen` | Generate an Ed25519 certificate signing keypair |
@@ -77,7 +78,8 @@ hashvault banner --json
 | `benchmark-layers` | Validate layered recipe chains and optional plaintext recovery |
 | `stats` | Show database, session, attempt, and analysis-log counters |
 | `strategies stats` | Show adaptive tool/pattern feedback |
-| `strategies reset --yes` | Clear adaptive feedback |\n| `corpus validate` | Validate corpus schema, provenance, counts, and duplicate ids |
+| `strategies reset --yes` | Clear adaptive feedback |
+| `corpus validate` | Validate corpus schema, provenance, counts, and duplicate ids |
 | `sessions` | List isolated cracking sessions; `--purge` deletes their working directories |
 | `patterns-audit` | Check the pattern catalogue for broken regexes, mode/example drift, and ranking ties |
 | `calibrate` | Measure identification confidence against corpus truth and suggest weights |
@@ -220,6 +222,31 @@ The converter gallery includes curated John profiles for archives, documents,
 password managers, encrypted disks, private keys, enterprise captures,
 wallets, and applications. Runtime availability is checked before use.
 
+## Auto2john
+
+```bash
+hashvault auto2john --list
+hashvault auto2john --list-tools --json
+hashvault auto2john protected.zip --detect-only
+hashvault auto2john protected.zip
+hashvault auto2john protected.zip --out-dir extracted --json
+hashvault auto2john protected.zip --profile zip --force
+hashvault auto2john protected.zip --tool-arg=--extra
+```
+
+`auto2john` is the official vendored engine from
+[github.com/vulnquest58/auto2john](https://github.com/vulnquest58/auto2john).
+It uses `paths.john_bin` and `paths.converters_dir`, defaults output to
+`paths.conversions_dir`, and writes `<stem>.hash`. Detection prefers specific
+magic signatures over generic containers, then filename hints, extensions, and
+an optional `python-magic` hint. Use `--detect-only` to inspect the decision
+without running a helper.
+
+The command accepts repeatable `--tool-dir` values and passes
+`--john-bin`, `--profile`, `--out`, `--out-dir`, `--force`, `--dry-run`,
+`--json`, `--no-libmagic`, and `--timeout` through to the engine. For values
+that start with a dash, use the equals form: `--tool-arg=--flag`.
+
 ## Operations
 
 ```bash
@@ -252,12 +279,16 @@ hashvault convert --sync
 hashvault convert protected.zip
 hashvault convert protected.7z --save
 hashvault convert --paths
+hashvault auto2john protected.zip --detect-only
+hashvault auto2john protected.zip --json
 ```
 
 The managed store lives under `paths.converters_dir` (default
 `tools/converters`). `--sync` copies John helper programs and shared modules
 from the configured John installation; nothing is downloaded. `--save` writes
-to `paths.conversions_dir`, and `--out-dir` writes elsewhere. See
+to `paths.conversions_dir`, and `--out-dir` writes elsewhere. The
+`auto2john` command is the official standalone engine vendored into HashVault
+and defaults to the same conversions directory. See
 [docs/CONVERSIONS.md](CONVERSIONS.md).
 
 ## Campaign Recovery

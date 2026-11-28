@@ -2186,6 +2186,119 @@ def convert_cmd(
                     render_crack_results([crack_result])
 
 
+@app.command("auto2john")
+def auto2john_cmd(
+    target: Optional[Path] = typer.Argument(
+        None, help="File or directory to convert"
+    ),
+    profile: str = typer.Option(
+        "", "--profile", "-p", help="Force an auto2john profile"
+    ),
+    out: Optional[Path] = typer.Option(
+        None, "--out", help="Explicit hash output file"
+    ),
+    out_dir: Optional[Path] = typer.Option(
+        None,
+        "--out-dir",
+        help="Output directory (default: configured conversions directory)",
+    ),
+    tool: str = typer.Option(
+        "", "--tool", help="Explicit converter path or name"
+    ),
+    tool_dir: Optional[List[Path]] = typer.Option(
+        None, "--tool-dir", help="Additional converter directory (repeatable)"
+    ),
+    john_bin: Optional[str] = typer.Option(
+        None, "--john-bin", help="John binary or run directory"
+    ),
+    tool_arg: Optional[List[str]] = typer.Option(
+        None,
+        "--tool-arg",
+        help="Extra converter argument (repeatable; use --tool-arg=--flag)",
+    ),
+    force: bool = typer.Option(
+        False, "--force", help="Overwrite the output file"
+    ),
+    dry_run: bool = typer.Option(
+        False, "--dry-run", help="Show the command without running it"
+    ),
+    detect_only: bool = typer.Option(
+        False, "--detect-only", help="Detect and print the profile only"
+    ),
+    list_profiles: bool = typer.Option(
+        False, "--list", help="List auto2john profiles"
+    ),
+    list_tools: bool = typer.Option(
+        False, "--list-tools", help="Resolve and list converters"
+    ),
+    json_out: bool = typer.Option(False, "--json", help="Emit JSON"),
+    no_libmagic: bool = typer.Option(
+        False, "--no-libmagic", help="Disable python-magic hints"
+    ),
+    timeout: float = typer.Option(
+        120.0, "--timeout", help="Converter timeout in seconds"
+    ),
+) -> None:
+    """Run the official auto2john engine with HashVault's configured paths."""
+
+    from hashvault.auto2john import main as auto2john_main
+
+    config = load_config()
+    arguments: list[str] = []
+    if list_profiles:
+        arguments.append("--list")
+    if list_tools:
+        arguments.append("--list-tools")
+    if target is not None:
+        arguments.append(str(target))
+    if profile:
+        arguments.extend(["--profile", profile])
+    if out is not None:
+        arguments.extend(["--out", str(out)])
+    if out_dir is not None:
+        arguments.extend(["--out-dir", str(out_dir)])
+    if tool:
+        arguments.extend(["--tool", tool])
+
+    directories = [Path(config.paths.converters_dir)]
+    if tool_dir:
+        directories.extend(tool_dir)
+    for directory in directories:
+        arguments.extend(["--tool-dir", str(directory)])
+
+    arguments.extend(["--john-bin", john_bin or config.paths.john_bin])
+    for value in tool_arg or []:
+        arguments.append(f"--tool-arg={value}")
+    if force:
+        arguments.append("--force")
+    if dry_run:
+        arguments.append("--dry-run")
+    if detect_only:
+        arguments.append("--detect-only")
+    if json_out:
+        arguments.append("--json")
+    if no_libmagic:
+        arguments.append("--no-libmagic")
+    arguments.extend(["--timeout", str(timeout)])
+
+    default_output = (
+        not (list_profiles or list_tools or detect_only)
+        and out is None
+        and out_dir is None
+    )
+    if default_output:
+        arguments.extend(["--out-dir", str(config.paths.conversions_dir)])
+
+    if not (list_profiles or list_tools) and target is None:
+        console.print(
+            "[bold red]Error:[/bold red] Provide a file path or use "
+            "--list/--list-tools."
+        )
+        raise typer.Exit(1)
+
+    raise typer.Exit(auto2john_main(arguments))
+
+
 @app.command("selftest")
 def selftest_cmd(
     matrix: bool = typer.Option(False, "--matrix", help="Run the full analysis matrix (default)"),
